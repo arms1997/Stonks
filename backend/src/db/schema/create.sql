@@ -23,7 +23,8 @@ CREATE TABLE "user_likes" (
 CREATE TABLE "user_watches" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
-  "ticker" varchar
+  "ticker" varchar,
+  "value" int
 );
 
 CREATE TABLE "user_friends" (
