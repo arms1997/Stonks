@@ -19,12 +19,12 @@ const addLike = function(userId, ticker) {
 
 //update the users_like table is_active row to false
 
-const removeLike = function(id) {
+const updateLike = function(id) {
   let queryParams = [id];
 
   let queryString = `
     UPDATE likes
-    SET is_active = false
+    SET is_active =  NOT is_active
     WHERE id = $1
     RETURNING *;
     `;
@@ -53,6 +53,6 @@ const likeCounter = function(tickerName) {
 
 module.exports = {
   addLike,
-  removeLike,
+  updateLike,
   likeCounter
 };

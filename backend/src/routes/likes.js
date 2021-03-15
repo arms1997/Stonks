@@ -20,7 +20,7 @@ module.exports = (db) => {
   router.put('/:like_id', (req, res) => {
     const { like_id  } = req.params;
 
-    db.removeLike(like_id, ticker)
+    db.updateLike(like_id)
       .then((resources) => {
         res.json({ resources });
       })
@@ -28,8 +28,6 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
-
 
   return router;
 };
