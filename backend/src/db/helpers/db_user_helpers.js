@@ -27,6 +27,27 @@ const getUserById = function(id) {
 
 exports.getUserById = getUserById;
 
+
+//get user by email to join like and watch tables for specific user's profile page
+
+const getUserByEmail = function(email) {
+
+  const queryString = `
+    SELECT users.*
+    FROM users
+    JOIN user_likes ON user_likes.user_id = users.id
+    JOIN user_watches ON user_watches.user_id = users.id
+    WHERE email = $1
+    GROUP BY users.id 
+    `;
+
+  return db.query(queryString, email)
+    .then(res => res.rows[0]);
+};
+
+exports.getUserByEmail = getUserByEmail;
+
+
 const updateUserInfo = function(id, options) {
   
   let queryParams = [];
