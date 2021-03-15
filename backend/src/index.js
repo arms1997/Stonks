@@ -6,10 +6,15 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const app = express();
 
-const db = require("./db");
-
 app.use(cors());
 app.use(bodyparser.json());
+
+const watchRoutes = require("./routes/watches");
+
+const db_watches = require("./db/helpers/db_watches_helpers");
+
+const watchRouter = watchRoutes(db_watches);
+app.use("/api/watch", watchRouter);
 
 app.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
