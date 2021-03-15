@@ -28,7 +28,7 @@ const removeLike = function(id, ticker){
     UPDATE likes
     SET is_active = false
     WHERE id = $1
-    RETURNING id;
+    RETURNING *;
     `;
 
   return db.query(queryString, queryParams)

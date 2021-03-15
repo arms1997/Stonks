@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
 
   //user's profile page with liked graphs and watched tickers and general news
-  router.get('/me', (req, res) => {
+  router.get('/:user_email', (req, res) => {
 
     db.getUserByEmail(email)
       .then()

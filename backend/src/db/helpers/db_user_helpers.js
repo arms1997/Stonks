@@ -4,11 +4,11 @@ const addUser = function(user) {
 
   return db.query(`
   INSERT INTO users
-  (username, email)
-  VALUES($1, $2)
-  RETURNING *;`, [user.username, user.email])
+  (username, email, phone_number)
+  VALUES($1, $2, $3)
+  RETURNING *;`, [user.username, user.email, user.phone_number])
     .then(res => res.rows[0])
-    .catch(err => console.error('There has query error'));
+    .catch(err => console.error('There has been a query error'));
 
 };
 
@@ -21,7 +21,7 @@ const getUserById = function(id) {
   WHERE id = $1`, 
   [id])
     .then(res => res.rows[0])
-    .catch(err => console.error('There has query error', err.stack));
+    .catch(err => console.error('There has been a query error', err.stack));
 
 };
 
@@ -43,7 +43,7 @@ const getUserByEmail = function(email) {
 
   return db.query(queryString, email)
     .then(res => res.rows[0])
-    .catch(err => console.error('There has query error', err.stack));
+    .catch(err => console.error('There has been a query error', err.stack));
 };
 
 exports.getUserByEmail = getUserByEmail;
@@ -65,16 +65,22 @@ const updateUserInfo = function(id, options) {
     queryString += `SET email = $${queryParams.length} ` 
   }
 
+
+  if (options.phone_number) {
+    queryParams.push(`${options.phone_number}`);
+    queryString += `SET phone_number = $${queryParams.length} ` 
+  }
+
   //add user id to queryParms list 
   queryParams.push(`${id}`);
 
   queryString += `
   WHERE id = $${queryParams.length}
-  RETURNING username, email;
+  RETURNING *;
   `
   return db.query(queryString, queryParams)
     .then(res => res.rows)
-    .catch(err => console.error('There has query error', err.stack))
+    .catch(err => console.error('There has been a query error', err.stack))
 };
 
 exports.updateUserInfo = updateUserInfo;
