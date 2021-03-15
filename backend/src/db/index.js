@@ -1,7 +1,11 @@
 const pg = require("pg");
 
+require("dotenv").config();
+
 const client = new pg.Client({
-  connectionString: process.env.DATABASE_URL || "",
+  connectionString:
+    process.env.DATABASE_URL ||
+    `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}?sslmode=disable`,
 });
 
 client

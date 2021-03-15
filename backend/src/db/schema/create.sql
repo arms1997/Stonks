@@ -16,7 +16,7 @@ CREATE TABLE "user_likes" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
   "ticker" varchar,
-  "isActive" boolean not null default true
+  "is_active" boolean DEFAULT true
 );
 
 CREATE TABLE "user_watches" (
@@ -24,7 +24,7 @@ CREATE TABLE "user_watches" (
   "user_id" int,
   "ticker" varchar,
   "value" int,
-  "isActive" boolean not null default true
+  "is_active" boolean DEFAULT true
 );
 
 CREATE TABLE "user_friends" (
