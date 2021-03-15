@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS user_message_ref CASCADE;
 CREATE TABLE users (
   "id" SERIAL PRIMARY KEY,
   "username" varchar,
-  "created_at" timestamp,
   "email" varchar,
   "phone_number" varchar
 );
@@ -34,8 +33,7 @@ CREATE TABLE "user_friends" (
 
 CREATE TABLE "messages" (
   "id" SERIAL PRIMARY KEY,
-  "message_body" varchar,
-  "created_at" timestamp
+  "message_body" varchar
 );
 
 CREATE TABLE "user_message_ref" (
@@ -44,6 +42,10 @@ CREATE TABLE "user_message_ref" (
   "user_id" int,
   "is_sender" boolean
 );
+
+ALTER TABLE "users" ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
+
+ALTER TABLE "messages" ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
 
 ALTER TABLE "user_likes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
