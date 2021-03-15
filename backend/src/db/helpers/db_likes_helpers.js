@@ -29,7 +29,7 @@ const removeLike = function(id, ticker){
     SET isActive = false
     WHERE id = $1
     RETURNING id;
-    `
+    `;
 
   return db.query(queryString, queryParams)
     .then(res => res.rows[0])
@@ -39,3 +39,20 @@ const removeLike = function(id, ticker){
 
 exports.removeLike = removeLike;
 
+const likeCounter = function(tickerName) {
+
+  let queryParams = [tickerName];
+
+  let queryString = `
+    SELECT count(ticker) as likeCount
+    FROM user_likes
+    WHERE ticker = $1;
+    `;
+
+  return db.query(queryString, queryParams)
+    .then(res => res.rows[0])
+    .catch(err => console.error('There has query error', err.stack));
+
+};
+
+exports.likeCounter = likeCounter;
