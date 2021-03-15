@@ -34,9 +34,6 @@ const userRouter = userRoutes(db_users);
 app.use("/api/user", userRouter);
 
 
-
-
-
 app.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
 });
