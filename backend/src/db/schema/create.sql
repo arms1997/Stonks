@@ -12,14 +12,14 @@ CREATE TABLE users (
   "phone_number" varchar
 );
 
-CREATE TABLE "user_likes" (
+CREATE TABLE "likes" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
   "ticker" varchar,
   "is_active" boolean DEFAULT true
 );
 
-CREATE TABLE "user_watches" (
+CREATE TABLE "watches" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
   "ticker" varchar,
@@ -27,7 +27,7 @@ CREATE TABLE "user_watches" (
   "is_active" boolean DEFAULT true
 );
 
-CREATE TABLE "user_friends" (
+CREATE TABLE "friends" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
   "friend_id" int
@@ -49,13 +49,13 @@ ALTER TABLE "users" ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
 
 ALTER TABLE "messages" ADD COLUMN created_at TIMESTAMP DEFAULT NOW();
 
-ALTER TABLE "user_likes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "likes" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-ALTER TABLE "user_watches" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "watches" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-ALTER TABLE "user_friends" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "friends" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-ALTER TABLE "user_friends" ADD FOREIGN KEY ("friend_id") REFERENCES "users" ("id");
+ALTER TABLE "friends" ADD FOREIGN KEY ("friend_id") REFERENCES "users" ("id");
 
 ALTER TABLE "user_message_ref" ADD FOREIGN KEY ("message_id") REFERENCES "messages" ("id");
 
