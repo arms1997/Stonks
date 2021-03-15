@@ -35,8 +35,8 @@ const getUserByEmail = function(email) {
   const queryString = `
     SELECT users.*
     FROM users
-    JOIN user_likes ON user_likes.user_id = users.id
-    JOIN user_watches ON user_watches.user_id = users.id
+    JOIN likes ON likes.user_id = users.id
+    JOIN watches ON watches.user_id = users.id
     WHERE email = $1
     GROUP BY users.id 
     `;

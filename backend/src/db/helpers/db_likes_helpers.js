@@ -5,7 +5,7 @@ const addLike = function(userId, ticker) {
   let queryParams = [userId, ticker];
 
   let queryString = `
-    INSERT INTO user_likes
+    INSERT INTO likes
     (user_id, ticker)
     VALUES($1, $2)
     RETURNING *;
@@ -25,8 +25,8 @@ const removeLike = function(id, ticker){
   let queryParams = [id, ticker];
 
   let queryString = `
-    UPDATE user_likes
-    SET isActive = false
+    UPDATE likes
+    SET is_active = false
     WHERE id = $1
     RETURNING id;
     `;
@@ -45,7 +45,7 @@ const likeCounter = function(tickerName) {
 
   let queryString = `
     SELECT count(ticker) as likeCount
-    FROM user_likes
+    FROM likes
     WHERE ticker = $1;
     `;
 
