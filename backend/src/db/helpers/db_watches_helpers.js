@@ -14,9 +14,9 @@ const addWatch = function (userID, ticker, value) {
     .catch((err) => console.log("query error", err.stack));
 };
 
-const deleteWatch = function (watch_id) {
+const updateWatch = function (watch_id) {
   const queryString = `
-  UPDATE watches SET is_active = false 
+  UPDATE watches SET is_active = NOT is_active 
   WHERE id = $1
   RETURNING *;`;
 
@@ -28,5 +28,5 @@ const deleteWatch = function (watch_id) {
 
 module.exports = {
   addWatch,
-  deleteWatch,
+  updateWatch,
 };
