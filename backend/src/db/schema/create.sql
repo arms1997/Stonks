@@ -15,14 +15,16 @@ CREATE TABLE users (
 CREATE TABLE "user_likes" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
-  "ticker" varchar
+  "ticker" varchar,
+  "isActive" boolean
 );
 
 CREATE TABLE "user_watches" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
   "ticker" varchar,
-  "value" int
+  "value" int,
+  "isActive" boolean
 );
 
 CREATE TABLE "user_friends" (

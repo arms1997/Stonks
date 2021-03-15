@@ -7,19 +7,28 @@ const addUser = function(user) {
   (username, email)
   VALUES($1, $2)
   RETURNING *;`, [user.username, user.email])
-    .then(res => res.rows[0]);
+    .then(res => res.rows[0])
+    .catch(err => console.error('There has query error'));
 
 };
 
 exports.addUser = addUser;
 
-const getUserByEmail = function(email) {
+const getUserById = function(id) {
 
   return db.query(`
-  SELECT 
-  
-  `)
+  SELECT * FROM users
+  WHERE id = $1`, 
+  [id])
+    .then(res => res.rows[0])
+    .catch(err => console.error('There has query error'));
 
 };
 
-exports.getUserByEmail = getUserByEmail;
+exports.getUserById = getUserById;
+
+const updateUserInfo = function(id, username, email) {
+
+
+  
+};
