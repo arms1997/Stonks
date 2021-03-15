@@ -42,7 +42,8 @@ const getUserByEmail = function(email) {
     `;
 
   return db.query(queryString, email)
-    .then(res => res.rows[0]);
+    .then(res => res.rows[0])
+    .catch(err => console.error('There has query error', err.stack));
 };
 
 exports.getUserByEmail = getUserByEmail;
