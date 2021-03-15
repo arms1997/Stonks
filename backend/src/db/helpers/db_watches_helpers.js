@@ -3,7 +3,7 @@ const db = require("../index");
 
 const addWatch = function (userID, ticker, value) {
   const queryString = `
-  INSERT INTO user_watches
+  INSERT INTO watches
   (user_id, ticker, value)
   VALUES($1, $2, $3)
   RETURNING *;`;
@@ -16,7 +16,7 @@ const addWatch = function (userID, ticker, value) {
 
 const deleteWatch = function (watch_id) {
   const queryString = `
-  UPDATE user_watches SET is_active = false 
+  UPDATE watches SET is_active = false 
   WHERE id = $1
   RETURNING *;`;
 
