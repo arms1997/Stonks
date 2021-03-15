@@ -12,8 +12,6 @@ const addUser = function(user) {
 
 };
 
-exports.addUser = addUser;
-
 const getUserById = function(id) {
 
   return db.query(`
@@ -24,9 +22,6 @@ const getUserById = function(id) {
     .catch(err => console.error('There has been a query error', err.stack));
 
 };
-
-exports.getUserById = getUserById;
-
 
 //get user by email to join like and watch tables for specific user's profile page
 
@@ -45,9 +40,6 @@ const getUserByEmail = function(email) {
     .then(res => res.rows[0])
     .catch(err => console.error('There has been a query error', err.stack));
 };
-
-exports.getUserByEmail = getUserByEmail;
-
 
 const updateUserInfo = function(id, options) {
   
@@ -83,4 +75,9 @@ const updateUserInfo = function(id, options) {
     .catch(err => console.error('There has been a query error', err.stack))
 };
 
-exports.updateUserInfo = updateUserInfo;
+module.exports = {
+  addUser,
+  getUserById,
+  getUserByEmail,
+  updateUserInfo
+};
