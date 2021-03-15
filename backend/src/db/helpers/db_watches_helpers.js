@@ -28,5 +28,5 @@ const deleteWatch = function (watch_id) {
 
 module.exports = {
   addWatch,
-  deleteWatch,
+  deleteWatch
 };

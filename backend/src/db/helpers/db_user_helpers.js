@@ -23,61 +23,99 @@ const getUserById = function(id) {
 
 };
 
-//get user by email to join like and watch tables for specific user's profile page
-
 const getUserByEmail = function(email) {
 
   const queryString = `
-    SELECT users.*
-    FROM users
-    JOIN likes ON likes.user_id = users.id
-    JOIN watches ON watches.user_id = users.id
-    WHERE email = $1
-    GROUP BY users.id 
+    SELECT * FROM users
+    WHERE email = $1;
     `;
 
-  return db.query(queryString, email)
+  return db.query(queryString, [email])
     .then(res => res.rows[0])
     .catch(err => console.error('There has been a query error', err.stack));
 };
 
-const updateUserInfo = function(id, options) {
+const updateUserInfo = function(user_id, options) {
   
   let queryParams = [];
 
-  let queryString = `UPDATE users `;
+  let queryString = `UPDATE users SET `;
+
+  let setQuery = [];
 
   if (options.username) {
     queryParams.push(`${options.username}`);
-    queryString += `SET username = $${queryParams.length} `
+    setQuery.push(`username = $${queryParams.length}`)
   }
 
   if (options.email) {
     queryParams.push(`${options.email}`);
-    queryString += `SET email = $${queryParams.length} ` 
+    setQuery.push(`email = $${queryParams.length}`)
   }
 
 
   if (options.phone_number) {
     queryParams.push(`${options.phone_number}`);
-    queryString += `SET phone_number = $${queryParams.length} ` 
+    setQuery.push(`phone_number = $${queryParams.length}`)
   }
 
   //add user id to queryParms list 
-  queryParams.push(`${id}`);
-
+  
+  let joinedSetString;
+  
+  if (queryParams.length > 1) {
+    
+    joinedSetString = setQuery.join(', ')
+    
+  } else {
+    
+    joinedSetString = setQuery[0]
+  }
+  
+  queryString += joinedSetString;
+  
+  queryParams.push(`${user_id}`);
   queryString += `
-  WHERE id = $${queryParams.length}
-  RETURNING * ;
-  `
+    WHERE id = $${queryParams.length}
+    RETURNING *;
+    `;
+
   return db.query(queryString, queryParams)
-    .then(res => res.rows)
+    .then(res => res.rows[0])
     .catch(err => console.error('There has been a query error', err.stack))
+};
+
+const getUserLikes = function(user_id) {
+
+  let queryString = `
+    SELECT * 
+    FROM likes 
+    WHERE user_id = $1;
+    `;
+
+    return db.query(queryString, [user_id])
+      .then(res => res.rows)
+      .catch(err => console.error('There has been a query error', err.stack));
+};
+
+const getUserWatches = function(user_id) {
+
+  let queryString = `
+    SELECT * 
+    FROM watches
+    WHERE user_id = $1;
+    `;
+
+    return db.query(queryString, [user_id])
+      .then(res => res.rows)
+      .catch(err => console.error('There has been a query error', err.stack));
 };
 
 module.exports = {
   addUser,
   getUserById,
   getUserByEmail,
-  updateUserInfo
+  updateUserInfo,
+  getUserLikes,
+  getUserWatches
 };
