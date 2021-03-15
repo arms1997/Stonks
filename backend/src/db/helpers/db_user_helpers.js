@@ -76,7 +76,7 @@ const updateUserInfo = function(id, options) {
 
   queryString += `
   WHERE id = $${queryParams.length}
-  RETURNING *;
+  RETURNING * ;
   `
   return db.query(queryString, queryParams)
     .then(res => res.rows)

@@ -17,12 +17,10 @@ const addLike = function(userId, ticker) {
 
 };
 
-exports.addLike = addLike;
-
 //update the users_like table is_active row to false
 
-const removeLike = function(id, ticker){
-  let queryParams = [id, ticker];
+const removeLike = function(id) {
+  let queryParams = [id];
 
   let queryString = `
     UPDATE likes
@@ -30,14 +28,12 @@ const removeLike = function(id, ticker){
     WHERE id = $1
     RETURNING *;
     `;
-
+ 
   return db.query(queryString, queryParams)
     .then(res => res.rows[0])
     .catch(err => console.error('There has query error', err.stack));
 
 };
-
-exports.removeLike = removeLike;
 
 const likeCounter = function(tickerName) {
 
@@ -55,4 +51,8 @@ const likeCounter = function(tickerName) {
 
 };
 
-exports.likeCounter = likeCounter;
+module.exports = {
+  addLike,
+  removeLike,
+  likeCounter
+};
