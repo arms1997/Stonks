@@ -7,10 +7,9 @@ DROP TABLE IF EXISTS user_message_ref CASCADE;
 
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "full_name" varchar,
+  "username" varchar,
   "created_at" timestamp,
   "email" varchar,
-  "password" password,
   "phone_number" varchar
 );
 
