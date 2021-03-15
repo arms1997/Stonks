@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS user_friends CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
 DROP TABLE IF EXISTS user_message_ref CASCADE;
 
-CREATE TABLE "users" (
+CREATE TABLE users (
   "id" SERIAL PRIMARY KEY,
   "username" varchar,
   "created_at" timestamp,
