@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Card, Container } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Signup() {
 
@@ -12,6 +13,7 @@ export default function Signup() {
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -24,6 +26,7 @@ export default function Signup() {
       setError("")
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      history.push("/")
     } catch {
       setError("Oh no no noooo....Failed to create an account");
     }
@@ -47,7 +50,10 @@ export default function Signup() {
             <Button disabled={loading} variant="contained" color="primary" type="submit">Sign Up!</Button>
           </form>
         </Card> 
-        <div>Already have an account? Login</div>`
+        <div>
+          Already have an account?
+          <Link to="/login">Log in</Link>
+        </div>
       </Container>
     </>
   )
