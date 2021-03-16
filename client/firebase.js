@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-
 //Set up firebase with env variables
 
 const app = firebase.initializeApp({
@@ -12,3 +11,9 @@ const app = firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 });
+
+
+// export variable to use for authentication methods 
+export const auth = app.auth();
+
+export default app;
