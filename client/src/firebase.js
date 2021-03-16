@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/app'
+import "firebase/auth"
 
 //Set up firebase with env variables
 
@@ -14,6 +14,7 @@ const app = firebase.initializeApp({
 
 
 // export variable to use for authentication methods 
-export const auth = app.auth();
+
+export const auth = app.auth()
 
 export default app;

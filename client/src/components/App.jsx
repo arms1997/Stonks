@@ -1,15 +1,20 @@
-import "./App.css";
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { AuthProvider } from "../contexts/AuthContext";
 
 import Signup from './Signup';
-import { Container } from '@material-ui/core';
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <Container maxWidth="sm" >
-        <Signup />
-      </Container>
-    </div>);
+    <AuthProvider>
+      <div className="App">
+        <Container maxWidth="sm" >
+          <Signup />
+        </Container>
+      </div>
+    </ AuthProvider>
+  );
 }
 
 export default App;
