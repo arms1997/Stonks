@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signup from './Signup';
 import UpdateProfile from './UpdateProfile';
 import Login from './Login';
+import Landing from './Landing';
 import ForgotPassword from './ForgotPassword';
 import PrivateRoute from './PrivateRoute';
 
@@ -18,7 +19,7 @@ function App() {
         <Container >
           <Router>
             <Switch>
-              <Route exact path='/'component={UpdateProfile}/>
+              <Route exact path='/'component={Landing}/>
               <Route path='/me' component={UpdateProfile}/>
               <Route path='/signup' component={Signup}/>
               <Route path='/login' component={Login}/>

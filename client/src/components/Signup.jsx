@@ -42,11 +42,11 @@ export default function Signup() {
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
             <label for="email">Email</label>
-            <input name="email" type="email" ref={emailRef} />
+            <input name="email" type="email" ref={emailRef} required/>
             <label for="password">Password</label>
-            <input name="password" type="password" ref={passwordRef} />
+            <input name="password" type="password" ref={passwordRef} required/>
             <label for="email">Password Confirmation</label>
-            <input name="email" type="password" ref={passwordConfirmRef} />
+            <input name="email" type="password" ref={passwordConfirmRef} required/>
             <Button disabled={loading} variant="contained" color="primary" type="submit">Sign Up!</Button>
           </form>
         </Card> 
