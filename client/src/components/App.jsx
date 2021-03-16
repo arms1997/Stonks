@@ -3,8 +3,10 @@ import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Signup from './Signup';
-import Dashboard from './Dashboard';
+import UpdateProfile from './UpdateProfile';
 import Login from './Login';
+import ForgotPassword from './ForgotPassword';
+import PrivateRoute from './PrivateRoute';
 
 import "./App.css";
 import { Container } from '@material-ui/core';
@@ -16,10 +18,11 @@ function App() {
         <Container >
           <Router>
             <Switch>
-              <Route exact path='/'component={Dashboard}/>
-              <Route path='/me' component={Dashboard}/>
+              <Route exact path='/'component={UpdateProfile}/>
+              <Route path='/me' component={UpdateProfile}/>
               <Route path='/signup' component={Signup}/>
               <Route path='/login' component={Login}/>
+              <Route path='/forgot-password' component={ForgotPassword}/>
             </Switch>
           </Router>
         </Container>

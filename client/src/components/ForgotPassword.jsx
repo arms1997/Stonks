@@ -3,50 +3,47 @@ import React, { useRef, useState } from 'react';
 import { Button, Card, Container } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-
-export default function Login() {
+export default function ForgotPassword() {
 
   const emailRef = useRef();
-  const passwordRef = useRef();
-
-  const { login } = useAuth();
+  const { resetPassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const [message, setMessage] = useState("");
 
 
   async function handleSubmit(e) {
     e.preventDefault()
 
-    try {;
-      setError("")
+    try {
+      setMessage("");
+      setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      await resetPassword(emailRef.current.value);
+      setMessage('Check your inbox for further instructions');
     } catch {
-      setError("Oh no no noooo....Failed to log in!");
+      setError("Failed to reset password");
     }
 
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
     <>
       <Container maxWidth="sm">
         <Card>
-          <h2>Log In</h2>
+          <h2>Password Reset</h2>
           {error && <Alert severity="error">{error}</Alert>}
+          {message && <Alert severity="success">{message}</Alert>}
           <form onSubmit={handleSubmit}>
             <label for="email">Email</label>
             <input name="email" type="email" ref={emailRef} />
-            <label for="password">Password</label>
-            <input name="password" type="password" ref={passwordRef} />
-            <Button disabled={loading} variant="contained" color="primary" type="submit">Log in!</Button>
+            <Button disabled={loading} variant="contained" color="primary" type="submit">Reset password</Button>
           </form>
           <div> 
-            <Link to="/forgot-password">Forgot password?</Link>
+            <Link to="/login">Log In</Link>
           </div>
         </Card> 
         <div> 

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Dashboard() {
+export default function UpdateProfile() {
   return (
     <div>
-     <p>dashboard</p>
+      signed in
     </div>
   )
 }
