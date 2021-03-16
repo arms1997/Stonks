@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { auth } from "../firebase";
+import { getUserBackend } from './Auth_Helpers';
 
 //Create context for all of app to use 
 const AuthContext = React.createContext();
@@ -45,6 +46,16 @@ export function AuthProvider({ children }) {
   useEffect(() => {
 
     const unsubscribe = auth.onAuthStateChanged(user => {
+    
+    //make request to backend to add user likes/watches to currentUser object
+     getUserBackend(user.email)
+      .then((backendUserData) => {
+        user["likes"] = backendUserData.data.likes;
+        user["watches"] = backendUserData.data.watches;
+      })
+      .catch(err => console.log(err))
+      
+      console.log(user)
       setLoading(false);
       setCurrentUser(user);
 

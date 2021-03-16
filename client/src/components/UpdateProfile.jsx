@@ -15,8 +15,6 @@ export default function UpdateProfile() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  console.log("current user", currentUser.email);
-
   function handleSubmit(e) {
     e.preventDefault()
 
@@ -51,7 +49,7 @@ export default function UpdateProfile() {
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
             <label for="email">Email</label>
-            <input name="email" type="email" ref={emailRef} defaultValue={currentUser.email} />
+            <input name="email" type="email" ref={emailRef} defaultValue={currentUser && currentUser.email} />
             <label for="password">Password</label>
             <input name="password" type="password" ref={passwordRef} placeholder="Leave blank to keep the same"/>
             <label for="email">Password Confirmation</label>

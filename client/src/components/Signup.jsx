@@ -10,6 +10,9 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const usernameRef = useRef();
+  const phoneNumRef = useRef();
+  
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,7 +28,7 @@ export default function Signup() {
     try {;
       setError("")
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(emailRef.current.value, passwordRef.current.value)
       history.push("/")
     } catch {
       setError("Oh no no noooo....Failed to create an account");
@@ -41,12 +44,26 @@ export default function Signup() {
           <h2>Sign Up</h2>
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
-            <label for="email">Email</label>
-            <input name="email" type="email" ref={emailRef} required/>
-            <label for="password">Password</label>
-            <input name="password" type="password" ref={passwordRef} required/>
-            <label for="email">Password Confirmation</label>
-            <input name="email" type="password" ref={passwordConfirmRef} required/>
+            <div>
+              <label for="email">Email</label>
+              <input name="email" type="email" ref={emailRef} required/>
+            </div>
+            <div>
+              <label for="username">Username</label>
+              <input name="username" type="text" ref={usernameRef} required/>
+            </div>
+            <div>
+              <label for="phone-number">Phone Number (optional)</label>
+              <input name="phone-number" type="tel" ref={phoneNumRef} required/>
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input name="password" type="password" ref={passwordRef} required/>
+            </div>
+            <div>
+              <label for="email">Password Confirmation</label>
+              <input name="email" type="password" ref={passwordConfirmRef} required/>
+            </div>
             <Button disabled={loading} variant="contained" color="primary" type="submit">Sign Up!</Button>
           </form>
         </Card> 
