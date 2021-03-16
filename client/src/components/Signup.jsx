@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { Button, Card } from '@material-ui/core';
+import { Button, Card, Container } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -33,20 +33,22 @@ export default function Signup() {
 
   return (
     <>
-      <Card>
-        <h2>Sign Up</h2>
-        {error && <Alert severity="error">{error}</Alert>}
-        <form onSubmit={handleSubmit}>
-          <label for="email">Email</label>
-          <input name="email" type="email" ref={emailRef} />
-          <label for="password">Password</label>
-          <input name="password" type="password" ref={passwordRef} />
-          <label for="email">Password Confirmation</label>
-          <input name="email" type="password" ref={passwordConfirmRef} />
-          <Button disabled={loading} variant="contained" color="primary" type="submit">Sign Up!</Button>
-        </form>
-      </Card> 
-      <div>Already have an account? Login</div>
+      <Container maxWidth="sm">
+        <Card>
+          <h2>Sign Up</h2>
+          {error && <Alert severity="error">{error}</Alert>}
+          <form onSubmit={handleSubmit}>
+            <label for="email">Email</label>
+            <input name="email" type="email" ref={emailRef} />
+            <label for="password">Password</label>
+            <input name="password" type="password" ref={passwordRef} />
+            <label for="email">Password Confirmation</label>
+            <input name="email" type="password" ref={passwordConfirmRef} />
+            <Button disabled={loading} variant="contained" color="primary" type="submit">Sign Up!</Button>
+          </form>
+        </Card> 
+        <div>Already have an account? Login</div>`
+      </Container>
     </>
   )
 }
