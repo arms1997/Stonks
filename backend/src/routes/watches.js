@@ -17,7 +17,7 @@ module.exports = (db) => {
   router.put("/:watch_id", (req, res) => {
     const { watch_id } = req.params;
 
-    db.deleteWatch(watch_id)
+    db.updateWatch(watch_id)
       .then((resources) => {
         res.json({ resources });
       })
