@@ -15,7 +15,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 
   const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
@@ -58,10 +58,17 @@ export function AuthProvider({ children }) {
          user["user_id"] = backendUserData.data.user_id;
          user["user_phone_num"] = backendUserData.data.user_phone_num;
        })
+       .then(() => {
+         setCurrentUser(user);
+         setLoading(false);
+        })
        .catch(err => console.log(err))
-    }
-      setLoading(false);
+
+    } else {
       setCurrentUser(user);
+      setLoading(false);
+    }
+      // setLoading(false);
     });
 
     return unsubscribe;

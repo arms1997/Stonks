@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { Button, Card, Container } from '@material-ui/core';
+import { Button, Card, Container, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
@@ -39,10 +39,12 @@ export default function Login() {
           <h2>Log In</h2>
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
-            <label for="email">Email</label>
-            <input name="email" type="email" ref={emailRef} />
-            <label for="password">Password</label>
-            <input name="password" type="password" ref={passwordRef} />
+            {/* <label for="email">Email</label> */}
+            <TextField required id="standard-required" label="Required" helperText="Email" type="email" inputRef={emailRef} />
+            {/* <input name="email" type="email" ref={emailRef} /> */}
+            {/* <label for="password">Password</label> */}
+            <TextField required id="standard-required" label="Required" helperText="Password" type="password" inputRef={passwordRef} />
+            {/* <input name="password" type="password" ref={passwordRef} /> */}
             <Button disabled={loading} variant="contained" color="primary" type="submit">Log in!</Button>
           </form>
           <div> 

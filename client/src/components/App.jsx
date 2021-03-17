@@ -7,6 +7,7 @@ import UpdateProfile from './UpdateProfile';
 import Login from './Login';
 import Landing from './Landing';
 import ForgotPassword from './ForgotPassword';
+import Graph from './Graph/index';
 import PrivateRoute from './PrivateRoute';
 
 import "./App.css";
@@ -20,8 +21,11 @@ function App() {
           <Router>
             <Switch>
               <Route exact path='/'component={Landing}/>
-              <Route path='/me' component={UpdateProfile}/>
+              <PrivateRoute path='/me' component={UpdateProfile}/>
               <Route path='/signup' component={Signup}/>
+              <Route path='/graph'>
+                <Graph company="tsla" symbol="tsla" />
+              </Route>
               <Route path='/login' component={Login}/>
               <Route path='/forgot-password' component={ForgotPassword}/>
             </Switch>
