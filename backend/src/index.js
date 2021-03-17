@@ -11,6 +11,7 @@ app.use(bodyparser.json());
 
 const watchRoutes = require("./routes/watches");
 const tickerRoutes = require("./routes/tickers");
+const newsRoutes = require("./routes/news");
 
 const db_watches = require("./db/helpers/db_watches_helpers");
 
@@ -19,6 +20,9 @@ app.use("/api/watch", watchRouter);
 
 const tickerRouter = tickerRoutes();
 app.use("/api/tickers", tickerRouter);
+
+const newsRouter = newsRoutes();
+app.use("/api/news", newsRouter);
 
 app.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
