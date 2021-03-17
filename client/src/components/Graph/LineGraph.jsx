@@ -13,15 +13,17 @@ import {
 import "../../node_modules/react-vis/dist/style.css";
 import moment from "moment";
 
+import DataBubble from "../Bubbles/DataBubble";
+
 export default function LineGraph(props) {
   const [hoverdNode, setHoveredNode] = useState(null);
 
-  const { timestamps, yDomain, data } = props;
+  const { ticker, timestamps, yDomain, data } = props;
 
   const _onMouseLeave = () => setHoveredNode(null);
 
   const _tickFormatter = (index) => {
-    return moment(props.timestamps[index]).format("MM-DD");
+    return moment(timestamps[index]).format("MM-DD");
   };
 
   const _onNearestX = (value) => setHoveredNode({ ...value });
@@ -31,7 +33,7 @@ export default function LineGraph(props) {
       <FlexibleWidthXYPlot
         height={500}
         onMouseLeave={_onMouseLeave}
-        yDomain={props.yDomain}
+        yDomain={yDomain}
       >
         <VerticalGridLines />
         <HorizontalGridLines />
@@ -44,7 +46,18 @@ export default function LineGraph(props) {
             value={hoverdNode}
             align={{ horizontal: "leftEdge", vertical: "topEdge" }}
             style={{ marginLeft: "80px", marginTop: "30px" }}
-          ></Hint>
+          >
+            <DataBubble ticker={ticker} value={hoverdNode.y} />
+          </Hint>
+        )}
+        {hoverdNode && (
+          <Hint
+            value={hoverdNode}
+            align={{ vertical: "bottomEdge", horizontal: "auto" }}
+            style={{ marginTop: "30px" }}
+          >
+            <DataBubble value={timestamp[hoverdNode.x]} timestamp />
+          </Hint>
         )}
       </FlexibleWidthXYPlot>
     </div>
