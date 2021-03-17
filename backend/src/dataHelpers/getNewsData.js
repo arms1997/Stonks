@@ -1,12 +1,27 @@
 const NewsApi = require("newsapi");
 
-const newsapi = new NewsApi(process.env.NEWS_API);
+const newsapi = new NewsApi("***REMOVED***");
 
-module.exports = (symbol) => {
+const getAllNews = () => {
   return newsapi.v2.everything({
     sources: "the-wall-street-journal, bloomberg, business-insider",
-    qInTitle: `${symbol}`,
     language: "en",
     sortBy: "publishedAt",
+    pageSize: 100,
   });
+};
+
+const getCompanyNews = (company, symbol) => {
+  return newsapi.v2.everything({
+    sources: "the-wall-street-journal, bloomberg, business-insider",
+    qInTitle: `${company} OR ${symbol}`,
+    language: "en",
+    sortBy: "publishedAt",
+    pageSize: 100,
+  });
+};
+
+module.exports = {
+  getCompanyNews,
+  getAllNews,
 };
