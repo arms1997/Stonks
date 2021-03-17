@@ -17,5 +17,11 @@ export default function Graph(props) {
       .catch((err) => console.error(err));
   }, [props.symbol]);
 
-  return <div>{graphData && <LineGraph data={graphData} />}</div>;
+  return (
+    <div>
+      {props.company
+        ? graphData && <LineGraphNews />
+        : graphData && <LineGraph data={graphData} />}
+    </div>
+  );
 }
