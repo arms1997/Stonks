@@ -8,18 +8,20 @@ import { Link, useHistory } from 'react-router-dom';
 import { updateUserBackend } from '../contexts/Auth_Helpers';
 
 export default function UpdateProfile() {
+
   
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const usernameRef = useRef();
   const phoneNumRef = useRef();
-
-
+  
   const { currentUser, updateEmail, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  
+  console.log("currentuser", currentUser);
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -82,7 +84,7 @@ export default function UpdateProfile() {
             </div>
             <div>
               <label for="phone-number">Phone Number</label>
-              <input name="phone-number" type="tel" ref={phoneNumRef} defaultValue={currentUser && currentUser.user_phone_num} />
+              <input name="phone-number" type="tel" ref={phoneNumRef} defaultValue={currentUser && currentUser.user_phone_num}/>
             </div>
             <div>
               <label for="password">Password</label>

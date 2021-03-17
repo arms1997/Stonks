@@ -60,10 +60,8 @@ export function AuthProvider({ children }) {
        })
        .catch(err => console.log(err))
     }
-      console.log(user)
       setLoading(false);
       setCurrentUser(user);
-
     });
 
     return unsubscribe;
