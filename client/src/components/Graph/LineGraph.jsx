@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   FlexibleWidthXYPlot,
-  AreaSeries,
   LineSeries,
   Hint,
   XAxis,
@@ -10,7 +9,7 @@ import {
   HorizontalGridLines,
   MarkSeries,
 } from "react-vis";
-import "../../node_modules/react-vis/dist/style.css";
+import "../../../node_modules/react-vis/dist/style.css";
 import moment from "moment";
 
 import DataBubble from "../Bubbles/DataBubble";
@@ -18,7 +17,7 @@ import DataBubble from "../Bubbles/DataBubble";
 export default function LineGraph(props) {
   const [hoverdNode, setHoveredNode] = useState(null);
 
-  const { ticker, timestamps, yDomain, data } = props;
+  const { title, timestamps, yDomain, data } = props.data;
 
   const _onMouseLeave = () => setHoveredNode(null);
 
@@ -40,14 +39,14 @@ export default function LineGraph(props) {
         <XAxis tickFormat={_tickFormatter} />
         <YAxis />
         <LineSeries data={data} onNearestX={_onNearestX} animation />
-        {hoverdNode && <MarkSeries data={hoverdNode} />}
+        {hoverdNode && <MarkSeries data={[hoverdNode]} />}
         {hoverdNode && (
           <Hint
             value={hoverdNode}
             align={{ horizontal: "leftEdge", vertical: "topEdge" }}
             style={{ marginLeft: "80px", marginTop: "30px" }}
           >
-            <DataBubble ticker={ticker} value={hoverdNode.y} />
+            <DataBubble ticker={title.toUpperCase()} value={hoverdNode.y} />
           </Hint>
         )}
         {hoverdNode && (
@@ -56,7 +55,7 @@ export default function LineGraph(props) {
             align={{ vertical: "bottomEdge", horizontal: "auto" }}
             style={{ marginTop: "30px" }}
           >
-            <DataBubble value={timestamp[hoverdNode.x]} timestamp />
+            <DataBubble value={timestamps[hoverdNode.x]} timestamp />
           </Hint>
         )}
       </FlexibleWidthXYPlot>
