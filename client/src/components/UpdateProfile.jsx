@@ -5,6 +5,8 @@ import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 
+import { updateUserBackend } from '../contexts/Auth_Helpers';
+
 export default function UpdateProfile() {
   
   const emailRef = useRef();
@@ -30,28 +32,30 @@ export default function UpdateProfile() {
     const userChanges = {};
 
     //conditionally add to object current users changes to be implemented 
-    if (usernameRef.current.value) {
+    if (usernameRef.current.value !== currentUser.username) {
       userChanges["username"] = usernameRef.current.value;
     };
 
-    if (phoneNumRef.current.value) {
+    if (phoneNumRef.current.value !== currentUser.user_phone_num) {
       userChanges["phone_number"] = phoneNumRef.current.value;
-    };
-
-    if (emailRef.current.value) {
-      userChanges["email"] = emailRef.current.value;
     };
 
     const promises = [];
 
+    //add backend changes to promises
+    console.log("userChanges", userChanges)
+    
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(updateEmail(emailRef.current.value))
+      userChanges["email"] = emailRef.current.value;
     };
-
+    
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
     };
 
+    promises.push(updateUserBackend(currentUser.user_id, userChanges));
+    
     Promise.all(promises).then(() => {
       history.push('/')
     }).catch(() => {

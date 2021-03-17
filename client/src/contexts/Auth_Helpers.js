@@ -10,8 +10,9 @@ export function addUserBackend(newUser) {
   })
 };
 
-export function updateUserBackend(user) {
+export function updateUserBackend(user_id, userChanges) {
   return axios.put(`/api/user/:user_id`, {
-    user_info: user
+    user_id: user_id,
+    user_info: userChanges
   })
 };
