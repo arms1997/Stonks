@@ -3,7 +3,7 @@ const router = express.Router();
 const rp = require("request-promise");
 const moment = require("moment");
 
-const getNewsData = require("../dataHelpers/getNewsData");
+const { getCompanyNews } = require("../dataHelpers/getNewsData");
 const getTickerData = require("../dataHelpers/getTickerData");
 
 const {
@@ -24,12 +24,10 @@ module.exports = () => {
       .catch((err) => res.status(500).send({ err: err.message }));
   });
 
-  router.get("/query", (req, res) => {
+  router.get("/graph", (req, res) => {
     const { symbol, company } = req.query;
 
-    console.log(symbol, company);
-
-    Promise.all([getTickerData(symbol), getNewsData(company)])
+    Promise.all([getTickerData(symbol), getCompanyNews(company, symbol)])
       .then(([data, news]) => {
         data = JSON.parse(data);
 
@@ -40,6 +38,13 @@ module.exports = () => {
         const deltaData = getChangeInData(data["Time Series (5min)"]);
 
         news = news["articles"].filter((article) => article.content);
+        news = news.map((article) => {
+          return {
+            title: article.title,
+            url: article.url,
+            publishedAt: article.publishedAt,
+          };
+        });
 
         const relevantNews = getRelevantNews(news, deltaData);
 
@@ -56,7 +61,29 @@ module.exports = () => {
           timestamps,
           areaData,
           hintData,
-          relevantNews,
+        });
+      })
+      .catch((err) => console.error(err));
+  });
+
+  router.get("/:symbol", (req, res) => {
+    const { symbol } = req.params;
+    console.log(symbol);
+    getTickerData(symbol)
+      .then((data) => {
+        data = JSON.parse(data);
+
+        const { parsedData, timestamps } = dataParser(
+          data["Time Series (5min)"]
+        );
+
+        const { min, max } = domainParser(parsedData);
+
+        res.send({
+          yDomain: [min, max],
+          title: symbol,
+          data: parsedData,
+          timestamps,
         });
       })
       .catch((err) => console.error(err));
