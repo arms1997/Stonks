@@ -3,7 +3,8 @@ const moment = require("moment");
 /**
  * Returns data and timestamps for line graph
  *
- * @param {Object} data object of stocks data in format date:{...data}
+ * @param {Object} data object of stocks data in format date:{...data} from alpha vantage
+ *
  * @return {Array, Array} returns array of data converted to x, y coordinates and timestamps
  */
 const dataParser = (data) => {
@@ -25,6 +26,13 @@ const dataParser = (data) => {
   return { parsedData, timestamps };
 };
 
+/**
+ * Returns yDomain for graph
+ *
+ * @param {Object} data object of stocks data in format date:{...data} from alpha vantage
+ *
+ * @return {Number, Number} min and max values for the y axis
+ */
 const domainParser = (data) => {
   const min = Math.floor(
     Math.min.apply(
@@ -43,6 +51,14 @@ const domainParser = (data) => {
   return { min, max };
 };
 
+/**
+ * Returns percent change between two data points
+ *
+ * @param {Number} firstValue
+ * @param {Number} secondValue
+ *
+ * @return {Number} percent change of two data points
+ */
 const calculateDelta = (firstValue, secondValue) => {
   return (
     Math.abs(parseInt(firstValue) - parseInt(secondValue)) /
@@ -50,6 +66,13 @@ const calculateDelta = (firstValue, secondValue) => {
   );
 };
 
+/**
+ * Returns Array of Dates indicating where there has been a change
+ *
+ * @param {Object} data object of stocks data in format date:{...data} from alpha vantage
+ *
+ * @return {Array} array of dates where percent change criteria was met
+ */
 const getChangeInData = (data) => {
   const DELTA = 0.05;
   const TIME = 10;
@@ -87,6 +110,14 @@ const getChangeInData = (data) => {
   return deltaArr;
 };
 
+/**
+ * Returns Object where each entry has an array with news articles related to that date
+ *
+ * @param {Array} news       news data related to the company, from newsApi
+ * @param {Array} deltaData  dates where percent change criteria was met
+ *
+ * @return {Object} relevantNews
+ */
 const getRelevantNews = (news, deltaData) => {
   const relevantNews = {};
 
@@ -105,6 +136,15 @@ const getRelevantNews = (news, deltaData) => {
   return relevantNews;
 };
 
+/**
+ * Returns an Array of arrays where each nested array contains the coordinates for the area chart
+ *
+ * @param {Object} data       object of stocks data in format date:{...data} from alpha vantage
+ * @param {Array} timestamps  array of timestamps from ticker data
+ * @param {Array} deltaData   array of timestamps where percent change criteria was met
+ *
+ * @return {Array} areaData
+ */
 const getAreaData = (data, timestamps, deltaData) => {
   const areaData = [];
   const newData = [...data].reverse();
@@ -130,26 +170,32 @@ const getAreaData = (data, timestamps, deltaData) => {
   return areaData;
 };
 
-const getHintData = (areaData, newsData) => {
+/**
+ *
+ * @param {Array} areaData Array of arrays containing the data points for the area chart
+ * @param {Array} news news data related to the company, from newsApi
+ */
+const getHintData = (areaData, news) => {
   //create new areaData
   const newAreaData = [...areaData];
 
   const hintArr = [];
 
-  const news = {};
-  for (const key in newsData) {
-    if (newsData[key].length) {
-      news[key] = [...newsData[key]];
+  const newsObj = {};
+  for (const key in news) {
+    if (news[key].length) {
+      newsObj[key] = [...news[key]];
     }
   }
 
-  const keys = Object.keys(news);
+  const keys = Object.keys(newsObj);
 
   let i = 0;
   for (const data of newAreaData) {
     hintArr.push({
       data: data[Math.floor(data.length / 2)],
-      hint: news[keys[i]][Math.floor(Math.random() * news[keys[i]].length)],
+      hint:
+        newsObj[keys[i]][Math.floor(Math.random() * newsObj[keys[i]].length)],
     });
 
     i++;
