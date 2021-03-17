@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LineGraph from "./LineGraph";
+import LineGraphNews from "./LineGraphNews";
 
 export default function Graph(props) {
   const [graphData, setGraphData] = useState(null);
@@ -15,12 +16,12 @@ export default function Graph(props) {
     request
       .then((data) => setGraphData(data.data))
       .catch((err) => console.error(err));
-  }, [props.symbol]);
+  }, []);
 
   return (
     <div>
       {props.company
-        ? graphData && <LineGraphNews />
+        ? graphData && <LineGraphNews data={graphData} />
         : graphData && <LineGraph data={graphData} />}
     </div>
   );
