@@ -5,6 +5,8 @@ import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 
+import { addUserBackend } from '../contexts/Auth_Helpers';
+
 export default function Signup() {
 
   const emailRef = useRef();
@@ -24,14 +26,28 @@ export default function Signup() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Oh no, passwords do not match!")
     }
+    const userObj = {
+      username: usernameRef.current.value,
+      email: emailRef.current.value,
+      phone_number: phoneNumRef.current.value
+    };
 
-    try {;
-      setError("")
+    try {
+      setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      history.push("/");
+      
     } catch {
       setError("Oh no no noooo....Failed to create an account");
+    }
+    
+    //add user to backend
+    try {
+      await addUserBackend(userObj)
+
+    } catch {
+      setError("Oh no no noooo....Failed to create an account on db");
     }
 
     setLoading(false);
@@ -54,7 +70,7 @@ export default function Signup() {
             </div>
             <div>
               <label for="phone-number">Phone Number (optional)</label>
-              <input name="phone-number" type="tel" ref={phoneNumRef} required/>
+              <input name="phone-number" type="tel" ref={phoneNumRef} />
             </div>
             <div>
               <label for="password">Password</label>
