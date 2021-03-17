@@ -4,7 +4,7 @@ import Graph from "./components/Graph";
 function App() {
   return (
     <div className="App">
-      <Graph symbol={"bb"} />
+      <Graph symbol={"tsla"} company={"tesla"} />
     </div>
   );
 }
