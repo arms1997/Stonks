@@ -45,11 +45,10 @@ export default function Signup() {
     //add user to backend
     try {
       await addUserBackend(userObj)
-
+      history.push("/");
     } catch {
       setError("Oh no no noooo....Failed to create an account on db");
     }
-
     setLoading(false);
   }
 

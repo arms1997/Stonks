@@ -48,13 +48,15 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged(user => {
     
     //make request to backend to add user likes/watches to currentUser object
-     getUserBackend(user.email)
-      .then((backendUserData) => {
-        user["likes"] = backendUserData.data.likes;
-        user["watches"] = backendUserData.data.watches;
-      })
-      .catch(err => console.log(err))
-      
+
+    if (user) {
+      getUserBackend(user.email)
+       .then((backendUserData) => {
+         user["likes"] = backendUserData.data.likes;
+         user["watches"] = backendUserData.data.watches;
+       })
+       .catch(err => console.log(err))
+    }
       console.log(user)
       setLoading(false);
       setCurrentUser(user);
