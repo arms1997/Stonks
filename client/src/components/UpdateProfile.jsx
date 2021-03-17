@@ -70,7 +70,7 @@ export default function UpdateProfile() {
           <form onSubmit={handleSubmit}>
           <div>
               <label for="username">Username</label>
-              <input name="username" type="text" ref={usernameRef} />
+              <input name="username" type="text" ref={usernameRef} defaultValue={currentUser && currentUser.username}/>
             </div>
             <div>
               <label for="email">Email</label>
@@ -78,7 +78,7 @@ export default function UpdateProfile() {
             </div>
             <div>
               <label for="phone-number">Phone Number</label>
-              <input name="phone-number" type="tel" ref={phoneNumRef} />
+              <input name="phone-number" type="tel" ref={phoneNumRef} defaultValue={currentUser && currentUser.user_phone_num} />
             </div>
             <div>
               <label for="password">Password</label>

@@ -54,6 +54,9 @@ export function AuthProvider({ children }) {
        .then((backendUserData) => {
          user["likes"] = backendUserData.data.likes;
          user["watches"] = backendUserData.data.watches;
+         user["username"] = backendUserData.data.username;
+         user["user_id"] = backendUserData.data.user_id;
+         user["user_phone_num"] = backendUserData.data.user_phone_num;
        })
        .catch(err => console.log(err))
     }
