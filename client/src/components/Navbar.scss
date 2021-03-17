@@ -1,0 +1,9 @@
+.navbar {
+  flex-grow: 1;
+
+  &__autocomplete {
+    margin: 5px 0px;
+    width: 60%;
+    font-size: large;
+  }
+}
