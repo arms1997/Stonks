@@ -10,12 +10,14 @@ import { useEffect, useState } from "react";
 import "./Navbar.scss";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  title: {
     flexGrow: 1,
-    display: "flex",
   },
   search: {
-    alignSelf: "",
+    flexGrow: 1,
+  },
+  text: {
+    height: "10%",
   },
 }));
 
@@ -47,14 +49,14 @@ export default function Navbar(props) {
       {!loading && (
         <AppBar position={"fixed"} color={"transparent"}>
           <Toolbar>
-            <p>Hello</p>
+            <p className={classes.title}>Hello</p>
             <Autocomplete
               options={options}
               getOptionLabel={(option) =>
                 `${option.shortName} ${option.symbol}`
               }
               groupBy={(option) => "Symbol"}
-              className={"navbar__autocomplete"}
+              className={classes.search}
               renderInput={(params) => (
                 <TextField
                   {...params}
