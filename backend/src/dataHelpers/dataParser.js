@@ -1,5 +1,11 @@
 const moment = require("moment");
 
+/**
+ * Returns data and timestamps for line graph
+ *
+ * @param {Object} data object of stocks data in format date:{...data}
+ * @return {Array, Array} returns array of data converted to x, y coordinates and timestamps
+ */
 const dataParser = (data) => {
   const parsedData = [];
   const timestamps = [];
@@ -130,14 +136,23 @@ const getHintData = (areaData, newsData) => {
 
   const hintArr = [];
 
-  const keys = Object.keys(newsData);
+  const news = {};
+  for (const key in newsData) {
+    if (newsData[key].length) {
+      news[key] = [...newsData[key]];
+    }
+  }
 
-  for (const data of areaData) {
+  const keys = Object.keys(news);
+
+  let i = 0;
+  for (const data of newAreaData) {
     hintArr.push({
       data: data[Math.floor(data.length / 2)],
-      hintTitle: "Title",
-      url: "",
+      hint: news[keys[i]][Math.floor(Math.random() * news[keys[i]].length)],
     });
+
+    i++;
   }
 
   return hintArr;
