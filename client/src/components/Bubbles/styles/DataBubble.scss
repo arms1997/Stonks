@@ -1,0 +1,25 @@
+.data {
+  &__item {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+
+    &-text {
+      margin: 10px 10px;
+      padding: 0;
+      color: black;
+    }
+  }
+
+  &__timestamp {
+    background-color: black;
+    border-radius: 5px;
+    border: 1px solid grey;
+
+    &-text {
+      margin: 10px 10px;
+      padding: 0;
+      color: white;
+    }
+  }
+}
