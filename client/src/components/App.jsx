@@ -20,7 +20,7 @@ function App() {
         <Container >
           <Router>
             <Switch>
-              <Route exact path='/'component={Landing}/>
+              <PrivateRoute exact path='/'component={Landing}/>
               <PrivateRoute path='/me' component={UpdateProfile}/>
               <Route path='/signup' component={Signup}/>
               <Route path='/graph'>

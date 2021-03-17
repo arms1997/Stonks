@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Card, Container, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 
 export default function Login() {
@@ -11,7 +11,7 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -34,6 +34,7 @@ export default function Login() {
 
   return (
     <>
+    {(currentUser) ? <Redirect to="/"/> : 
       <Container maxWidth="sm">
         <Card>
           <h2>Log In</h2>
@@ -55,7 +56,7 @@ export default function Login() {
           Need an account?
           <Link to="/signup">Sign up!</Link>
         </div>
-      </Container>
+      </Container> }
     </>
   )
 }

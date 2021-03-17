@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Card, Container } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import { addUserBackend } from '../contexts/Auth_Helpers';
 
@@ -15,7 +15,7 @@ export default function Signup() {
   const usernameRef = useRef();
   const phoneNumRef = useRef();
   
-  const { signup } = useAuth();
+  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -48,6 +48,7 @@ export default function Signup() {
 
   return (
     <>
+    {(currentUser) ? <Redirect to="/"/>  :
       <Container maxWidth="sm">
         <Card>
           <h2>Sign Up</h2>
@@ -80,7 +81,7 @@ export default function Signup() {
           Already have an account?
           <Link to="/login">Log in</Link>
         </div>
-      </Container>
+      </Container> }
     </>
   )
 }
