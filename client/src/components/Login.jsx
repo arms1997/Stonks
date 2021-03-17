@@ -41,10 +41,10 @@ export default function Login() {
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={handleSubmit}>
             {/* <label for="email">Email</label> */}
-            <TextField required id="standard-required" label="Required" helperText="Email" type="email" inputRef={emailRef} />
+            <TextField required className="standard-required" label="Required" helperText="Email" type="email" inputRef={emailRef} />
             {/* <input name="email" type="email" ref={emailRef} /> */}
             {/* <label for="password">Password</label> */}
-            <TextField required id="standard-required" label="Required" helperText="Password" type="password" inputRef={passwordRef} />
+            <TextField required className="standard-required" label="Required" helperText="Password" type="password" inputRef={passwordRef} />
             {/* <input name="password" type="password" ref={passwordRef} /> */}
             <Button disabled={loading} variant="contained" color="primary" type="submit">Log in!</Button>
           </form>
