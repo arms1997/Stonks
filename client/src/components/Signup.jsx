@@ -32,24 +32,18 @@ export default function Signup() {
       phone_number: phoneNumRef.current.value
     };
 
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value)
-      history.push("/");
-      
-    } catch {
-      setError("Oh no no noooo....Failed to create an account");
-    }
-    
-    //add user to backend
-    try {
-      await addUserBackend(userObj)
-      history.push("/");
-    } catch {
-      setError("Oh no no noooo....Failed to create an account on db");
-    }
-    setLoading(false);
+    setError("")
+    setLoading(true)
+
+    const promises = [signup(emailRef.current.value, passwordRef.current.value), addUserBackend(userObj)];
+
+    Promise.all(promises).then(() => {
+      history.push('/')
+    }).catch(() => {
+      setError("Failed to update account.")
+    }).finally(() => {
+      setLoading(false)
+    })
   }
 
   return (
