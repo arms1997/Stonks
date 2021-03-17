@@ -32,15 +32,15 @@ export default function Signup() {
       phone_number: phoneNumRef.current.value
     };
 
-    setError("")
-    setLoading(true)
+    setError("");
+    setLoading(true);
 
     const promises = [signup(emailRef.current.value, passwordRef.current.value), addUserBackend(userObj)];
 
     Promise.all(promises).then(() => {
       history.push('/')
     }).catch(() => {
-      setError("Failed to update account.")
+      setError("Failed to sign up.")
     }).finally(() => {
       setLoading(false)
     })
