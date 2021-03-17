@@ -9,7 +9,6 @@ import { updateUserBackend } from '../contexts/Auth_Helpers';
 
 export default function UpdateProfile() {
 
-  
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -20,8 +19,6 @@ export default function UpdateProfile() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  
-  console.log("currentuser", currentUser);
 
   function handleSubmit(e) {
     e.preventDefault()
