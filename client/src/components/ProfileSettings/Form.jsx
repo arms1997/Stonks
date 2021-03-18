@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
 
-import { Button, Card, Container } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../../contexts/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { updateUserBackend } from '../../contexts/Auth_Helpers';
 
+import './ProfileSettings.scss';
 
 export default function UpdateProfile() {
 
@@ -66,39 +67,64 @@ export default function UpdateProfile() {
   }
 
   return (
-    <>
-      <Container maxWidth="sm">
-        <Card>
-          <h2>Update Profile</h2>
-          {error && <Alert severity="error">{error}</Alert>}
-          <form onSubmit={handleSubmit}>
-          <div>
-              <label for="username">Username</label>
-              <input name="username" type="text" ref={usernameRef} defaultValue={currentUser && currentUser.username}/>
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input name="email" type="email" ref={emailRef} defaultValue={currentUser && currentUser.email} />
-            </div>
-            <div>
-              <label for="phone-number">Phone Number</label>
-              <input name="phone-number" type="tel" ref={phoneNumRef} defaultValue={currentUser && currentUser.user_phone_num}/>
-            </div>
-            <div>
-              <label for="password">Password</label>
-              <input name="password" type="password" ref={passwordRef} placeholder="********"/>
-            </div>
-            <div>
-              <label for="email">Password Confirmation</label>
-              <input name="email" type="password" ref={passwordConfirmRef} placeholder="*********"/>
-            </div>
-            <Button disabled={loading} variant="contained" color="primary" type="submit">Update!</Button>
-          </form>
-        </Card> 
-        <div>
-          <Link to="/">Cancel</Link>
-        </div>
-      </Container>
-    </>
-  )
+    <div className="profile__box">
+      {error && <Alert severity="error">{error}</Alert>}
+      <form onSubmit={handleSubmit} className="profile__box-form">
+        <TextField
+          className="profile__box-form-textfield"
+          id="outlined-basic"
+          variant="outlined"
+          label="Username"
+          type="text"
+          defaultValue={currentUser && currentUser.username}
+          inputRef={usernameRef}
+        />
+        <TextField
+          className="profile__box-form-textfield"
+          id="outlined-basic"
+          variant="outlined"
+          label="Email"
+          type="email"
+          defaultValue={currentUser && currentUser.email}
+          inputRef={emailRef}
+        />
+        <TextField
+          className="profile__box-form-textfield"
+          id="outlined-basic"
+          variant="outlined"
+          label="Telephone"
+          type="tel"
+          defaultValue={currentUser && currentUser.user_phone_num}
+          inputRef={phoneNumRef}
+        />
+        <TextField
+          className="profile__box-form-textfield"
+          id="outlined-basic"
+          variant="outlined"
+          label="Password"
+          type="password"
+          placeholder="Leave blank if no change"
+          inputRef={passwordRef}
+        />
+        <TextField
+          className="profile__box-form-textfield"
+          id="outlined-basic"
+          variant="outlined"
+          label="Password Confirmation"
+          type="password"
+          placeholder="Leave blank if no change"
+          inputRef={passwordConfirmRef}
+        />
+        <Button
+          className="profile__box-form-button"
+          disabled={loading}
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Update!
+        </Button>
+      </form>
+    </div>
+  );
 }
