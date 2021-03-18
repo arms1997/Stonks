@@ -12,7 +12,7 @@ module.exports = (db) => {
       .then((userInfo) => {
         Promise.all([db.getUserLikes(userInfo.id), db.getUserWatches(userInfo.id)])
         .then((data) => {
-          res.json({ likes: data[0], watches: data[1], user_id: userInfo.id, username: userInfo.username, user_phone_num: userInfo.phone_number })
+          res.json({ likes: data[0], watches: data[1], user_id: userInfo.id, username: userInfo.username, user_phone_num: userInfo.phone_number, user_email})
         })
         .catch((err) => {
           res.status(500).json({ error: err.message });

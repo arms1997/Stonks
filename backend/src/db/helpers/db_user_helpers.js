@@ -25,6 +25,8 @@ const getUserById = function(id) {
 
 const getUserByEmail = function(email) {
 
+  console.log("email", email);
+
   const queryString = `
     SELECT * FROM users
     WHERE email = $1;
@@ -48,14 +50,14 @@ const updateUserInfo = function(user_id, options) {
     setQuery.push(`username = $${queryParams.length}`)
   }
 
-  if (options.email) {
-    queryParams.push(`${options.email}`);
+  if (options.user_email) {
+    queryParams.push(`${options.user_email}`);
     setQuery.push(`email = $${queryParams.length}`)
   }
 
 
-  if (options.phone_number) {
-    queryParams.push(`${options.phone_number}`);
+  if (options.user_phone_num) {
+    queryParams.push(`${options.user_phone_num}`);
     setQuery.push(`phone_number = $${queryParams.length}`)
   }
 

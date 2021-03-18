@@ -1,15 +1,13 @@
 import React, { useRef, useState } from "react";
 
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Collapse } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
-import { updateUserBackend } from "../../contexts/Auth_Helpers";
-
 import "./ProfileSettings.scss";
 
-export default function UpdateProfile() {
+export default function Form() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -18,10 +16,9 @@ export default function UpdateProfile() {
 
   const {
     currentUser,
-    setCurrentUser,
-    updateEmail,
-    updatePassword,
+    updateUser
   } = useAuth();
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -30,9 +27,9 @@ export default function UpdateProfile() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Oh no, passwords do not match!");
-    }
+    // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    //   return setError("Oh no, passwords do not match!");
+    // }
 
     //object to send to backend
     const userChanges = {};
@@ -43,29 +40,27 @@ export default function UpdateProfile() {
     }
 
     if (phoneNumRef.current.value !== currentUser.user_phone_num) {
-      userChanges["phone_number"] = phoneNumRef.current.value;
+      userChanges["user_phone_num"] = phoneNumRef.current.value;
     }
+    
+    if (emailRef.current.value !== currentUser.user_email) { 
+      userChanges["user_email"] = emailRef.current.value;
+    }
+    
+    // if (passwordRef.current.value) {
+    //   userChanges["password"] = passwordRef.current.value;
+    // }
 
-    const promises = [];
     setLoading(true);
     setError("");
     setMessage("");
 
-    if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
-      userChanges["email"] = emailRef.current.value;
-    }
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
-    }
-
-    promises.push(updateUserBackend(currentUser.user_id, userChanges));
-
-    Promise.all(promises)
+    updateUser(userChanges)
       .then((value) => {
         setMessage("Your account has been updated.");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log("error", error);
         setError("Failed to update account.");
       })
       .finally(() => {
@@ -96,7 +91,7 @@ export default function UpdateProfile() {
             variant="outlined"
             label="Email"
             type="email"
-            defaultValue={currentUser && currentUser.email}
+            defaultValue={currentUser && currentUser.user_email}
             inputRef={emailRef}
           />
           <TextField
@@ -108,7 +103,7 @@ export default function UpdateProfile() {
             defaultValue={currentUser && currentUser.user_phone_num}
             inputRef={phoneNumRef}
           />
-          <TextField
+          {/* <TextField
             className="profile__box-form-textfield"
             id="outlined-basic"
             variant="outlined"
@@ -125,7 +120,7 @@ export default function UpdateProfile() {
             type="password"
             placeholder="Leave blank if no change"
             inputRef={passwordConfirmRef}
-          />
+          /> */}
           <Button
             className="profile__box-form-button"
             disabled={loading}
@@ -133,7 +128,7 @@ export default function UpdateProfile() {
             color="primary"
             type="submit"
           >
-            Update!
+            Update
           </Button>
         </form>
       </div>
