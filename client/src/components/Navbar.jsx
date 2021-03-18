@@ -73,6 +73,10 @@ export default function Navbar({ setStock }) {
     history.push("/me");
   };
 
+  const _onLoginClick = () => {
+    history.push("/login");
+  };
+
   const onChangeHandler = (event, value) => {
     if (!value) {
       return;
@@ -216,7 +220,9 @@ export default function Navbar({ setStock }) {
             </div>
           ) : (
             <div className="navbar__buttons">
-              <Button variant="outlined">Login</Button>
+              <Button variant="outlined" onClick={_onLoginClick}>
+                Login
+              </Button>
             </div>
           )}
         </Toolbar>
