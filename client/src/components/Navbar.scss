@@ -18,4 +18,17 @@
       }
     }
   }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__menu {
+    &-items {
+      display: flex;
+      flex-direction: column;
+      margin: 5px 20px;
+    }
+  }
 }
