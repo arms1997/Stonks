@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
 
-import { Button, Card, Container } from '@material-ui/core';
+import { Button, Card, Container, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import { addUserBackend } from '../contexts/Auth_Helpers';
+
+import './Signup.scss';
 
 export default function Signup() {
 
@@ -49,35 +51,58 @@ export default function Signup() {
   return (
     <>
     {(currentUser) ? <Redirect to="/"/>  :
-      <Container maxWidth="sm">
-        <Card>
-          <h2>Sign Up</h2>
+      <Container maxWidth="sm" className="register">
+        <Card className="register__card">
+          <img
+              src="./images/stonks.svg"
+              className="register__card-image"
+            />
+          <h2>Register</h2>
           {error && <Alert severity="error">{error}</Alert>}
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label for="email">Email</label>
-              <input name="email" type="email" ref={emailRef} required/>
-            </div>
-            <div>
-              <label for="username">Username</label>
-              <input name="username" type="text" ref={usernameRef} required/>
-            </div>
-            <div>
-              <label for="phone-number">Phone Number (optional)</label>
-              <input name="phone-number" type="tel" ref={phoneNumRef} />
-            </div>
-            <div>
-              <label for="password">Password</label>
-              <input name="password" type="password" ref={passwordRef} required/>
-            </div>
-            <div>
-              <label for="email">Password Confirmation</label>
-              <input name="email" type="password" ref={passwordConfirmRef} required/>
-            </div>
-            <Button disabled={loading} variant="contained" color="primary" type="submit">Sign Up!</Button>
+          <form onSubmit={handleSubmit} className="register__card-form">
+          <TextField
+                required
+                className="standard-required register__card-form-textfield"
+                label="Required"
+                helperText="Email"
+                type="email"
+                inputRef={emailRef}
+              />
+            <TextField
+                required
+                className="standard-required register__card-form-textfield"
+                label="Required"
+                helperText="Username"
+                type="text"
+                inputRef={usernameRef}
+              />
+            <TextField
+              className="standard-required register__card-form-textfield"
+              label="Optional"
+              helperText="Phone Number"
+              type="tel"
+              inputRef={phoneNumRef}
+            />    
+            <TextField
+                required
+                className="standard-required register__card-form-textfield"
+                label="Required"
+                helperText="Password"
+                type="password"
+                inputRef={passwordRef}
+             />
+             <TextField
+                required
+                className="standard-required register__card-form-textfield"
+                label="Required"
+                helperText="Confirm Password"
+                type="password"
+                inputRef={passwordConfirmRef}
+             />
+            <Button disabled={loading} variant="contained" color="primary" type="submit" className="register__card-form-button">Sign Up!</Button>
           </form>
         </Card> 
-        <div>
+        <div className="register__link">
           Already have an account?
           <Link to="/login">Log in</Link>
         </div>
