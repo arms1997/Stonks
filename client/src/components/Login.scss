@@ -1,0 +1,38 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  margin-top: 15%;
+
+  &__image {
+    margin-top: 20px;
+    height: 100px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 200px;
+
+    &-button {
+      height: 40px;
+      margin-top: 20px;
+    }
+
+    &-textfield {
+      width: 250px;
+    }
+  }
+
+  &__link {
+    margin: 20px 20px;
+  }
+
+  &__forgotpassword {
+    margin: 20px 20px;
+  }
+}
