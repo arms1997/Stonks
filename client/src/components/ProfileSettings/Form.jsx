@@ -9,20 +9,23 @@ import { updateUserBackend } from "../../contexts/Auth_Helpers";
 
 import "./ProfileSettings.scss";
 
-export default function UpdateProfile({ setCurrentUser }) {
+export default function UpdateProfile() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const usernameRef = useRef();
   const phoneNumRef = useRef();
 
-  const { currentUser, updateEmail, updatePassword } = useAuth();
+  const {
+    currentUser,
+    setCurrentUser,
+    updateEmail,
+    updatePassword,
+  } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const history = useHistory();
-
-  console.log("currentuser", currentUser);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -48,8 +51,6 @@ export default function UpdateProfile({ setCurrentUser }) {
     setError("");
     setMessage("");
 
-    console.log("userChanges", userChanges);
-
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value));
       userChanges["email"] = emailRef.current.value;
@@ -61,9 +62,8 @@ export default function UpdateProfile({ setCurrentUser }) {
     promises.push(updateUserBackend(currentUser.user_id, userChanges));
 
     Promise.all(promises)
-      .then(() => {
+      .then((value) => {
         setMessage("Your account has been updated.");
-        // history.push('/')
       })
       .catch(() => {
         setError("Failed to update account.");
