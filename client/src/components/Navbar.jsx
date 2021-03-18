@@ -1,4 +1,4 @@
-import { AppBar } from "@material-ui/core";
+import { AppBar, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -35,10 +35,11 @@ export default function Navbar(props) {
 
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-  const [options, setOptions] = useState();
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     let mounted = true;
+
     axios
       .get("/api/tickers")
       .then((data) => {
@@ -56,52 +57,55 @@ export default function Navbar(props) {
 
   return (
     <div>
-      {loading && (
-        <AppBar
-          position={"fixed"}
-          color={"transparent"}
-          className={classes.root}
-        >
-          <Toolbar className={classes.toolbar}>
-            <img
-              src="./images/stonks.svg"
-              className={"navbar__image"}
-              onClick={() => history.push("/")}
-            />
-            <Autocomplete
-              className={classes.search}
-              renderOption={(option) => {
-                return (
-                  <div className={"navbar__autocomplete-option"}>
-                    <p className={"navbar__autocomplete-option-p"}>
-                      {option.symbol.toUpperCase()}
-                    </p>
-                    <p className={"navbar__autocomplete-option-p"}>
-                      {option.shortName}
-                    </p>
-                  </div>
-                );
-              }}
-              loading={}
-              options={options}
-              getOptionLabel={(option) =>
-                `${option.symbol.toUpperCase()} ${option.shortName} `
-              }
-              groupBy={(option) => "Symbol"}
-              renderInput={(params) => (
-                <TextField
-                  className={classes.text}
-                  {...params}
-                  label="Search Stock"
-                  variant="outlined"
-                  margin="dense"
-                />
-              )}
-            />
-            <p></p>
-          </Toolbar>
-        </AppBar>
-      )}
+      <AppBar position={"fixed"} color={"transparent"} className={classes.root}>
+        <Toolbar className={classes.toolbar}>
+          <img
+            src="./images/stonks.svg"
+            className={"navbar__image"}
+            onClick={() => history.push("/")}
+          />
+          <Autocomplete
+            className={classes.search}
+            renderOption={(option) => {
+              return (
+                <div className={"navbar__autocomplete-option"}>
+                  <p className={"navbar__autocomplete-option-p"}>
+                    {option.symbol.toUpperCase()}
+                  </p>
+                  <p className={"navbar__autocomplete-option-p"}>
+                    {option.shortName}
+                  </p>
+                </div>
+              );
+            }}
+            loading={loading}
+            options={options}
+            getOptionLabel={(option) => `${option.symbol.toUpperCase()} `}
+            groupBy={() => "Symbol"}
+            renderInput={(params) => (
+              <TextField
+                className={classes.text}
+                {...params}
+                label="Search Stock"
+                variant="outlined"
+                margin="dense"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+              />
+            )}
+          />
+          <p></p>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }
