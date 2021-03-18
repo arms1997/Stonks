@@ -1,22 +1,21 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
-import { Button, TextField } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import { useAuth } from '../../contexts/AuthContext';
-import { useHistory } from 'react-router-dom';
+import { Button, TextField } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
-import { updateUserBackend } from '../../contexts/Auth_Helpers';
+import { updateUserBackend } from "../../contexts/Auth_Helpers";
 
-import './ProfileSettings.scss';
+import "./ProfileSettings.scss";
 
 export default function UpdateProfile({ setCurrentUser }) {
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const usernameRef = useRef();
   const phoneNumRef = useRef();
-  
+
   const { currentUser, updateEmail, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,51 +25,52 @@ export default function UpdateProfile({ setCurrentUser }) {
   console.log("currentuser", currentUser);
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Oh no, passwords do not match!")
+      return setError("Oh no, passwords do not match!");
     }
 
-    //object to send to backend 
+    //object to send to backend
     const userChanges = {};
 
-    //conditionally add to object current users changes to be implemented 
+    //conditionally add to object current users changes to be implemented
     if (usernameRef.current.value !== currentUser.username) {
       userChanges["username"] = usernameRef.current.value;
-    };
+    }
 
     if (phoneNumRef.current.value !== currentUser.user_phone_num) {
       userChanges["phone_number"] = phoneNumRef.current.value;
-    };
+    }
 
     const promises = [];
     setLoading(true);
     setError("");
     setMessage("");
 
-    console.log("userChanges", userChanges)
+    console.log("userChanges", userChanges);
 
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value));
       userChanges["email"] = emailRef.current.value;
     }
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value))
+      promises.push(updatePassword(passwordRef.current.value));
     }
-  
 
     promises.push(updateUserBackend(currentUser.user_id, userChanges));
-    
-    Promise.all(promises).then(() => {
-      setMessage("Your account has been updated.")
-      setCurrentUser((prev) => ({...prev, username: usernameRef.current.value}))
-      // history.push('/')
-    }).catch(() => {
-      setError("Failed to update account.")
-    }).finally(() => {
-      setLoading(false)
-    })
+
+    Promise.all(promises)
+      .then(() => {
+        setMessage("Your account has been updated.");
+        // history.push('/')
+      })
+      .catch(() => {
+        setError("Failed to update account.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
