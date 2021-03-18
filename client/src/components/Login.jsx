@@ -4,7 +4,7 @@ import { Button, Card, Container, TextField } from "@material-ui/core";
 
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import "./Login.scss";
 
@@ -15,7 +15,6 @@ export default function Login() {
   const { login, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
