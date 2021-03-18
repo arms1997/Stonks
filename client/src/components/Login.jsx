@@ -26,7 +26,7 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/me");
     } catch {
-      setError("Oh no no noooo....Failed to log in!");
+      setError("Incorrect credentials, please try again.");
     }
 
     setLoading(false);
@@ -42,6 +42,7 @@ export default function Login() {
             <img
               src="./images/stonks.svg"
               className="login__image"
+              alt="Stonks logo with graph"
             />
             <h2>Log In</h2>
             {error && <Alert severity="error">{error}</Alert>}

@@ -56,6 +56,7 @@ export default function Signup() {
           <img
               src="./images/stonks.svg"
               className="register__card-image"
+              alt="Stonks logo with graph"
             />
           <h2>Register</h2>
           {error && <Alert severity="error">{error}</Alert>}

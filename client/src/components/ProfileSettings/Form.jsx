@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react';
 
 import { Button, Card, Container } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 
-import { updateUserBackend } from '../contexts/Auth_Helpers';
+import { updateUserBackend } from '../../contexts/Auth_Helpers';
+
 
 export default function UpdateProfile() {
 

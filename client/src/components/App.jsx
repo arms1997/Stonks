@@ -3,7 +3,7 @@ import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Signup from './Signup';
-import UpdateProfile from './UpdateProfile';
+import UpdateProfile from './ProfileSettings/UpdateProfile';
 import Login from './Login';
 import Landing from './Landing';
 import ForgotPassword from './ForgotPassword';
