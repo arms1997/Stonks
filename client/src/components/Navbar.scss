@@ -21,14 +21,7 @@
 
   &__buttons {
     display: flex;
+    align-content: center;
     justify-content: space-between;
-  }
-
-  &__menu {
-    &-items {
-      display: flex;
-      flex-direction: column;
-      margin: 5px 20px;
-    }
   }
 }

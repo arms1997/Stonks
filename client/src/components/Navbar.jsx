@@ -1,4 +1,12 @@
-import { AppBar, Button, CircularProgress, Menu } from "@material-ui/core";
+import {
+  AppBar,
+  Button,
+  CircularProgress,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -6,12 +14,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import NightsStayIcon from "@material-ui/icons/NightsStay";
+import HomeIcon from "@material-ui/icons/Home";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 import "./Navbar.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,18 +45,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar(props) {
+export default function Navbar({ setStock }) {
   const classes = useStyles();
 
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [options, setOptions] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const { currentUser, logout } = useAuth();
-
-  console.log(anchorEl);
 
   async function handleLogout() {
     try {
@@ -64,11 +73,22 @@ export default function Navbar(props) {
     history.push("/me");
   };
 
+  const onChangeHandler = (event, value) => {
+    if (!value) {
+      return;
+    }
+
+    setStock({ symbol: value.symbol, company: value.shortName });
+    history.push("/graph");
+  };
+
   const _handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setOpenMenu(true);
   };
 
   const _handleClose = () => {
+    setOpenMenu(false);
     setAnchorEl(null);
   };
 
@@ -101,6 +121,12 @@ export default function Navbar(props) {
     );
   };
 
+  const { pathname } = useLocation();
+
+  if (pathname === "/login" || pathname === "/signup") {
+    return null;
+  }
+
   return (
     <div>
       <AppBar position={"fixed"} color={"transparent"} className={classes.root}>
@@ -108,13 +134,17 @@ export default function Navbar(props) {
           <img
             src="./images/stonks.svg"
             className="navbar__image"
+            alt="logo"
             onClick={_onHomeClick}
           />
           <Autocomplete
             className={classes.search}
             renderOption={(option) => optionComponent(option)}
             options={options}
-            getOptionLabel={(option) => `${option.symbol.toUpperCase()} `}
+            onChange={onChangeHandler}
+            getOptionLabel={(option) =>
+              `${option.symbol.toUpperCase()} ${option.shortName}`
+            }
             groupBy={() => "Symbol"}
             loading={loading}
             renderInput={(params) => (
@@ -150,22 +180,44 @@ export default function Navbar(props) {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 keepMounted
-                open={open}
+                open={openMenu}
                 onClose={_handleClose}
                 getContentAnchorEl={null}
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 transformOrigin={{ vertical: "top", horizontal: "center" }}
               >
-                <div className="navbar__menu-items">
-                  <Button onClick={_onHomeClick}>My Page</Button>
-                  <Button onclick={_onAccountClick}>Account</Button>
-                  <Button startIcon={<NightsStayIcon />}>Dark Mode</Button>
-                  <Button onClick={handleLogout}>Sign out</Button>
+                <div>
+                  <MenuItem onClick={_onHomeClick}>
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="My Page" />
+                  </MenuItem>
+                  <MenuItem onClick={_onAccountClick}>
+                    <ListItemIcon>
+                      <AccountBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Account" />
+                  </MenuItem>
+                  <MenuItem>
+                    <ListItemIcon>
+                      <NightsStayIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Dark Mode" />
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <ListItemIcon>
+                      <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Sign Out" />
+                  </MenuItem>
                 </div>
               </Menu>
             </div>
           ) : (
-            <div className="navbar__buttons"></div>
+            <div className="navbar__buttons">
+              <Button variant="outlined">Login</Button>
+            </div>
           )}
         </Toolbar>
       </AppBar>
