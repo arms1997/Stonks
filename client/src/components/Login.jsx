@@ -5,6 +5,8 @@ import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, Redirect, useHistory } from "react-router-dom";
 
+import "./Login.scss";
+
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -34,46 +36,47 @@ export default function Login() {
       {currentUser ? (
         <Redirect to="/" />
       ) : (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" className={"login"}>
           <Card>
+          <img
+              src="./images/stonks.svg"
+              className="login__image"
+            />
             <h2>Log In</h2>
             {error && <Alert severity="error">{error}</Alert>}
-            <form onSubmit={handleSubmit}>
-              {/* <label for="email">Email</label> */}
+            <form onSubmit={handleSubmit} className="login__form">
               <TextField
                 required
-                className="standard-required"
+                className="standard-required login__form-textfield"
                 label="Required"
                 helperText="Email"
                 type="email"
                 inputRef={emailRef}
               />
-              {/* <input name="email" type="email" ref={emailRef} /> */}
-              {/* <label for="password">Password</label> */}
               <TextField
                 required
-                className="standard-required"
+                className="standard-required login__form-textfield"
                 label="Required"
                 helperText="Password"
                 type="password"
                 inputRef={passwordRef}
               />
-              {/* <input name="password" type="password" ref={passwordRef} /> */}
               <Button
                 disabled={loading}
                 variant="contained"
                 color="primary"
                 type="submit"
+                className="login__form-button"
               >
                 Log in!
               </Button>
             </form>
-            <div>
+            <div className="login__forgotpassword">
               <Link to="/forgot-password">Forgot password?</Link>
             </div>
           </Card>
-          <div>
-            Need an account?
+          <div className="login__link">
+            Need an account? 
             <Link to="/signup">Sign up!</Link>
           </div>
         </Container>
