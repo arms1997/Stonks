@@ -83,7 +83,7 @@ export default function Navbar({ setStock }) {
     }
 
     setStock({ symbol: value.symbol, company: value.shortName });
-    history.push("/graph");
+    history.push("/ticker");
   };
 
   const _handleMenuClick = (event) => {

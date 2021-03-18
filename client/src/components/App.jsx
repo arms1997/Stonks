@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import "./App.css";
 import { Container } from "@material-ui/core";
 import Navbar from "./Navbar";
+import Ticker from "./Ticker";
 
 function App() {
   const [stock, setStock] = useState({
@@ -31,8 +32,8 @@ function App() {
               <PrivateRoute exact path="/" component={Landing} />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
-              <Route path="/graph">
-                <Graph company={stock.company} symbol={stock.symbol} />
+              <Route path="/ticker">
+                <Ticker company={stock.company} symbol={stock.symbol} />
               </Route>
               <Route path="/login" component={Login} />
               <Route path="/newslist">
