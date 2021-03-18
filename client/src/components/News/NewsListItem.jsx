@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     marginBottom: 25,
     display: "flex",
     flexDirection: "row",
+    textAlign: "left",
   },
 
   content: {
@@ -24,11 +25,8 @@ const useStyles = makeStyles({
   },
 
   innerContent: {
+    display: "flex",
     flexDirection: "column",
-  },
-
-  linkContent: {
-    flexDirection: "row",
   },
 
   media: {
@@ -56,7 +54,7 @@ export default function NewsListItem({title, description, image, author, source,
             <Typography gutterBottom variant="h6" component="h2">
               {title}
             </Typography>
-            <Typography gutterBottom variant="h6" component="h2">
+            <Typography gutterBottom variant="subtitle1" component="h3">
               {author}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -64,14 +62,9 @@ export default function NewsListItem({title, description, image, author, source,
             </Typography>
           </CardContent>
             <CardContent className={classes.content} >
-              <div className={classes.linkContent}>
                 <Button size="small" color="primary" href={url} >
                   Learn More
                 </Button>
-                <Typography>
-                  {source}
-                </Typography>
-              </div>
           </CardContent>
         </div>
     </Card> 
