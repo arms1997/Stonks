@@ -61,18 +61,18 @@ export default function Navbar(props) {
         <Toolbar className={classes.toolbar}>
           <img
             src="./images/stonks.svg"
-            className={"navbar__image"}
+            className="navbar__image"
             onClick={() => history.push("/")}
           />
           <Autocomplete
             className={classes.search}
             renderOption={(option) => {
               return (
-                <div className={"navbar__autocomplete-option"}>
-                  <p className={"navbar__autocomplete-option-p"}>
+                <div className="navbar__autocomplete-option">
+                  <p className="navbar__autocomplete-option-p">
                     {option.symbol.toUpperCase()}
                   </p>
-                  <p className={"navbar__autocomplete-option-p"}>
+                  <p className="navbar__autocomplete-option-p">
                     {option.shortName}
                   </p>
                 </div>
