@@ -24,7 +24,6 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/me");
     } catch {
       setError("Incorrect credentials, please try again.");
     }
@@ -78,7 +77,7 @@ export default function Login() {
             </div>
           </Card>
           <div className="login__link">
-            Need an account? 
+            Need an account?
             <Link to="/signup">Sign up!</Link>
           </div>
         </Container>
