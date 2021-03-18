@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -15,18 +15,27 @@ import { Container } from "@material-ui/core";
 import Navbar from "./Navbar";
 
 function App() {
+  const [stock, setStock] = useState({
+    symbol: "",
+    company: "",
+  });
+
   return (
     <AuthProvider>
       <div className="App">
         <Container>
           <Router>
-            <Navbar />
+            <Navbar setStock={setStock} />
             <Switch>
               <PrivateRoute exact path="/" component={Landing} />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/graph">
-                <Graph company="tsla" symbol="tsla" />
+                <Graph
+                  company={stock.company}
+                  symbol={stock.symbol}
+                  showNews={true}
+                />
               </Route>
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
