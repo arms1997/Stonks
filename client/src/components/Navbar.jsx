@@ -8,22 +8,32 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import "./Navbar.scss";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
+  root: {
+    height: "6%",
+    display: "flex",
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignContent: "center",
+    minHeight: "100%",
   },
   search: {
-    flexGrow: 1,
+    width: "50%",
+    height: 40,
   },
   text: {
-    height: "10%",
+    marginTop: 0,
   },
 }));
 
 export default function Navbar(props) {
   const classes = useStyles();
 
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [options, setOptions] = useState();
 
@@ -39,32 +49,55 @@ export default function Navbar(props) {
       })
       .catch((err) => console.error({ err: err.message }));
 
-    return function cleanup() {
+    return () => {
       mounted = false;
     };
   }, []);
 
   return (
-    <div className={classes.root}>
-      {!loading && (
-        <AppBar position={"fixed"} color={"transparent"}>
-          <Toolbar>
-            <p className={classes.title}>Hello</p>
+    <div>
+      {loading && (
+        <AppBar
+          position={"fixed"}
+          color={"transparent"}
+          className={classes.root}
+        >
+          <Toolbar className={classes.toolbar}>
+            <img
+              src="./images/stonks.svg"
+              className={"navbar__image"}
+              onClick={() => history.push("/")}
+            />
             <Autocomplete
+              className={classes.search}
+              renderOption={(option) => {
+                return (
+                  <div className={"navbar__autocomplete-option"}>
+                    <p className={"navbar__autocomplete-option-p"}>
+                      {option.symbol.toUpperCase()}
+                    </p>
+                    <p className={"navbar__autocomplete-option-p"}>
+                      {option.shortName}
+                    </p>
+                  </div>
+                );
+              }}
               options={options}
               getOptionLabel={(option) =>
-                `${option.shortName} ${option.symbol}`
+                `${option.symbol.toUpperCase()} ${option.shortName} `
               }
               groupBy={(option) => "Symbol"}
-              className={classes.search}
               renderInput={(params) => (
                 <TextField
+                  className={classes.text}
                   {...params}
                   label="Search Stock"
                   variant="outlined"
+                  margin="dense"
                 />
               )}
             />
+            <p></p>
           </Toolbar>
         </AppBar>
       )}
