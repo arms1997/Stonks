@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
 
 import { updateUserBackend } from "../../contexts/Auth_Helpers";
 
@@ -16,16 +15,10 @@ export default function UpdateProfile() {
   const usernameRef = useRef();
   const phoneNumRef = useRef();
 
-  const {
-    currentUser,
-    setCurrentUser,
-    updateEmail,
-    updatePassword,
-  } = useAuth();
+  const { currentUser, updateEmail, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
