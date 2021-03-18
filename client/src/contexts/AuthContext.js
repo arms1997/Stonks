@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       //make request to backend to add user likes/watches to currentUser object
 
-      if (user) {
+      if (false) {
         getUserBackend(user.email)
           .then((backendUserData) => {
             user["likes"] = backendUserData.data.likes;
