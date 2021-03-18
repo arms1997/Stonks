@@ -6,9 +6,10 @@
   justify-content: center;
   align-items: center;
   width: 500px;
+  height: 700px;
 
   &__card {
-
+    height: 90%;
     width: 100%;
 
     &-image {
@@ -17,7 +18,7 @@
     }
   
     &-form {
-  
+      
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -26,8 +27,7 @@
   
       &-button {
         height: 40px;
-        margin: 10px;
-  
+        margin-top: 10px;
       }
   
       &-textfield {

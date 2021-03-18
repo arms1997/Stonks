@@ -36,7 +36,7 @@ export default function ForgotPassword() {
     <>
       <Container maxWidth="sm" className="forgotPass">
         <Card className="forgotPass__card">
-          <img src="./images/stonks.svg" className="forgotPass__card-image" />
+          <img src="./images/stonks.svg" className="forgotPass__card-image" alt="Stonks logo with graph" />
           <h2>Password Reset</h2>
           {error && <Alert severity="error">{error}</Alert>}
           {message && <Alert severity="success">{message}</Alert>}
