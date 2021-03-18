@@ -16,6 +16,8 @@ import moment from "moment";
 import DataBubble from "../Bubbles/DataBubble";
 import NewsBubble from "../Bubbles/NewsBubble";
 
+import "./Graph.scss";
+
 export default function LineGraphNews({ graphData, showNews = false }) {
   const [hoverdNode, setHoveredNode] = useState(null);
   const [areaHover, setAreaHover] = useState({});
@@ -62,7 +64,9 @@ export default function LineGraphNews({ graphData, showNews = false }) {
     });
 
   return (
-    <div>
+    <div className="graph__item">
+      <h1 className="graph__item-title">{title.toUpperCase()}</h1>
+      <h3 className="graph__item-price">{data[0]["y"]}</h3>
       <FlexibleWidthXYPlot
         height={500}
         onMouseLeave={_onMouseLeave}
