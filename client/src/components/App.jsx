@@ -1,38 +1,40 @@
-import React from 'react';
+import React from "react";
 import { AuthProvider } from "../contexts/AuthContext";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Signup from './Signup';
-import UpdateProfile from './UpdateProfile';
-import Login from './Login';
-import Landing from './Landing';
-import ForgotPassword from './ForgotPassword';
-import Graph from './Graph/index';
-import PrivateRoute from './PrivateRoute';
+import Signup from "./Signup";
+import UpdateProfile from "./UpdateProfile";
+import Login from "./Login";
+import Landing from "./Landing";
+import ForgotPassword from "./ForgotPassword";
+import Graph from "./Graph/index";
+import PrivateRoute from "./PrivateRoute";
 
 import "./App.css";
-import { Container } from '@material-ui/core';
+import { Container } from "@material-ui/core";
+import Navbar from "./Navbar";
 
 function App() {
   return (
     <AuthProvider>
       <div className="App">
-        <Container >
+        <Container>
           <Router>
+            <Navbar />
             <Switch>
-              <PrivateRoute exact path='/'component={Landing}/>
-              <PrivateRoute path='/me' component={UpdateProfile}/>
-              <Route path='/signup' component={Signup}/>
-              <Route path='/graph'>
+              <PrivateRoute exact path="/" component={Landing} />
+              <PrivateRoute path="/me" component={UpdateProfile} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/graph">
                 <Graph company="tsla" symbol="tsla" />
               </Route>
-              <Route path='/login' component={Login}/>
-              <Route path='/forgot-password' component={ForgotPassword}/>
+              <Route path="/login" component={Login} />
+              <Route path="/forgot-password" component={ForgotPassword} />
             </Switch>
           </Router>
         </Container>
       </div>
-    </ AuthProvider>
+    </AuthProvider>
   );
 }
 
