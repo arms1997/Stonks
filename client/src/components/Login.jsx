@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import { Button, Card, Container, TextField } from "@material-ui/core";
+
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -36,9 +37,9 @@ export default function Login() {
       {currentUser ? (
         <Redirect to="/" />
       ) : (
-        <Container maxWidth="sm" className={"login"}>
+        <Container maxWidth="sm" className="login">
           <Card>
-          <img
+            <img
               src="./images/stonks.svg"
               className="login__image"
             />
