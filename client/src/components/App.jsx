@@ -8,6 +8,7 @@ import Login from './Login';
 import Landing from './Landing';
 import ForgotPassword from './ForgotPassword';
 import Graph from './Graph/index';
+import NewsList from './News/NewsList';
 import PrivateRoute from './PrivateRoute';
 
 import "./App.css";
@@ -27,6 +28,9 @@ function App() {
                 <Graph company="tsla" symbol="tsla" />
               </Route>
               <Route path='/login' component={Login}/>
+              <Route path='/newslist'>
+                <NewsList company="tesla" symbol="tsla"/>
+              </Route>
               <Route path='/forgot-password' component={ForgotPassword}/>
             </Switch>
           </Router>
