@@ -82,7 +82,6 @@ export default function Navbar(props) {
                   </div>
                 );
               }}
-              loading={}
               options={options}
               getOptionLabel={(option) =>
                 `${option.symbol.toUpperCase()} ${option.shortName} `
