@@ -1,0 +1,16 @@
+.graph {
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &-title {
+      margin: 0px 0px 10px 2%;
+    }
+
+    &-price {
+      margin: 0px 0px 0px 2%;
+      color: grey;
+    }
+  }
+}
