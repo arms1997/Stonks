@@ -66,6 +66,30 @@ module.exports = () => {
       .catch((err) => console.error(err));
   });
 
+  router.get("/company/:symbol", (req, res) => {
+    const { symbol } = req.params;
+
+    rp.get(
+      `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${process.env.ALPHA_VANTAGE_API}`
+    )
+      .then((data) => {
+        data = JSON.parse(data);
+
+        const returnObj = {
+          symbol: data["Symbol"],
+          name: data["Name"],
+          description: data["Description"],
+          currency: data["Currency"],
+          country: data["Country"],
+          exchange: data["Exchange"],
+          address: data["Address"],
+        };
+
+        res.send(returnObj);
+      })
+      .catch((err) => res.status(500).send(err));
+  });
+
   router.get("/:symbol", (req, res) => {
     const { symbol } = req.params;
     console.log(symbol);
