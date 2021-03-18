@@ -29,7 +29,6 @@ module.exports = () => {
 
   router.get("/company", (req, res) => {
     const { company, symbol } = req.query;
-
     getCompanyNews(company, symbol)
       .then((news) => {
         news = news["articles"].filter((article) => article.content);

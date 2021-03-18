@@ -1,0 +1,40 @@
+.register {
+  display: flex;
+  margin-top: 15%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 700px;
+
+  &__card {
+    height: 90%;
+    width: 100%;
+
+    &-image {
+      margin-top: 20px;
+      height: 100px;
+    }
+
+    &-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      margin: 20px;
+
+      &-button {
+        height: 40px;
+        margin-top: 10px;
+      }
+
+      &-textfield {
+        width: 250px;
+      }
+    }
+  }
+
+  &__link {
+    margin: 20px 20px;
+  }
+}
