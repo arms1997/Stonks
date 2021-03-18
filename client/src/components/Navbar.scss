@@ -1,9 +1,21 @@
 .navbar {
-  flex-grow: 1;
+  &__image {
+    height: 100%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   &__autocomplete {
-    margin: 5px 0px;
-    width: 60%;
-    font-size: large;
+    &-option {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      &-p {
+        margin: 0px 10px;
+        font-weight: bold;
+      }
+    }
   }
 }
