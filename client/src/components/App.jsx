@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import Signup from "./Signup";
 import UpdateProfile from "./ProfileSettings/UpdateProfile";
@@ -16,10 +21,7 @@ import Navbar from "./Navbar";
 import Ticker from "./Ticker";
 
 function App() {
-  const [stock, setStock] = useState({
-    symbol: "",
-    company: "",
-  });
+  const [stock, setStock] = useState(null);
 
   return (
     <AuthProvider>
@@ -32,7 +34,11 @@ function App() {
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/ticker">
-                <Ticker company={stock.company} symbol={stock.symbol} />
+                {stock ? (
+                  <Ticker company={stock.company} symbol={stock.symbol} />
+                ) : (
+                  <Redirect to="/" />
+                )}
               </Route>
               <Route path="/login" component={Login} />
               <Route path="/newslist">
