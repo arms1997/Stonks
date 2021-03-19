@@ -133,7 +133,7 @@ export default function Navbar({ setStock }) {
 
   return (
     <div>
-      <AppBar position={"fixed"} color={"secondary"} className={classes.root}>
+      <AppBar position={"fixed"} color={"transparent"} className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <img
             src="./images/stonks.svg"
