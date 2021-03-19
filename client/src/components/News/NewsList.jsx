@@ -59,10 +59,14 @@ export default function NewsList({ company, symbol }) {
 
   return (
     <div>
-      {newsData && newsData.length < 1 && <h2>No Articles Available</h2>}
-      {newsData && newsData.length > 1 && (
+      {newsData && newsData.length < 1 && (
+        <h2 style={{ textAlign: "start", marginTop: 0 }}>
+          No Articles Available
+        </h2>
+      )}
+      {newsData && newsData.length > 0 && (
         <>
-          <h1 style={{ textAlign: "start" }}>News</h1>
+          <h1 style={{ textAlign: "start", marginTop: 0 }}>News</h1>
           {articlesToShow}
           {newsData.length > 5 && (
             <Button
