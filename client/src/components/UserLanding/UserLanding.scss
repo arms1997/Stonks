@@ -1,0 +1,16 @@
+.userLanding {
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__watchTable {
+    align-self: flex-end;
+  }
+}

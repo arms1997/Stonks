@@ -33,7 +33,7 @@ export default function Login() {
   return (
     <>
       {currentUser ? (
-        <Redirect to="/" />
+        <Redirect to="/mylanding" />
       ) : (
         <Container maxWidth="sm" className="login">
           <Card>

@@ -22,6 +22,7 @@ export default function Graph({
       .then((data) => {
         setGraphData(data.data);
         setLoading(false);
+        console.log("data", data.data);
       })
       .catch((err) => console.error(err));
   }, [company, symbol, showNews, setLoading]);
