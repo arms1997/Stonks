@@ -6,12 +6,12 @@ import NewsListItem from "./NewsListItem";
 import "./NewsList.scss";
 
 export default function NewsList({ company, symbol }) {
-  const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const articlesPerPage = 5;
+  let arrayForHoldingArticles = [];
 
-  const [newsData, setNewsData] = useState(null);
+  const [newsData, setNewsData] = useState([]);
+  const [articlesToShow, setArticlesToShow] = useState([]);
+  const [next, setNext] = useState(5);
 
   function getNews(company, symbol) {
     return axios.get(`/api/news/company?company=${company}&symbol=${symbol}`);
@@ -24,7 +24,7 @@ export default function NewsList({ company, symbol }) {
   }, [company, symbol]);
 
   const parsedArticles =
-    newsData &&
+    newsData.length &&
     newsData.map((article, index) => {
       return (
         <NewsListItem
@@ -40,23 +40,41 @@ export default function NewsList({ company, symbol }) {
       );
     });
 
-  // const showArticles = parsedArticles.slice(0, 6);
+  const loopWithSlice = (start, end, articles) => {
+    const slicedArticles = articles.slice(start, end);
+    arrayForHoldingArticles = [...arrayForHoldingArticles, ...slicedArticles];
+    setArticlesToShow(arrayForHoldingArticles);
+  };
 
-  // const restOfArticles = parsedArticles.slice(5);
+  useEffect(() => {
+    if (newsData.length) {
+      loopWithSlice(0, articlesPerPage, parsedArticles);
+    }
+  }, []);
+
+  const handleShowMoreArticles = () => {
+    loopWithSlice(0, next + articlesPerPage, parsedArticles);
+    setNext(next + articlesPerPage);
+  };
 
   return (
     <div>
-      {/* {parsedArticles.length < 1 && <h2>No Articles Available</h2>} */}
-      <h1>News</h1>
-      {/* {showArticles} */}
-      <Button
-        className="newsList__button"
-        variant="outlined"
-        onClick={handleExpandClick}
-      >
-        Show More
-      </Button>
-      <Collapse in={expanded}>{parsedArticles}</Collapse>
+      {newsData.length < 1 && <h2>No Articles Available</h2>}
+      {newsData.length > 1 && (
+        <>
+          <h1>News</h1>
+          {/* {articlesToShow} */}
+          {newsData.length > 5 && (
+            <Button
+              className="newsList__button"
+              variant="outlined"
+              onClick={handleShowMoreArticles}
+            >
+              Show More
+            </Button>
+          )}
+        </>
+      )}
     </div>
   );
 }
