@@ -27,3 +27,11 @@ export function likeTicker(user_id, ticker) {
 export function updateLikeTicker(like_id) {
   return axios.put(`/api/like/${like_id}`);
 }
+
+export function createWatchTicker(user_id, ticker, value) {
+  return axios.post(`/api/watch`, {
+    userId: user_id,
+    ticker: ticker,
+    value: value,
+  });
+}
