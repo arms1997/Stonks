@@ -6,8 +6,6 @@ import { useAuth } from "../../contexts/AuthContext";
 
 import "./ProfileSettings.scss";
 
-import "./ProfileSettings.scss";
-
 export default function PasswordForm() {
 
   const passwordRef = useRef();
