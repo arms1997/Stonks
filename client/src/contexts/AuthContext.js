@@ -1,6 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { getUserBackend, updateUserBackend } from "./Auth_Helpers";
+import {
+  getUserBackend,
+  updateUserBackend,
+  likeTicker,
+  updateLikeTicker,
+} from "./Auth_Helpers";
 
 //Create context for all of app to use
 const AuthContext = React.createContext();
@@ -73,6 +78,28 @@ export function AuthProvider({ children }) {
     });
   }
 
+  function addLike(userId, ticker) {
+    return likeTicker(userId, ticker)
+      .then(({ data }) => {
+        const { resources } = data;
+        setCurrentUser((prev) => ({
+          ...prev,
+          likes: [...prev.likes, resources],
+        }));
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function updateLike(likeId, index) {
+    return updateLikeTicker(likeId)
+      .then(() => {
+        const newLikesArr = [...currentUser.likes];
+        newLikesArr[index]["is_active"] = !newLikesArr[index]["is_active"];
+        setCurrentUser((prev) => ({ ...prev, likes: newLikesArr }));
+      })
+      .catch((err) => console.error(err));
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setAuthUser(user);
@@ -105,6 +132,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateUser,
     setCurrentUser,
+    addLike,
+    updateLike,
   };
 
   return (
