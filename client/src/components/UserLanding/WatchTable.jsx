@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { removeWatch } from "../../contexts/Auth_Helpers";
 
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -32,18 +31,21 @@ function createData(id, ticker, watchPrice) {
 }
 
 export default function WatchTable() {
-  const { currentUser, setCurrentUser } = useAuth();
+  const { currentUser, updateWatch } = useAuth();
   const classes = useStyles();
 
   const rows = [];
 
   console.log(currentUser);
 
-  const handleDelete = (watchId) => {
-    removeWatch(watchId)
-      .then(() => {
-        console.log("deleted");
-      })
+  const handleDeleteClick = (watchId) => {
+    const index = currentUser.watches.findIndex(
+      (watch) => watch.id === watchId
+    );
+    console.log("index", index);
+
+    updateWatch(watchId, index)
+      .then(() => console.log("deleted"))
       .catch((err) => console.error(err));
   };
 
@@ -73,7 +75,7 @@ export default function WatchTable() {
                   <IconButton
                     aria-label="delete"
                     onClick={() => {
-                      handleDelete(row.id);
+                      handleDeleteClick(row.id);
                     }}
                   >
                     <DeleteIcon />
