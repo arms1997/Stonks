@@ -39,9 +39,6 @@ function App() {
                 />
               </Route>
               <Route path="/login" component={Login} />
-              <Route path="/newslist">
-                <NewsList company="tesla" symbol="tsla" />
-              </Route>
               <Route path="/forgot-password" component={ForgotPassword} />
             </Switch>
           </Router>
