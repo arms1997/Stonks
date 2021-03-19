@@ -25,8 +25,6 @@ const getUserById = function(id) {
 
 const getUserByEmail = function(email) {
 
-  console.log("email", email);
-
   const queryString = `
     SELECT * FROM users
     WHERE email = $1;
