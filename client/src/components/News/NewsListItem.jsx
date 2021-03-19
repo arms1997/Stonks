@@ -37,9 +37,7 @@ export default function NewsListItem({
   description,
   image,
   author,
-  source,
   url,
-  publishedDate,
 }) {
   const classes = useStyles();
 
@@ -61,7 +59,7 @@ export default function NewsListItem({
           </Typography>
         </CardContent>
         <CardContent className={classes.content}>
-          <Button size="small" color="primary" href={url}>
+          <Button size="small" color="primary" href={url} target="_blank">
             Learn More
           </Button>
         </CardContent>

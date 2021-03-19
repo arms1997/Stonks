@@ -6,6 +6,7 @@ import {
   likeTicker,
   updateLikeTicker,
   createWatchTicker,
+  removeWatch,
 } from "./Auth_Helpers";
 
 //Create context for all of app to use
@@ -102,13 +103,20 @@ export function AuthProvider({ children }) {
   }
 
   function createWatch(userId, ticker, value) {
-    return createWatchTicker(userId, ticker, value)
-      .then(({ data }) => {
-        const { resources } = data;
-        setCurrentUser((prev) => ({
-          ...prev,
-          watches: [...prev.watches, resources],
-        }));
+    return createWatchTicker(userId, ticker, value).then(({ data }) => {
+      const { resources } = data;
+      setCurrentUser((prev) => ({
+        ...prev,
+        watches: [...prev.watches, resources],
+      }));
+    });
+  }
+  function updateWatch(watchId, index) {
+    return removeWatch(watchId)
+      .then(() => {
+        const newWatchArr = [...currentUser.watches];
+        newWatchArr[index]["is_active"] = !newWatchArr[index]["is_active"];
+        setCurrentUser((prev) => ({ ...prev, watches: newWatchArr }));
       })
       .catch((err) => console.error(err));
   }
@@ -120,7 +128,7 @@ export function AuthProvider({ children }) {
       if (updating) {
         return;
       } else if (user) {
-        console.log("auth", auth);
+        // console.log("auth", auth);
         getUserBackend(user.email)
           .then((backendUserData) => {
             setCurrentUser(backendUserData.data);
@@ -148,6 +156,7 @@ export function AuthProvider({ children }) {
     addLike,
     updateLike,
     createWatch,
+    updateWatch,
   };
 
   return (
