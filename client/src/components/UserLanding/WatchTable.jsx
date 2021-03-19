@@ -7,6 +7,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { ToolTip, Checkbox, IconButton, Switch } from "@material-ui/core";
+import { DeleteIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +25,7 @@ function createData(id, ticker, watchPrice) {
   return { id, ticker, watchPrice };
 }
 
-export default function BasicTable({ userWatches }) {
+export default function WatchTable({ userWatches }) {
   const classes = useStyles();
 
   console.log(userWatches);
@@ -54,7 +56,9 @@ export default function BasicTable({ userWatches }) {
               </TableCell>
               <TableCell align="right">{row.ticker}</TableCell>
               <TableCell align="right">{row.watchPrice}</TableCell>
-              <TableCell align="right">Delete Y/N</TableCell>
+              <TableCell align="right">
+                <Checkbox />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
