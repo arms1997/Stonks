@@ -74,7 +74,7 @@ const calculateDelta = (firstValue, secondValue) => {
  * @return {Array} array of dates where percent change criteria was met
  */
 const getChangeInData = (data) => {
-  const DELTA = 0.05;
+  const DELTA = 0.03;
   const TIME = 10;
 
   const keys = Object.keys(data).reverse();
