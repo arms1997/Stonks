@@ -18,6 +18,7 @@ import "./App.css";
 import { Container } from "@material-ui/core";
 import Navbar from "./Navbar";
 import Ticker from "./Ticker";
+import UserLanding from "../components/UserLanding/UserLanding";
 
 function App() {
   const [stock, setStock] = useState(null);
@@ -30,6 +31,7 @@ function App() {
             <Navbar setStock={setStock} />
             <Switch>
               <PrivateRoute exact path="/" component={Landing} />
+              <PrivateRoute path="/mylanding" component={UserLanding} />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/ticker">
