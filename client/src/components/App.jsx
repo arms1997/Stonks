@@ -32,11 +32,7 @@ function App() {
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/graph">
-                <Graph
-                  company={stock.company}
-                  symbol={stock.symbol}
-                  showNews={true}
-                />
+                <Graph company={stock.company} symbol={stock.symbol} />
               </Route>
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
