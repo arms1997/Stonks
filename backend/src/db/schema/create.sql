@@ -57,6 +57,6 @@ ALTER TABLE "friends" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON D
 
 ALTER TABLE "friends" ADD FOREIGN KEY ("friend_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "user_message_ref" ADD FOREIGN KEY ("message_id") REFERENCES "messages" ON DELETE CASCADE ("id");
+ALTER TABLE "user_message_ref" ADD FOREIGN KEY ("message_id") REFERENCES "messages"  ("id") ON DELETE CASCADE;
 
 ALTER TABLE "user_message_ref" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
