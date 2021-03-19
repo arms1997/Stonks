@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -59,7 +59,7 @@ export default function Detail({ symbol }) {
     }
 
     return (
-      <>
+      <React.Fragment key={key}>
         <hr></hr>
         <div className={classes.row}>
           <Typography variant="inherit">{key.toUpperCase()}</Typography>
@@ -71,7 +71,7 @@ export default function Detail({ symbol }) {
             {companyData[key]}
           </Typography>
         </div>
-      </>
+      </React.Fragment>
     );
   });
 
