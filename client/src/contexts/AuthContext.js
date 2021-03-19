@@ -42,34 +42,35 @@ export function AuthProvider({ children }) {
     return authUser.updatePassword(password);
   }
 
+  //update user on the front end and back end server with user changes on profile page
   function updateUser(newUser) {
     setUpdating(true);
 
     const changes = Object.keys(newUser);
     const updates = [];
 
-    if (changes.includes("password")) updates.push(updatePassword(newUser.password))
-    if (changes.includes("user_email")) updates.push(updateEmail(newUser.user_email))
-    
+    if (changes.includes("password"))
+      updates.push(updatePassword(newUser.password));
+    if (changes.includes("user_email"))
+      updates.push(updateEmail(newUser.user_email));
+    //delete password information so it does not get sent to the backend by deleting in newUser object
     delete newUser.password;
 
     if (!(changes.includes("password") && changes.length === 1)) {
-      updates.push(updateUserBackend(currentUser.user_id, newUser))
-    } 
+      updates.push(updateUserBackend(currentUser.user_id, newUser));
+    }
 
-    return Promise.all(updates)
-      .then(() => { 
-        setUpdating(false);
-        return setCurrentUser((prev) => {
-          const updatedUser = {...prev};
-          changes.forEach((key) => {
-            if (key === "password") return 
-            updatedUser[key] = newUser[key]
-          })
-          return updatedUser
-        })
-      })
-
+    return Promise.all(updates).then(() => {
+      setUpdating(false);
+      return setCurrentUser((prev) => {
+        const updatedUser = { ...prev };
+        changes.forEach((key) => {
+          if (key === "password") return;
+          updatedUser[key] = newUser[key];
+        });
+        return updatedUser;
+      });
+    });
   }
 
   useEffect(() => {
@@ -78,11 +79,11 @@ export function AuthProvider({ children }) {
 
       if (updating) {
         return;
-       } else if (user) {
-        console.log("auth", auth) 
+      } else if (user) {
+        console.log("auth", auth);
         getUserBackend(user.email)
           .then((backendUserData) => {
-            setCurrentUser(backendUserData.data)
+            setCurrentUser(backendUserData.data);
             setLoading(false);
           })
           .catch((err) => console.error("hello"));
