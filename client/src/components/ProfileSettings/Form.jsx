@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import { Button, TextField, Collapse } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../../contexts/AuthContext";
 

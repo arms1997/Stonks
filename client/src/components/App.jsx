@@ -12,7 +12,6 @@ import UpdateProfile from "./ProfileSettings/UpdateProfile";
 import Login from "./Login";
 import Landing from "./Landing";
 import ForgotPassword from "./ForgotPassword";
-import NewsList from "./News/NewsList";
 import PrivateRoute from "./PrivateRoute";
 
 import "./App.css";
