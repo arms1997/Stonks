@@ -1,0 +1,13 @@
+.ticker {
+  margin: 100px 0px;
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &-detail {
+      width: 30%;
+    }
+  }
+}
