@@ -25,14 +25,14 @@ export default function Ticker({ symbol, company }) {
         loading={loading}
         setLoading={setLoading}
       />
-      {!loading && (
-        <div className="ticker__bottom">
-          <NewsList symbol={symbol} company={company} />
-          <div className="ticker__bottom-detail">
-            <Detail symbol={symbol} />
-          </div>
+      {/* {!loading && ( */}
+      <div className="ticker__bottom">
+        <NewsList symbol={symbol} company={company} />
+        <div className="ticker__bottom-detail">
+          <Detail symbol={symbol} />
         </div>
-      )}
+      </div>
+      {/* )} */}
     </div>
   );
 }
