@@ -9,8 +9,6 @@ import "./ProfileSettings.scss";
 
 export default function Form() {
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const usernameRef = useRef();
   const phoneNumRef = useRef();
 
@@ -27,10 +25,6 @@ export default function Form() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    //   return setError("Oh no, passwords do not match!");
-    // }
-
     //object to send to backend
     const userChanges = {};
 
@@ -46,10 +40,6 @@ export default function Form() {
     if (emailRef.current.value !== currentUser.user_email) { 
       userChanges["user_email"] = emailRef.current.value;
     }
-    
-    // if (passwordRef.current.value) {
-    //   userChanges["password"] = passwordRef.current.value;
-    // }
 
     setLoading(true);
     setError("");
@@ -103,24 +93,6 @@ export default function Form() {
             defaultValue={currentUser && currentUser.user_phone_num}
             inputRef={phoneNumRef}
           />
-          {/* <TextField
-            className="profile__box-form-textfield"
-            id="outlined-basic"
-            variant="outlined"
-            label="Password"
-            type="password"
-            placeholder="Leave blank if no change"
-            inputRef={passwordRef}
-          />
-          <TextField
-            className="profile__box-form-textfield"
-            id="outlined-basic"
-            variant="outlined"
-            label="Password Confirmation"
-            type="password"
-            placeholder="Leave blank if no change"
-            inputRef={passwordConfirmRef}
-          /> */}
           <Button
             className="profile__box-form-button"
             disabled={loading}
