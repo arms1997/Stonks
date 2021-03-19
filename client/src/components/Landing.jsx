@@ -25,7 +25,7 @@ export default function Landing() {
       <Card>
         <h2 className="text-center mb-4">Profile</h2>
         {error && <Alert severity="error">{error}</Alert>}
-        <strong>Email:</strong> {currentUser && currentUser.email}
+        <strong>Email:</strong> {currentUser && currentUser.user_email}
       </Card>
       <div className="w-100 text-center mt-2">
         <Button onClick={handleLogout}>Log Out</Button>

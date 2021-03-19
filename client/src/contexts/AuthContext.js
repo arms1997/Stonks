@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { getUserBackend } from "./Auth_Helpers";
+import { getUserBackend, updateUserBackend } from "./Auth_Helpers";
 
 //Create context for all of app to use
 const AuthContext = React.createContext();
@@ -15,6 +15,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [authUser, setAuthUser] = useState();
+  const [updating, setUpdating] = useState();
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -33,28 +35,55 @@ export function AuthProvider({ children }) {
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return authUser.updateEmail(email);
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password);
+    return authUser.updatePassword(password);
+  }
+
+  //update user on the front end and back end server with user changes on profile page
+  function updateUser(newUser) {
+    setUpdating(true);
+
+    const changes = Object.keys(newUser);
+    const updates = [];
+
+    if (changes.includes("password"))
+      updates.push(updatePassword(newUser.password));
+    if (changes.includes("user_email"))
+      updates.push(updateEmail(newUser.user_email));
+    //delete password information so it does not get sent to the backend by deleting in newUser object
+    delete newUser.password;
+
+    if (!(changes.includes("password") && changes.length === 1)) {
+      updates.push(updateUserBackend(currentUser.user_id, newUser));
+    }
+
+    return Promise.all(updates).then(() => {
+      setUpdating(false);
+      return setCurrentUser((prev) => {
+        const updatedUser = { ...prev };
+        changes.forEach((key) => {
+          if (key === "password") return;
+          updatedUser[key] = newUser[key];
+        });
+        return updatedUser;
+      });
+    });
   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      //make request to backend to add user likes/watches to currentUser object
+      setAuthUser(user);
 
-      if (false) {
+      if (updating) {
+        return;
+      } else if (user) {
+        console.log("auth", auth);
         getUserBackend(user.email)
           .then((backendUserData) => {
-            user["likes"] = backendUserData.data.likes;
-            user["watches"] = backendUserData.data.watches;
-            user["username"] = backendUserData.data.username;
-            user["user_id"] = backendUserData.data.user_id;
-            user["user_phone_num"] = backendUserData.data.user_phone_num;
-          })
-          .then(() => {
-            setCurrentUser(user);
+            setCurrentUser(backendUserData.data);
             setLoading(false);
           })
           .catch((err) => console.error("hello"));
@@ -62,7 +91,6 @@ export function AuthProvider({ children }) {
         setCurrentUser(user);
         setLoading(false);
       }
-      // setLoading(false);
     });
 
     return unsubscribe;
@@ -75,8 +103,7 @@ export function AuthProvider({ children }) {
     login,
     logout,
     resetPassword,
-    updateEmail,
-    updatePassword,
+    updateUser,
     setCurrentUser,
   };
 

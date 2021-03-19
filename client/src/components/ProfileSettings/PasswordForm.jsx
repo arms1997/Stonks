@@ -1,39 +1,39 @@
 import React, { useRef, useState } from "react";
 
-import { Button, TextField, Collapse } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../../contexts/AuthContext";
 
 import "./ProfileSettings.scss";
 
-export default function Form() {
-  const emailRef = useRef();
-  const usernameRef = useRef();
-  const phoneNumRef = useRef();
+export default function PasswordForm() {
 
-  const { currentUser, updateUser } = useAuth();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+
+  const {
+    currentUser,
+    updateUser
+  } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  function handleSubmit(e) {
+  function handlePasswordSubmit(e) {
     e.preventDefault();
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Oh no, passwords do not match!");
+    }
 
     //object to send to backend
     const userChanges = {};
 
     //conditionally add to object current users changes to be implemented
-    if (usernameRef.current.value !== currentUser.username) {
-      userChanges["username"] = usernameRef.current.value;
-    }
-
-    if (phoneNumRef.current.value !== currentUser.user_phone_num) {
-      userChanges["user_phone_num"] = phoneNumRef.current.value;
-    }
-
-    if (emailRef.current.value !== currentUser.user_email) {
-      userChanges["user_email"] = emailRef.current.value;
+    
+    if (passwordRef.current.value) {
+      userChanges["password"] = passwordRef.current.value;
     }
 
     setLoading(true);
@@ -41,8 +41,8 @@ export default function Form() {
     setMessage("");
 
     updateUser(userChanges)
-      .then((value) => {
-        setMessage("Your account has been updated.");
+      .then(() => {
+        setMessage("Your password has been updated.");
       })
       .catch((error) => {
         console.log("error", error);
@@ -60,33 +60,24 @@ export default function Form() {
         {error && <Alert severity="error">{error}</Alert>}
       </div>
       <div className="profile__box">
-        <form onSubmit={handleSubmit} className="profile__box-form">
+        <form onSubmit={handlePasswordSubmit} className="profile__box-form">
           <TextField
             className="profile__box-form-textfield"
             id="outlined-basic"
             variant="outlined"
-            label="Username"
-            type="text"
-            defaultValue={currentUser && currentUser.username}
-            inputRef={usernameRef}
+            label="Password"
+            type="password"
+            placeholder="Leave blank if no change"
+            inputRef={passwordRef}
           />
           <TextField
             className="profile__box-form-textfield"
             id="outlined-basic"
             variant="outlined"
-            label="Email"
-            type="email"
-            defaultValue={currentUser && currentUser.user_email}
-            inputRef={emailRef}
-          />
-          <TextField
-            className="profile__box-form-textfield"
-            id="outlined-basic"
-            variant="outlined"
-            label="Telephone"
-            type="tel"
-            defaultValue={currentUser && currentUser.user_phone_num}
-            inputRef={phoneNumRef}
+            label="Password Confirmation"
+            type="password"
+            placeholder="Leave blank if no change"
+            inputRef={passwordConfirmRef}
           />
           <Button
             className="profile__box-form-button"
