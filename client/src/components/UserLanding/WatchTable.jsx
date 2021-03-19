@@ -16,7 +16,7 @@ import { useAuth } from "../../contexts/AuthContext";
 const useStyles = makeStyles({
   container: {
     marginTop: 100,
-    maxWidth: 500,
+    maxWidth: 300,
     maxHeight: 300,
     minHeight: 300,
   },
@@ -36,13 +36,10 @@ export default function WatchTable() {
 
   const rows = [];
 
-  console.log(currentUser);
-
   const handleDeleteClick = (watchId) => {
     const index = currentUser.watches.findIndex(
       (watch) => watch.id === watchId
     );
-    console.log("index", index);
 
     updateWatch(watchId, index)
       .then(() => console.log("deleted"))
