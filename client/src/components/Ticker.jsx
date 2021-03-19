@@ -32,10 +32,14 @@ export default function Ticker({ symbol, company }) {
   });
 
   useEffect(() => {
-    if (currentUser.likes.includes(symbol)) {
+    if (currentUser && currentUser.likes.includes(symbol)) {
       setLiked(true);
     }
   }, [currentUser, symbol]);
+
+  const _handleLikeClick = (currentUser) => {
+    setLiked(true);
+  };
 
   return (
     <div className="ticker">
@@ -50,7 +54,7 @@ export default function Ticker({ symbol, company }) {
         />
         <CardActions className={classes.cardBottom}>
           <div>
-            <IconButton onClick={() => setLiked(!liked)}>
+            <IconButton onClick={_handleLikeClick}>
               <FavoriteIcon color={liked ? "primary" : "inherit"} />
             </IconButton>
             <IconButton>
