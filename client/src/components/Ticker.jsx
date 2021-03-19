@@ -23,7 +23,7 @@ export default function Ticker({ symbol, company }) {
   const [liked, setLiked] = useState(false);
   const classes = useStyles();
 
-  const { currentUser, addLike, updateLike } = useAuth();
+  const { currentUser, addLike, updateLike, createWatch } = useAuth();
 
   const { containerProps, indicatorEl } = useLoading({
     loading: loading,
@@ -52,6 +52,10 @@ export default function Ticker({ symbol, company }) {
     }
   };
 
+  const _handleWatchClick = (currentUser) => {
+    createWatch(currentUser.user_id, symbol, 800);
+  };
+
   return (
     <div className="ticker">
       <Card>
@@ -68,7 +72,7 @@ export default function Ticker({ symbol, company }) {
             <IconButton onClick={() => _handleLikeClick(currentUser)}>
               <FavoriteIcon color={liked ? "primary" : "inherit"} />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => _handleWatchClick(currentUser)}>
               <VisibilityIcon />
             </IconButton>
           </div>
