@@ -8,14 +8,11 @@ import { useAuth } from "../../contexts/AuthContext";
 
 export default function UserLanding() {
   const { currentUser } = useAuth();
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div>
-      <WatchTable
-        userWatches={currentUser.watches}
-        userId={currentUser.user_id}
-      />
+      <WatchTable />
     </div>
   );
 }
