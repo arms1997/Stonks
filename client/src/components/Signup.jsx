@@ -1,67 +1,74 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
-import { Button, Card, Container, TextField } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import { useAuth } from '../contexts/AuthContext';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Button, Card, Container, TextField } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
-import { addUserBackend } from '../contexts/Auth_Helpers';
+import { addUserBackend } from "../contexts/Auth_Helpers";
 
-import './Signup.scss';
+import "./Signup.scss";
 
 export default function Signup() {
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const usernameRef = useRef();
   const phoneNumRef = useRef();
-  
+
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Oh no, passwords do not match!")
+      return setError("Oh no, passwords do not match!");
     }
     const userObj = {
       username: usernameRef.current.value,
       email: emailRef.current.value,
-      phone_number: phoneNumRef.current.value
+      phone_number: phoneNumRef.current.value,
     };
 
     setError("");
     setLoading(true);
 
-    const promises = [signup(emailRef.current.value, passwordRef.current.value), addUserBackend(userObj)];
+    const promises = [
+      signup(emailRef.current.value, passwordRef.current.value),
+      addUserBackend(userObj),
+    ];
 
-    Promise.all(promises).then(() => {
-      history.push('/')
-    }).catch(() => {
-      setError("Failed to sign up.")
-    }).finally(() => {
-      setLoading(false)
-    })
+    Promise.all(promises)
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
     <>
-    {(currentUser) ? <Redirect to="/"/>  :
-      <Container maxWidth="sm" className="register">
-        <Card className="register__card">
-          <img
+      {currentUser ? (
+        <Redirect to="/" />
+      ) : (
+        <Container maxWidth="sm" className="register">
+          <Card className="register__card">
+            <img
               src="./images/stonks.svg"
               className="register__card-image"
               alt="Stonks logo with graph"
             />
-          <h2>Register</h2>
-          {error && <Alert severity="error">{error}</Alert>}
-          <form onSubmit={handleSubmit} className="register__card-form">
-          <TextField
+            <h2>Register</h2>
+            {error && <Alert severity="error">{error}</Alert>}
+            <form onSubmit={handleSubmit} className="register__card-form">
+              <TextField
                 required
                 className="standard-required register__card-form-textfield"
                 label="Required"
@@ -69,7 +76,7 @@ export default function Signup() {
                 type="email"
                 inputRef={emailRef}
               />
-            <TextField
+              <TextField
                 required
                 className="standard-required register__card-form-textfield"
                 label="Required"
@@ -77,37 +84,46 @@ export default function Signup() {
                 type="text"
                 inputRef={usernameRef}
               />
-            <TextField
-              className="standard-required register__card-form-textfield"
-              label="Optional"
-              helperText="Phone Number"
-              type="tel"
-              inputRef={phoneNumRef}
-            />    
-            <TextField
+              <TextField
+                className="standard-required register__card-form-textfield"
+                label="Optional"
+                helperText="Phone Number"
+                type="tel"
+                inputRef={phoneNumRef}
+              />
+              <TextField
                 required
                 className="standard-required register__card-form-textfield"
                 label="Required"
                 helperText="Password"
                 type="password"
                 inputRef={passwordRef}
-             />
-             <TextField
+              />
+              <TextField
                 required
                 className="standard-required register__card-form-textfield"
                 label="Required"
                 helperText="Confirm Password"
                 type="password"
                 inputRef={passwordConfirmRef}
-             />
-            <Button disabled={loading} variant="contained" color="primary" type="submit" className="register__card-form-button">Sign Up!</Button>
-          </form>
-        </Card> 
-        <div className="register__link">
-          Already have an account?
-          <Link to="/login">Log in</Link>
-        </div>
-      </Container> }
+              />
+              <Button
+                disabled={loading}
+                variant="contained"
+                color="primary"
+                type="submit"
+                className="register__card-form-button"
+              >
+                Sign Up!
+              </Button>
+            </form>
+          </Card>
+          <div className="register__link">
+            Already have an account?
+            <Link to="/login">Log in</Link>
+          </div>
+        </Container>
+      )}
     </>
-  )
+  );
 }
