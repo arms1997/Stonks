@@ -27,7 +27,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "6%",
+    height: 60,
     display: "flex",
   },
   toolbar: {
