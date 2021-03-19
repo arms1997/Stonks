@@ -33,5 +33,5 @@ export default function NewsList({ company, symbol }) {
       );
     });
 
-  return <>{parsedArticles}</>;
+  return <div>{parsedArticles}</div>;
 }
