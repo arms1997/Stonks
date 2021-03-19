@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { getUserBackend, updateUserBackend } from "./Auth_Helpers";
+import { getUserBackend, updateUserBackend, removeWatch } from "./Auth_Helpers";
 
 //Create context for all of app to use
 const AuthContext = React.createContext();
@@ -73,6 +73,16 @@ export function AuthProvider({ children }) {
     });
   }
 
+  function updateWatch(watchId, index) {
+    return removeWatch(watchId)
+      .then(() => {
+        const newWatchArr = [...currentUser.watches];
+        newWatchArr[index]["is_active"] = !newWatchArr[index]["is_active"];
+        setCurrentUser((prev) => ({ ...prev, watches: newWatchArr }));
+      })
+      .catch((err) => console.error(err));
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setAuthUser(user);
@@ -105,6 +115,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateUser,
     setCurrentUser,
+    updateWatch,
   };
 
   return (
