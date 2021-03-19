@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 import NewsListItem from "./NewsListItem";
 import "./NewsList.scss";
 
-export default function NewsList({ company, symbol }) {
+export default function NewsList({ company, symbol, showAllNews = false }) {
   const articlesPerPage = 5;
   let arrayForHoldingArticles = [];
 
@@ -13,15 +13,16 @@ export default function NewsList({ company, symbol }) {
   const [articlesToShow, setArticlesToShow] = useState([]);
   const [next, setNext] = useState(5);
 
-  function getNews(company, symbol) {
-    return axios.get(`/api/news/company?company=${company}&symbol=${symbol}`);
-  }
-
   useEffect(() => {
-    getNews(company, symbol)
+    const requestString = showAllNews
+      ? `/api/news/`
+      : `/api/news/company?company=${company}&symbol=${symbol}`;
+
+    axios
+      .get(requestString)
       .then((newsData) => setNewsData(newsData.data))
       .catch((err) => console.error(err));
-  }, [company, symbol]);
+  }, [company, symbol, showAllNews]);
 
   const parsedArticles =
     newsData &&
