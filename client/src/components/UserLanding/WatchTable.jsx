@@ -12,11 +12,14 @@ import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { removeWatch } from "../../contexts/Auth_Helpers";
 
+import { useAuth } from "../../contexts/AuthContext";
+
 const useStyles = makeStyles({
   container: {
     marginTop: 100,
     maxWidth: 500,
     maxHeight: 300,
+    minHeight: 300,
   },
 
   table: {
@@ -28,22 +31,26 @@ function createData(id, ticker, watchPrice) {
   return { id, ticker, watchPrice };
 }
 
-export default function WatchTable({ userWatches, userId, setCurrentUser }) {
+export default function WatchTable() {
+  const { currentUser, setCurrentUser } = useAuth();
   const classes = useStyles();
 
   const rows = [];
 
+  console.log(currentUser);
+
   const handleDelete = (watchId) => {
     removeWatch(watchId)
       .then(() => {
-        // setCurrentUser(userId);
         console.log("deleted");
       })
       .catch((err) => console.error(err));
   };
 
-  userWatches.map((watch) => {
-    rows.push(createData(watch.id, watch.ticker, watch.value));
+  currentUser.watches.map((watch) => {
+    if (watch.is_active) {
+      rows.push(createData(watch.id, watch.ticker, watch.value));
+    }
   });
 
   return (
