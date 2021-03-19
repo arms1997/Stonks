@@ -9,7 +9,6 @@ import "./Ticker.scss";
 import { Card, CardActions, IconButton, makeStyles } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { blue } from "@material-ui/core/colors";
 import { useAuth } from "../contexts/AuthContext";
 
 const useStyles = makeStyles({
@@ -24,7 +23,7 @@ export default function Ticker({ symbol, company }) {
   const [liked, setLiked] = useState(false);
   const classes = useStyles();
 
-  const { currentUser } = useAuth();
+  const { currentUser, addLike, updateLike } = useAuth();
 
   const { containerProps, indicatorEl } = useLoading({
     loading: loading,
@@ -32,13 +31,25 @@ export default function Ticker({ symbol, company }) {
   });
 
   useEffect(() => {
-    if (currentUser && currentUser.likes.includes(symbol)) {
+    setLiked(false);
+    if (
+      currentUser &&
+      currentUser.likes.some((like) => like.ticker === symbol && like.is_active)
+    ) {
       setLiked(true);
     }
   }, [currentUser, symbol]);
 
   const _handleLikeClick = (currentUser) => {
-    setLiked(true);
+    const index = currentUser.likes.findIndex((like) => like.ticker === symbol);
+
+    if (index !== -1) {
+      const { id } = currentUser.likes[index];
+
+      updateLike(id, index).then(() => setLiked(!liked));
+    } else {
+      addLike(currentUser.user_id, symbol).then(() => setLiked(true));
+    }
   };
 
   return (
@@ -54,7 +65,7 @@ export default function Ticker({ symbol, company }) {
         />
         <CardActions className={classes.cardBottom}>
           <div>
-            <IconButton onClick={_handleLikeClick}>
+            <IconButton onClick={() => _handleLikeClick(currentUser)}>
               <FavoriteIcon color={liked ? "primary" : "inherit"} />
             </IconButton>
             <IconButton>
