@@ -55,7 +55,7 @@ export default function Detail({ symbol }) {
 
   const detailsInfo = companyDataKeys.map((key) => {
     if (key === "name") {
-      return;
+      return null;
     }
 
     return (
