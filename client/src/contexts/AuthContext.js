@@ -5,6 +5,7 @@ import {
   updateUserBackend,
   likeTicker,
   updateLikeTicker,
+  createWatchTicker,
 } from "./Auth_Helpers";
 
 //Create context for all of app to use
@@ -100,6 +101,18 @@ export function AuthProvider({ children }) {
       .catch((err) => console.error(err));
   }
 
+  function createWatch(userId, ticker, value) {
+    return createWatchTicker(userId, ticker, value)
+      .then(({ data }) => {
+        const { resources } = data;
+        setCurrentUser((prev) => ({
+          ...prev,
+          watches: [...prev.watches, resources],
+        }));
+      })
+      .catch((err) => console.error(err));
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setAuthUser(user);
@@ -134,6 +147,7 @@ export function AuthProvider({ children }) {
     setCurrentUser,
     addLike,
     updateLike,
+    createWatch,
   };
 
   return (
