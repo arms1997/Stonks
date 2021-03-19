@@ -7,8 +7,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { ToolTip, Checkbox, IconButton, Switch } from "@material-ui/core";
-import { DeleteIcon } from "@material-ui/icons";
+import Tooltip from "@material-ui/core/Tooltip";
+import { Checkbox, IconButton, Switch } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles({
   container: {
@@ -25,39 +26,42 @@ function createData(id, ticker, watchPrice) {
   return { id, ticker, watchPrice };
 }
 
-export default function WatchTable({ userWatches }) {
+export default function WatchTable({ userWatches, userId }) {
   const classes = useStyles();
 
-  console.log(userWatches);
+  console.log(userId);
 
   const rows = [];
+
+  const handleDelete = () => {
+    console.log("delete");
+  };
 
   userWatches.map((watch) => {
     rows.push(createData(watch.id, watch.ticker, watch.value));
   });
 
-  console.log(rows);
   return (
     <TableContainer className={classes.container} component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Ticker ID</TableCell>
-            <TableCell align="right">Ticker</TableCell>
-            <TableCell align="right">Watch Price ($)</TableCell>
-            <TableCell align="right">Delete?</TableCell>
+            <TableCell align="center">Ticker</TableCell>
+            <TableCell align="center">Watch Price ($)</TableCell>
+            <TableCell align="center">Delete?</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell align="right">{row.ticker}</TableCell>
-              <TableCell align="right">{row.watchPrice}</TableCell>
-              <TableCell align="right">
-                <Checkbox />
+              <TableCell align="center">{row.ticker}</TableCell>
+              <TableCell align="center">{row.watchPrice}</TableCell>
+              <TableCell align="center">
+                <Tooltip title="Delete">
+                  <IconButton aria-label="delete" onClick={handleDelete}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
               </TableCell>
             </TableRow>
           ))}
