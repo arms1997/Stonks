@@ -90,7 +90,7 @@ export function AuthProvider({ children }) {
       if (updating) {
         return;
       } else if (user) {
-        console.log("auth", auth);
+        // console.log("auth", auth);
         getUserBackend(user.email)
           .then((backendUserData) => {
             setCurrentUser(backendUserData.data);
