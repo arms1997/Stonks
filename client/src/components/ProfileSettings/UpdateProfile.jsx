@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-import { Avatar, makeStyles, Button, Collapse } from "@material-ui/core";
+import { Avatar, makeStyles, Button } from "@material-ui/core";
 
 import Form from "./Form";
 

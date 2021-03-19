@@ -7,14 +7,10 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./ProfileSettings.scss";
 
 export default function PasswordForm() {
-
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
-  const {
-    currentUser,
-    updateUser
-  } = useAuth();
+  const { updateUser } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,7 +27,7 @@ export default function PasswordForm() {
     const userChanges = {};
 
     //conditionally add to object current users changes to be implemented
-    
+
     if (passwordRef.current.value) {
       userChanges["password"] = passwordRef.current.value;
     }

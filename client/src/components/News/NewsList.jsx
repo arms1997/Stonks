@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Collapse } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 import NewsListItem from "./NewsListItem";
 import "./NewsList.scss";
