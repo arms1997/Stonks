@@ -17,18 +17,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 export default function UpdateProfile() {
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-  
+  const [showPasswordForm, setUserPasswordForm] = useState(false);
+  const [updateButton, setUpdateButton] = useState("Update Password");
+
   const { currentUser } = useAuth();
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleFormClick = () => {
+    if (showPasswordForm) {
+      setUpdateButton("Update Password");
+    } else {
+      setUpdateButton("Update User Account");
+    }
+    setUserPasswordForm(!showPasswordForm);
   };
-
 
   return (
     <main className="profile">
@@ -38,19 +41,16 @@ export default function UpdateProfile() {
       </header>
       <h2 className="profile__title">Account Settings</h2>
       <p>Update your account information below.</p>
-      <Form />
+      {showPasswordForm ? <PasswordForm /> : <Form />}
       <Button
-        className="profile__box-form-button"
+        className="profile__box-form-update-button"
         variant="contained"
         color="default"
         type="button"
-        onClick={handleExpandClick}
+        onClick={handleFormClick}
       >
-        Update Password
+        {updateButton}
       </Button>
-      <Collapse in={expanded} unmountOnExit> 
-        <PasswordForm/>
-      </Collapse>
       <footer className="profile__footer">
         <Link to="/">Go Back To Home Page</Link>
       </footer>
