@@ -26,7 +26,7 @@ function App() {
   return (
     <AuthProvider>
       <div className="App">
-        <Container>
+        <Container className="App__container">
           <Router>
             <Navbar setStock={setStock} />
             <Switch>
