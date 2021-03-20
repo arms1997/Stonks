@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LineGraphNews from "./LineGraphNews";
+import { useLoading, Audio } from "@agney/react-loading";
 
 export default function Graph({
   company,
   symbol,
   showNews = false,
-  loading,
-  setLoading,
   height,
   small = false,
 }) {
   const [graphData, setGraphData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const { containerProps, indicatorEl } = useLoading({
+    loading: loading,
+    indicator: <Audio width="100" />,
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -26,10 +31,11 @@ export default function Graph({
         setLoading(false);
       })
       .catch((err) => console.error(err));
-  }, [company, symbol, showNews, setLoading]);
+  }, [company, symbol, showNews]);
 
   return (
     <div>
+      <section {...containerProps}>{indicatorEl}</section>
       {!loading && graphData && (
         <LineGraphNews
           graphData={graphData}
