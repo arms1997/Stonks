@@ -112,6 +112,8 @@ export function AuthProvider({ children }) {
     });
   }
 
+  function updateWatch(watchId, index) {}
+
   function removeWatch(watchId, index) {
     return removeWatchTicker(watchId)
       .then(() => {
