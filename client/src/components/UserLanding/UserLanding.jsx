@@ -15,24 +15,31 @@ import {
 } from "@material-ui/core";
 
 import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
-export default function UserLanding() {
+export default function UserLanding({ setStock }) {
   const { currentUser } = useAuth();
-  console.log(currentUser);
+  const history = useHistory();
+
   //get user's liked tickers for graph display
   const [loading, setLoading] = useState(true);
 
   const likedTickers = [...currentUser.likes];
 
+  const handleGraphClick = ({ ticker, company }) => {
+    setStock({ symbol: ticker, company });
+    history.push("/ticker");
+  };
+
   const parsedGraphs = likedTickers.map((graph) => {
     return (
       <TableRow>
         <TableCell>
-          <CardActionArea>
+          <CardActionArea onClick={() => handleGraphClick(graph)}>
             <Card className="userLanding__section-top-graph">
               <Graph
                 symbol={graph.ticker}
-                company={null}
+                company={graph.company}
                 showNews={false}
                 loading={loading}
                 setLoading={setLoading}
