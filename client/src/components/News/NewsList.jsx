@@ -67,7 +67,7 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
       )}
       {newsData && newsData.length > 0 && (
         <>
-          <h1 style={{ textAlign: "start", marginTop: 0 }}>News</h1>
+          <h1 style={{ textAlign: "start", marginTop: 20 }}>News</h1>
           {articlesToShow}
           {newsData.length > articlesToShow.length && (
             <Button
