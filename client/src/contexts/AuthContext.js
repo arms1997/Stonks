@@ -6,7 +6,7 @@ import {
   likeTicker,
   updateLikeTicker,
   createWatchTicker,
-  removeWatch,
+  removeWatchTicker,
 } from "./Auth_Helpers";
 
 //Create context for all of app to use
@@ -112,8 +112,8 @@ export function AuthProvider({ children }) {
     });
   }
 
-  function updateWatch(watchId, index) {
-    return removeWatch(watchId)
+  function removeWatch(watchId, index) {
+    return removeWatchTicker(watchId)
       .then(() => {
         const newWatchArr = [...currentUser.watches];
         newWatchArr[index]["is_active"] = !newWatchArr[index]["is_active"];
@@ -157,7 +157,7 @@ export function AuthProvider({ children }) {
     addLike,
     updateLike,
     createWatch,
-    updateWatch,
+    removeWatch,
   };
 
   return (
