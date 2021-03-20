@@ -20,7 +20,8 @@
     width: 100%;
 
     &-bottom {
-      margin-top: 20px;
+      display: flex;
+      justify-content: center;
     }
 
     &-top {
