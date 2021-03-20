@@ -31,6 +31,12 @@ module.exports = () => {
       .then(([data, news]) => {
         data = JSON.parse(data);
 
+        if (data["Note"]) {
+          console.log("stock api limit reacher");
+          res.status(500).send("api limit reached");
+          return;
+        }
+
         const { parsedData, timestamps } = dataParser(
           data["Time Series (5min)"]
         );
@@ -97,9 +103,10 @@ module.exports = () => {
       .then((data) => {
         data = JSON.parse(data);
 
-        if (data["News"]) {
+        if (data["Note"]) {
           console.log("stock api limit reacher");
           res.status(500).send("api limit reached");
+          return;
         }
 
         const { parsedData, timestamps } = dataParser(
