@@ -8,12 +8,20 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    &-watchesTitle {
+      margin-right: 120px;
+    }
   }
 
   &__section {
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    &-bottom {
+      margin-top: 20px;
+    }
 
     &-top {
       display: flex;
@@ -25,6 +33,13 @@
       &-graph {
         height: 300px;
         width: 800px;
+      }
+
+      &-watchTable {
+        margin: 15px;
+        align-self: flex-start;
+        width: 400px;
+        height: 300px;
       }
     }
   }
