@@ -88,9 +88,10 @@ const getChangeInData = (data) => {
   const deltaArr = [];
 
   for (const i in keys) {
-    const secondDate = moment(firstDate)
-      .add(1, "day")
-      .format("YYYY-MM-DD hh:mm:ss");
+    const secondDate =
+      moment(firstDate).day() === 5
+        ? moment(firstDate).add(3, "day").format("YYYY-MM-DD hh:mm:ss")
+        : moment(firstDate).add(1, "day").format("YYYY-MM-DD hh:mm:ss");
 
     if (!data[secondDate]) break;
 
