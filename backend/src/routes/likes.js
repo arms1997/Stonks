@@ -6,7 +6,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const { userId, ticker, company } = req.body;
 
-    db.addLike(userId, ticker)
+    db.addLike(userId, ticker, company)
       .then((resources) => {
         res.json({ resources });
       })

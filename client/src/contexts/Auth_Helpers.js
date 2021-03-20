@@ -17,10 +17,11 @@ export function updateUserBackend(user_id, userChanges) {
   });
 }
 
-export function likeTicker(user_id, ticker) {
+export function likeTicker(user_id, ticker, company) {
   return axios.post(`/api/like`, {
     userId: user_id,
     ticker: ticker,
+    company: company,
   });
 }
 
