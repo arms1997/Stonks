@@ -102,6 +102,20 @@ export default function Ticker({ symbol, company }) {
     });
   };
 
+  const _handleWatchUpdate = () => {
+    const index = currentUser.watches.findIndex(
+      (watch) => watch.ticker === symbol
+    );
+
+    if (index !== -1) {
+      const { id } = currentUser.likes[index];
+
+      updateLike(id, index).then(() => setLiked(!liked));
+    } else {
+      addLike(currentUser.user_id, symbol).then(() => setLiked(true));
+    }
+  };
+
   const _handleDeleteClick = (watchId) => {
     const index = currentUser.watches.findIndex(
       (watch) => watch.ticker === symbol && watch["is_active"]
@@ -127,7 +141,7 @@ export default function Ticker({ symbol, company }) {
         <Graph
           symbol={symbol}
           company={company}
-          showNews={false}
+          showNews={true}
           loading={loading}
           setLoading={setLoading}
           height={500}
