@@ -30,7 +30,7 @@ function createData(id, ticker, watchPrice) {
 }
 
 export default function WatchTable() {
-  const { currentUser, updateWatch } = useAuth();
+  const { currentUser, removeWatch } = useAuth();
   const classes = useStyles();
 
   const rows = [];
@@ -40,7 +40,7 @@ export default function WatchTable() {
       (watch) => watch.id === watchId
     );
 
-    updateWatch(watchId, index)
+    removeWatch(watchId, index)
       .then(() => console.log("deleted"))
       .catch((err) => console.error(err));
   };

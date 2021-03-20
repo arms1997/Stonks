@@ -76,13 +76,13 @@ module.exports = () => {
         data = JSON.parse(data);
 
         const returnObj = {
-          symbol: data["Symbol"],
           name: data["Name"],
-          description: data["Description"],
+          symbol: data["Symbol"],
+          exchange: data["Exchange"],
           currency: data["Currency"],
           country: data["Country"],
-          exchange: data["Exchange"],
-          address: data["Address"],
+          industry: data["Industry"],
+          employees: data["FullTimeEmployees"],
         };
 
         res.send(returnObj);

@@ -17,6 +17,25 @@ export function updateUserBackend(user_id, userChanges) {
   });
 }
 
-export function removeWatch(watchId) {
+export function likeTicker(user_id, ticker) {
+  return axios.post(`/api/like`, {
+    userId: user_id,
+    ticker: ticker,
+  });
+}
+
+export function updateLikeTicker(like_id) {
+  return axios.put(`/api/like/${like_id}`);
+}
+
+export function createWatchTicker(user_id, ticker, value) {
+  return axios.post(`/api/watch`, {
+    userId: user_id,
+    ticker: ticker,
+    value: value,
+  });
+}
+
+export function removeWatchTicker(watchId) {
   return axios.put(`/api/watch/${watchId}`);
 }

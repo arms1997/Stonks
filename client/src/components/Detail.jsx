@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -21,7 +21,17 @@ const useStyles = makeStyles({
     padding: 12,
   },
   details: {
-    padding: 32,
+    padding: "0px 32px",
+  },
+  row: {
+    display: "flex",
+    justifyContent: "space-between",
+    fontSize: 14,
+    marginBottom: "20px",
+    width: "100%",
+  },
+  detailRow: {
+    maxWidth: "40%",
   },
 });
 
@@ -41,33 +51,42 @@ export default function Detail({ symbol }) {
     setExpanded(!expanded);
   };
 
+  const companyDataKeys = Object.keys(companyData);
+
+  const detailsInfo = companyDataKeys.map((key) => {
+    if (key === "name") {
+      return null;
+    }
+
+    return (
+      <React.Fragment key={key}>
+        <hr></hr>
+        <div className={classes.row}>
+          <Typography variant="inherit">{key.toUpperCase()}</Typography>
+          <Typography
+            variant="inherit"
+            align="right"
+            className={classes.detailRow}
+          >
+            {companyData[key]}
+          </Typography>
+        </div>
+      </React.Fragment>
+    );
+  });
+
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent className={classes.header}>
         <Typography className={classes.text} variant="h6">
-          About
+          {companyData.name}
         </Typography>
         <IconButton onClick={handleExpandClick}>
           <ExpandMoreIcon />
         </IconButton>
       </CardContent>
-      <Collapse in={expanded} unmountOnExit>
-        <CardContent className={classes.details}>
-          <Typography variant="body1">Name: {companyData.name}</Typography>
-          <Typography variant="body1">Symbol: {companyData.symbol}</Typography>
-          <Typography variant="body1">
-            Country: {companyData.country}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Currency:</strong> {companyData.currency}
-          </Typography>
-          <Typography variant="body1">
-            Exchange: {companyData.exchange}
-          </Typography>
-          <Typography variant="body1">
-            Description: {companyData.description}
-          </Typography>
-        </CardContent>
+      <Collapse in={expanded}>
+        <CardContent className={classes.details}>{detailsInfo}</CardContent>
       </Collapse>
     </Card>
   );

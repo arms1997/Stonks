@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  FlexibleXYPlot,
+  FlexibleWidthXYPlot,
   LineSeries,
   Hint,
   XAxis,
@@ -18,7 +18,7 @@ import NewsBubble from "../Bubbles/NewsBubble";
 
 import "./Graph.scss";
 
-export default function LineGraphNews({ graphData, showNews = false }) {
+export default function LineGraphNews({ graphData, showNews = false, height }) {
   const [hoverdNode, setHoveredNode] = useState(null);
   const [areaHover, setAreaHover] = useState({});
   const [hintInfo, setHintInfo] = useState({});
@@ -67,10 +67,10 @@ export default function LineGraphNews({ graphData, showNews = false }) {
     <div className="graph__item">
       <h1 className="graph__item-title">{title.toUpperCase()}</h1>
       <h3 className="graph__item-price">${data[0]["y"]}</h3>
-      <FlexibleXYPlot
-        height={300}
+      <FlexibleWidthXYPlot
         onMouseLeave={_onMouseLeave}
         yDomain={yDomain}
+        height={height}
       >
         <VerticalGridLines />
         <HorizontalGridLines />
@@ -102,7 +102,7 @@ export default function LineGraphNews({ graphData, showNews = false }) {
             <NewsBubble title={hintInfo.hint.title} />
           </Hint>
         )}
-      </FlexibleXYPlot>
+      </FlexibleWidthXYPlot>
     </div>
   );
 }
