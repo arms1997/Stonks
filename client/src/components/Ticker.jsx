@@ -106,7 +106,9 @@ export default function Ticker({ symbol, company }) {
     if (index !== -1) {
       const { id } = currentUser.watches[index];
 
-      updateWatch(id, index, value).then(() => setWatch(!watch));
+      updateWatch(id, index, value).then(() => {
+        setAnchorEl(null);
+      });
     } else {
       createWatch(currentUser.user_id, symbol, value).then(() => {
         setWatch(true);
