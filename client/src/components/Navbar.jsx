@@ -66,7 +66,7 @@ export default function Navbar({ setStock }) {
   }
 
   const _onHomeClick = () => {
-    history.push("/");
+    history.push("/mylanding");
   };
 
   const _onAccountClick = () => {
