@@ -9,6 +9,7 @@ import {
   HorizontalGridLines,
   MarkSeries,
   AreaSeries,
+  XYPlot,
 } from "react-vis";
 import "../../../node_modules/react-vis/dist/style.css";
 import moment from "moment";
@@ -18,7 +19,7 @@ import NewsBubble from "../Bubbles/NewsBubble";
 
 import "./Graph.scss";
 
-export default function LineGraphNews({ graphData, showNews = false }) {
+export default function LineGraphNews({ graphData, showNews = false, height }) {
   const [hoverdNode, setHoveredNode] = useState(null);
   const [areaHover, setAreaHover] = useState({});
   const [hintInfo, setHintInfo] = useState({});
@@ -68,9 +69,9 @@ export default function LineGraphNews({ graphData, showNews = false }) {
       <h1 className="graph__item-title">{title.toUpperCase()}</h1>
       <h3 className="graph__item-price">${data[0]["y"]}</h3>
       <FlexibleWidthXYPlot
-        height={500}
         onMouseLeave={_onMouseLeave}
         yDomain={yDomain}
+        height={height}
       >
         <VerticalGridLines />
         <HorizontalGridLines />
