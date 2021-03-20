@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  FlexibleWidthXYPlot,
+  FlexibleXYPlot,
   LineSeries,
   Hint,
   XAxis,
@@ -67,8 +67,8 @@ export default function LineGraphNews({ graphData, showNews = false }) {
     <div className="graph__item">
       <h1 className="graph__item-title">{title.toUpperCase()}</h1>
       <h3 className="graph__item-price">${data[0]["y"]}</h3>
-      <FlexibleWidthXYPlot
-        height={500}
+      <FlexibleXYPlot
+        height={300}
         onMouseLeave={_onMouseLeave}
         yDomain={yDomain}
       >
@@ -102,7 +102,7 @@ export default function LineGraphNews({ graphData, showNews = false }) {
             <NewsBubble title={hintInfo.hint.title} />
           </Hint>
         )}
-      </FlexibleWidthXYPlot>
+      </FlexibleXYPlot>
     </div>
   );
 }
