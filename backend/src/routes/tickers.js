@@ -48,6 +48,7 @@ module.exports = () => {
           return {
             title: article.title,
             url: article.url,
+            source: article.source.name,
             publishedAt: article.publishedAt,
           };
         });
@@ -60,6 +61,13 @@ module.exports = () => {
 
         const { min, max } = domainParser(parsedData);
 
+        const newsObj = {};
+        for (const key in relevantNews) {
+          if (relevantNews[key].length) {
+            newsObj[key] = [...relevantNews[key]];
+          }
+        }
+
         res.send({
           yDomain: [min, max],
           title: symbol,
@@ -67,6 +75,7 @@ module.exports = () => {
           timestamps,
           areaData,
           hintData,
+          relevantNews: newsObj,
         });
       })
       .catch((err) => console.error(err));

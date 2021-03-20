@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 export default function Detail({ symbol }) {
   const classes = useStyles();
   const [companyData, setCompanyData] = useState({});
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   useEffect(() => {
     axios

@@ -18,6 +18,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import CheckIcon from "@material-ui/icons/Check";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAuth } from "../contexts/AuthContext";
+import NewsContainer from "./Graph/NewsContainer";
 
 const useStyles = makeStyles({
   cardBottom: {
@@ -172,7 +173,14 @@ export default function Ticker({ symbol, company }) {
   return (
     <div className="ticker">
       <Card>
-        <Graph symbol={symbol} company={company} showNews={true} height={500} />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Graph
+            symbol={symbol}
+            company={company}
+            showNews={true}
+            height={500}
+          />
+        </div>
         {graphButtons()}
       </Card>
       <div className="ticker__bottom">
