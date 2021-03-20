@@ -38,7 +38,13 @@ export default function Ticker({ symbol, company }) {
   const [value, setValue] = useState("");
   const classes = useStyles();
 
-  const { currentUser, addLike, updateLike, createWatch } = useAuth();
+  const {
+    currentUser,
+    addLike,
+    updateLike,
+    createWatch,
+    updateWatch,
+  } = useAuth();
 
   const { containerProps, indicatorEl } = useLoading({
     loading: loading,
@@ -61,7 +67,7 @@ export default function Ticker({ symbol, company }) {
       const watch = currentUser.watches.find(
         (watch) => watch.ticker === symbol && watch.is_active
       );
-      console.log(watch);
+
       if (watch) {
         setValue(watch.value);
         setWatch(true);
@@ -96,7 +102,23 @@ export default function Ticker({ symbol, company }) {
     });
   };
 
-  const _handleDeleteClick = () => {};
+  const _handleDeleteClick = (watchId) => {
+    const index = currentUser.watches.findIndex(
+      (watch) => watch.ticker === symbol && watch["is_active"]
+    );
+
+    const watch = currentUser.watches.find((watch) => {
+      return watch.ticker === symbol && watch["is_active"];
+    });
+
+    updateWatch(watch.id, index)
+      .then(() => {
+        setWatch(false);
+        setAnchorEl(null);
+        setValue("");
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="ticker">
