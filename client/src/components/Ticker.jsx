@@ -30,7 +30,6 @@ export default function Ticker({ symbol, company }) {
   const [liked, setLiked] = useState(false);
   const [watch, setWatch] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(false);
   const [value, setValue] = useState("");
   const classes = useStyles();
 
