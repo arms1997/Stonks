@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../../contexts/AuthContext";
+import CustomButton from "../CustomButton";
 
 import "./ProfileSettings.scss";
 
@@ -75,7 +76,7 @@ export default function PasswordForm() {
             placeholder="Leave blank if no change"
             inputRef={passwordConfirmRef}
           />
-          <Button
+          <CustomButton
             className="profile__box-form-button"
             disabled={loading}
             variant="contained"
@@ -83,7 +84,7 @@ export default function PasswordForm() {
             type="submit"
           >
             Update
-          </Button>
+          </CustomButton>
         </form>
       </div>
     </>
