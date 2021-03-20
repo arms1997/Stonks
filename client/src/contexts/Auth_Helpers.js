@@ -39,3 +39,9 @@ export function createWatchTicker(user_id, ticker, value) {
 export function removeWatchTicker(watchId) {
   return axios.put(`/api/watch/${watchId}`);
 }
+
+export function updateWatchTicker(watchId, value) {
+  return axios.put(`api/watch/${watchId}`, {
+    value: value,
+  });
+}

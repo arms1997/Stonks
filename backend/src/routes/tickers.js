@@ -96,6 +96,11 @@ module.exports = () => {
       .then((data) => {
         data = JSON.parse(data);
 
+        if (data["News"]) {
+          console.log("stock api limit reacher");
+          res.status(500).send("api limit reached");
+        }
+
         const { parsedData, timestamps } = dataParser(
           data["Time Series (5min)"]
         );

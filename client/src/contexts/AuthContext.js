@@ -7,6 +7,7 @@ import {
   updateLikeTicker,
   createWatchTicker,
   removeWatchTicker,
+  updateWatchTicker,
 } from "./Auth_Helpers";
 
 //Create context for all of app to use
@@ -112,6 +113,20 @@ export function AuthProvider({ children }) {
     });
   }
 
+  function updateWatch(watchId, index, value) {
+    return updateWatchTicker(watchId, value)
+      .then(({ data }) => {
+        const newWatchArr = [...currentUser.watches];
+        newWatchArr[index]["value"] = value;
+        console.log(newWatchArr[index]["value"], value);
+        setCurrentUser((prev) => ({
+          ...prev,
+          watches: newWatchArr,
+        }));
+      })
+      .catch((err) => console.error(err));
+  }
+
   function removeWatch(watchId, index) {
     return removeWatchTicker(watchId)
       .then(() => {
@@ -158,6 +173,7 @@ export function AuthProvider({ children }) {
     updateLike,
     createWatch,
     removeWatch,
+    updateWatch,
   };
 
   return (
