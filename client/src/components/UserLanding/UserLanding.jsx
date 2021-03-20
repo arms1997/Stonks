@@ -12,11 +12,23 @@ import {
   TableContainer,
   TableBody,
   TableRow,
+  Avatar,
+  makeStyles,
 } from "@material-ui/core";
 
 import { useAuth } from "../../contexts/AuthContext";
 
+const useStyles = makeStyles((theme) => ({
+  large: {
+    width: 100,
+    height: 100,
+    backgroundColor: "#3f51b5",
+    alignSelf: "center",
+  },
+}));
+
 export default function UserLanding() {
+  const classes = useStyles();
   const { currentUser } = useAuth();
   console.log(currentUser);
   //get user's liked tickers for graph display
@@ -49,6 +61,7 @@ export default function UserLanding() {
 
   return (
     <div className="userLanding">
+      <Avatar src="/broken-image.jpg" className={classes.large} />
       <h1>Hello {currentUser.username}</h1>
       <header className="userLanding__header">
         <h2>Liked Stocks</h2>
@@ -63,11 +76,11 @@ export default function UserLanding() {
           </Table>
         </TableContainer>
         <div className="userLanding__section-top-watchTable">
-          <WatchTable />
+          {currentUser.watches && <WatchTable />}
         </div>
       </section>
       <section className="userLanding___section-bottom">
-        <NewsList company="null" symbol="null" showAllNews={true} />
+        {/* <NewsList company="null" symbol="null" showAllNews={true} /> */}
       </section>
     </div>
   );
