@@ -4,6 +4,7 @@ import NewsList from "../News/NewsList";
 import WatchTable from "./WatchTable";
 import Graph from "../Graph/index";
 import "./UserLanding.scss";
+import { Card } from "@material-ui/core";
 
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -31,16 +32,18 @@ export default function UserLanding() {
 
   return (
     <div className="userLanding">
-      <header className>
-        <h1>Hello {currentUser.username}</h1>
+      <h1>Hello {currentUser.username}</h1>
+      <header className="userLanding__header">
+        <h2>Liked Stocks</h2>
         <h2>Current Watches</h2>
       </header>
-      <section>
-        <WatchTable className="userLanding__watchTable" />
-        {parsedGraphs}
+      <section className="userLanding__section-top">
+        <Card className="userLanding__section-top-graph">{parsedGraphs}</Card>
+        <WatchTable className="userLanding__section-top-watchTable" />
       </section>
-      <h2>News</h2>
-      <NewsList company="null" symbol="null" showAllNews={true} />
+      <section className="userLanding___section-bottom">
+        <NewsList company="null" symbol="null" showAllNews={true} />
+      </section>
     </div>
   );
 }

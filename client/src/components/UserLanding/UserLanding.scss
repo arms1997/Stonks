@@ -10,7 +10,22 @@
     justify-content: space-between;
   }
 
-  &__watchTable {
-    align-self: flex-end;
+  &__section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &-top {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      &-graph {
+        height: 300px;
+        width: 800px;
+      }
+    }
   }
 }
