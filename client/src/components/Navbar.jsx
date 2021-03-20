@@ -127,7 +127,11 @@ export default function Navbar({ setStock }) {
 
   const { pathname } = useLocation();
 
-  if (pathname === "/login" || pathname === "/signup") {
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password"
+  ) {
     return null;
   }
 
