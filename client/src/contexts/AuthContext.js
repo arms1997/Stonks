@@ -111,6 +111,7 @@ export function AuthProvider({ children }) {
       }));
     });
   }
+
   function updateWatch(watchId, index) {
     return removeWatch(watchId)
       .then(() => {
