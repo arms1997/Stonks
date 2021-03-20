@@ -1,13 +1,22 @@
 import React, { useRef, useState } from "react";
 
-import { Button, Card, Container, TextField } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  Container,
+  TextField,
+  CardContent,
+} from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, Redirect, useHistory } from "react-router-dom";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 import { addUserBackend } from "../contexts/Auth_Helpers";
 
 import "./Signup.scss";
+
+import CustomButton from "./CustomButton";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -60,12 +69,13 @@ export default function Signup() {
       ) : (
         <Container maxWidth="sm" className="register">
           <Card className="register__card">
+            <CardContent className="register__card-content" />
             <img
               src="./images/stonks.svg"
               className="register__card-image"
               alt="Stonks logo with graph"
             />
-            <h2>Register</h2>
+            <h2 className="register__card-title">Register</h2>
             {error && <Alert severity="error">{error}</Alert>}
             <form onSubmit={handleSubmit} className="register__card-form">
               <TextField
@@ -107,7 +117,7 @@ export default function Signup() {
                 type="password"
                 inputRef={passwordConfirmRef}
               />
-              <Button
+              <CustomButton
                 disabled={loading}
                 variant="contained"
                 color="primary"
@@ -115,13 +125,11 @@ export default function Signup() {
                 className="register__card-form-button"
               >
                 Sign Up!
-              </Button>
+              </CustomButton>
             </form>
           </Card>
-          <div className="register__link">
-            Already have an account?
-            <Link to="/login">Log in</Link>
-          </div>
+          <div className="register__link">Already have an account?</div>
+          <Link to="/login">Log in</Link>
         </Container>
       )}
     </>

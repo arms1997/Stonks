@@ -1,6 +1,6 @@
 .register {
   display: flex;
-  margin-top: 15%;
+  margin-top: 10%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -10,6 +10,14 @@
   &__card {
     height: 95%;
     width: 100%;
+
+    &-title {
+      color: #54575a;
+    }
+
+    &-content {
+      background-color: #815d78;
+    }
 
     &-image {
       margin-top: 20px;
