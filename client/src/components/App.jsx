@@ -31,7 +31,10 @@ function App() {
             <Navbar setStock={setStock} />
             <Switch>
               <PrivateRoute exact path="/" component={Landing} />
-              <PrivateRoute path="/mylanding" component={UserLanding} />
+              <PrivateRoute
+                path="/mylanding"
+                component={() => <UserLanding setStock={setStock} />}
+              />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/ticker">
