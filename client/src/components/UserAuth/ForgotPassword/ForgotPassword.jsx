@@ -1,18 +1,12 @@
 import React, { useRef, useState } from "react";
 
-import {
-  Button,
-  Card,
-  Container,
-  TextField,
-  CardContent,
-} from "@material-ui/core";
+import { Card, Container, TextField, CardContent } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import "./ForgotPassword.scss";
 
-import CustomButton from "./CustomButton";
+import CustomButton from "../../CustomButton";
 
 export default function ForgotPassword() {
   const emailRef = useRef();

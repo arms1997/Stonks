@@ -1,22 +1,15 @@
 import React, { useRef, useState } from "react";
 
-import {
-  Button,
-  Card,
-  Container,
-  TextField,
-  CardContent,
-} from "@material-ui/core";
+import { Card, Container, TextField, CardContent } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { Link, Redirect, useHistory } from "react-router-dom";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 
-import { addUserBackend } from "../contexts/Auth_Helpers";
+import { addUserBackend } from "../../../contexts/Auth_Helpers";
 
 import "./Signup.scss";
 
-import CustomButton from "./CustomButton";
+import CustomButton from "../../CustomButton";
 
 export default function Signup() {
   const emailRef = useRef();
