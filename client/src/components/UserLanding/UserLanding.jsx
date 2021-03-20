@@ -24,6 +24,7 @@ export default function UserLanding() {
         showNews={false}
         loading={loading}
         setLoading={setLoading}
+        height={200}
       />
     );
   });

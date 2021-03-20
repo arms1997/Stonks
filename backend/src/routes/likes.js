@@ -1,10 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-
   //add a like to a ticker from a user
-  router.post('/', (req, res) => {
+  router.post("/", (req, res) => {
     const { userId, ticker } = req.body;
 
     db.addLike(userId, ticker)
@@ -17,8 +16,8 @@ module.exports = (db) => {
   });
 
   //update like is_active to false to remove like from a user
-  router.put('/:like_id', (req, res) => {
-    const { like_id  } = req.params;
+  router.put("/:like_id", (req, res) => {
+    const { like_id } = req.params;
 
     db.updateLike(like_id)
       .then((resources) => {

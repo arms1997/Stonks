@@ -8,6 +8,7 @@ export default function Graph({
   showNews = false,
   loading,
   setLoading,
+  height,
 }) {
   const [graphData, setGraphData] = useState(null);
 
@@ -30,7 +31,11 @@ export default function Graph({
   return (
     <div>
       {!loading && graphData && (
-        <LineGraphNews graphData={graphData} showNews={showNews} />
+        <LineGraphNews
+          graphData={graphData}
+          showNews={showNews}
+          height={height}
+        />
       )}
     </div>
   );

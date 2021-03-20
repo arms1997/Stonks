@@ -1,6 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { getUserBackend, updateUserBackend, removeWatch } from "./Auth_Helpers";
+import {
+  getUserBackend,
+  updateUserBackend,
+  likeTicker,
+  updateLikeTicker,
+  createWatchTicker,
+  removeWatchTicker,
+} from "./Auth_Helpers";
 
 //Create context for all of app to use
 const AuthContext = React.createContext();
@@ -73,8 +80,40 @@ export function AuthProvider({ children }) {
     });
   }
 
-  function updateWatch(watchId, index) {
-    return removeWatch(watchId)
+  function addLike(userId, ticker) {
+    return likeTicker(userId, ticker)
+      .then(({ data }) => {
+        const { resources } = data;
+        setCurrentUser((prev) => ({
+          ...prev,
+          likes: [...prev.likes, resources],
+        }));
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function updateLike(likeId, index) {
+    return updateLikeTicker(likeId)
+      .then(() => {
+        const newLikesArr = [...currentUser.likes];
+        newLikesArr[index]["is_active"] = !newLikesArr[index]["is_active"];
+        setCurrentUser((prev) => ({ ...prev, likes: newLikesArr }));
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function createWatch(userId, ticker, value) {
+    return createWatchTicker(userId, ticker, value).then(({ data }) => {
+      const { resources } = data;
+      setCurrentUser((prev) => ({
+        ...prev,
+        watches: [...prev.watches, resources],
+      }));
+    });
+  }
+
+  function removeWatch(watchId, index) {
+    return removeWatchTicker(watchId)
       .then(() => {
         const newWatchArr = [...currentUser.watches];
         newWatchArr[index]["is_active"] = !newWatchArr[index]["is_active"];
@@ -115,7 +154,10 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateUser,
     setCurrentUser,
-    updateWatch,
+    addLike,
+    updateLike,
+    createWatch,
+    removeWatch,
   };
 
   return (

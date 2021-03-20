@@ -69,7 +69,7 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
         <>
           <h1 style={{ textAlign: "start", marginTop: 0 }}>News</h1>
           {articlesToShow}
-          {newsData.length > 5 && (
+          {newsData.length > articlesToShow.length && (
             <Button
               className="newsList__button"
               variant="outlined"
