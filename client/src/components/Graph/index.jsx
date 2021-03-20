@@ -34,7 +34,7 @@ export default function Graph({
   }, [company, symbol, showNews]);
 
   return (
-    <div>
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <section {...containerProps}>{indicatorEl}</section>
       {!loading && graphData && (
         <LineGraphNews
