@@ -37,6 +37,7 @@ export default function UserLanding() {
                 loading={loading}
                 setLoading={setLoading}
                 height={200}
+                small={true}
               />
             </Card>
           </CardActionArea>
