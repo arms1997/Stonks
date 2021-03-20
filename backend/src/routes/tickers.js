@@ -95,6 +95,8 @@ module.exports = () => {
     console.log(symbol);
     getTickerData(symbol)
       .then((data) => {
+        console.log(data);
+
         data = JSON.parse(data);
 
         const { parsedData, timestamps } = dataParser(

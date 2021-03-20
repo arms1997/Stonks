@@ -9,6 +9,7 @@ export default function Graph({
   loading,
   setLoading,
   height,
+  small = false,
 }) {
   const [graphData, setGraphData] = useState(null);
 
@@ -35,6 +36,7 @@ export default function Graph({
           graphData={graphData}
           showNews={showNews}
           height={height}
+          small={small}
         />
       )}
     </div>
