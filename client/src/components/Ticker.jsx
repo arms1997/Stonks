@@ -174,18 +174,6 @@ export default function Ticker({ symbol, company }) {
     <div className="ticker">
       <Card>
         <Graph symbol={symbol} company={company} showNews={true} height={500} />
-        {/* <CardActions className={classes.cardBottom}>
-          <div>
-            <IconButton onClick={() => _handleLikeClick(currentUser)}>
-              <FavoriteIcon color={liked ? "primary" : "inherit"} />
-            </IconButton>
-            <IconButton
-              onClick={(event) => _handleWatchClick(currentUser, event)}
-            >
-              <VisibilityIcon color={watch ? "primary" : "inherit"} />
-            </IconButton>
-          </div>
-        </CardActions> */}
         {graphButtons()}
       </Card>
       <div className="ticker__bottom">
