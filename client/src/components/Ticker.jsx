@@ -70,6 +70,7 @@ export default function Ticker({ symbol, company }) {
       );
 
       if (watch) {
+        console.log(watch);
         setValue(watch.value);
         setWatch(true);
       }
@@ -105,7 +106,7 @@ export default function Ticker({ symbol, company }) {
     if (index !== -1) {
       const { id } = currentUser.watches[index];
 
-      updateWatch(id, index).then(() => setLiked(!liked));
+      updateWatch(id, index, value).then(() => setWatch(!watch));
     } else {
       createWatch(currentUser.user_id, symbol, value).then(() => {
         setWatch(true);
