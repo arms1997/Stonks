@@ -98,6 +98,7 @@ export default function Ticker({ symbol, company }) {
       const { id } = currentUser.watches[index];
 
       updateWatch(id, index, value).then(() => {
+        setWatch(true);
         setAnchorEl(null);
       });
     } else {
@@ -126,29 +127,8 @@ export default function Ticker({ symbol, company }) {
       .catch((err) => console.error(err));
   };
 
-  return (
-    <div className="ticker">
-      <Card>
-        <Graph symbol={symbol} company={company} showNews={true} height={500} />
-        <CardActions className={classes.cardBottom}>
-          <div>
-            <IconButton onClick={() => _handleLikeClick(currentUser)}>
-              <FavoriteIcon color={liked ? "primary" : "inherit"} />
-            </IconButton>
-            <IconButton
-              onClick={(event) => _handleWatchClick(currentUser, event)}
-            >
-              <VisibilityIcon color={watch ? "primary" : "inherit"} />
-            </IconButton>
-          </div>
-        </CardActions>
-      </Card>
-      <div className="ticker__bottom">
-        <NewsList symbol={symbol} company={company} />
-        <div className="ticker__bottom-detail">
-          <Detail symbol={symbol} />
-        </div>
-      </div>
+  const watchPopper = () => {
+    return (
       <Popper anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)}>
         <Card>
           <CardActions>
@@ -170,6 +150,51 @@ export default function Ticker({ symbol, company }) {
           </CardActions>
         </Card>
       </Popper>
+    );
+  };
+
+  const graphButtons = () => {
+    return (
+      <CardActions className={classes.cardBottom}>
+        <div>
+          <IconButton onClick={() => _handleLikeClick(currentUser)}>
+            <FavoriteIcon color={liked ? "primary" : "inherit"} />
+          </IconButton>
+          <IconButton
+            onClick={(event) => _handleWatchClick(currentUser, event)}
+          >
+            <VisibilityIcon color={watch ? "primary" : "inherit"} />
+          </IconButton>
+        </div>
+      </CardActions>
+    );
+  };
+
+  return (
+    <div className="ticker">
+      <Card>
+        <Graph symbol={symbol} company={company} showNews={true} height={500} />
+        {/* <CardActions className={classes.cardBottom}>
+          <div>
+            <IconButton onClick={() => _handleLikeClick(currentUser)}>
+              <FavoriteIcon color={liked ? "primary" : "inherit"} />
+            </IconButton>
+            <IconButton
+              onClick={(event) => _handleWatchClick(currentUser, event)}
+            >
+              <VisibilityIcon color={watch ? "primary" : "inherit"} />
+            </IconButton>
+          </div>
+        </CardActions> */}
+        {graphButtons()}
+      </Card>
+      <div className="ticker__bottom">
+        <NewsList symbol={symbol} company={company} />
+        <div className="ticker__bottom-detail">
+          <Detail symbol={symbol} />
+        </div>
+      </div>
+      {watchPopper()}
     </div>
   );
 }

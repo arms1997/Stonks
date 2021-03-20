@@ -117,8 +117,7 @@ export function AuthProvider({ children }) {
     return updateWatchTicker(watchId, value)
       .then(({ data }) => {
         const newWatchArr = [...currentUser.watches];
-        newWatchArr[index]["value"] = value;
-        console.log(newWatchArr[index]["value"], value);
+        newWatchArr[index] = data;
         setCurrentUser((prev) => ({
           ...prev,
           watches: newWatchArr,
