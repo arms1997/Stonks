@@ -9,7 +9,6 @@ import {
   HorizontalGridLines,
   MarkSeries,
   AreaSeries,
-  XYPlot,
 } from "react-vis";
 import "../../../node_modules/react-vis/dist/style.css";
 import moment from "moment";
