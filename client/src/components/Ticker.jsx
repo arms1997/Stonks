@@ -43,7 +43,7 @@ export default function Ticker({ symbol, company }) {
     addLike,
     updateLike,
     createWatch,
-    updateWatch,
+    removeWatch,
   } = useAuth();
 
   const { containerProps, indicatorEl } = useLoading({
@@ -125,7 +125,7 @@ export default function Ticker({ symbol, company }) {
       return watch.ticker === symbol && watch["is_active"];
     });
 
-    updateWatch(watch.id, index)
+    removeWatch(watch.id, index)
       .then(() => {
         setWatch(false);
         setAnchorEl(null);
