@@ -1,6 +1,6 @@
 const NewsApi = require("newsapi");
 
-const newsapi = new NewsApi("***REMOVED***");
+const newsapi = new NewsApi(process.env.NEWS_API);
 
 /**
  * Returns all news from sources specified

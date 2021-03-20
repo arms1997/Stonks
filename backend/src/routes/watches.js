@@ -16,10 +16,10 @@ module.exports = (db) => {
 
   router.put("/:watch_id", (req, res) => {
     const { watch_id } = req.params;
-
-    db.updateWatch(watch_id)
+    const { value = null } = req.body;
+    db.updateWatch(watch_id, value)
       .then((resources) => {
-        res.json({ resources });
+        res.json({ ...resources });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

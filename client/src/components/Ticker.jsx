@@ -44,6 +44,7 @@ export default function Ticker({ symbol, company }) {
     updateLike,
     createWatch,
     removeWatch,
+    updateWatch,
   } = useAuth();
 
   const { containerProps, indicatorEl } = useLoading({
@@ -69,6 +70,7 @@ export default function Ticker({ symbol, company }) {
       );
 
       if (watch) {
+        console.log(watch);
         setValue(watch.value);
         setWatch(true);
       }
@@ -96,23 +98,22 @@ export default function Ticker({ symbol, company }) {
     if (!value.length) {
       return;
     }
-    createWatch(currentUser.user_id, symbol, value).then(() => {
-      setWatch(true);
-      setAnchorEl(null);
-    });
-  };
 
-  const _handleWatchUpdate = () => {
     const index = currentUser.watches.findIndex(
       (watch) => watch.ticker === symbol
     );
 
     if (index !== -1) {
-      const { id } = currentUser.likes[index];
+      const { id } = currentUser.watches[index];
 
-      updateLike(id, index).then(() => setLiked(!liked));
+      updateWatch(id, index, value).then(() => {
+        setAnchorEl(null);
+      });
     } else {
-      addLike(currentUser.user_id, symbol).then(() => setLiked(true));
+      createWatch(currentUser.user_id, symbol, value).then(() => {
+        setWatch(true);
+        setAnchorEl(null);
+      });
     }
   };
 
