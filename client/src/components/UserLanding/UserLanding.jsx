@@ -14,6 +14,7 @@ import {
   TableRow,
   Avatar,
   makeStyles,
+  Box,
 } from "@material-ui/core";
 
 import { useAuth } from "../../contexts/AuthContext";
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: 100,
     height: 100,
-    backgroundColor: "#3f51b5",
+    backgroundColor: "#7ca5ce",
     alignSelf: "center",
   },
 }));
@@ -64,7 +65,7 @@ export default function UserLanding() {
       <Avatar src="/broken-image.jpg" className={classes.large} />
       <h1>Hello {currentUser.username}</h1>
       <header className="userLanding__header">
-        <h2>Liked Stocks</h2>
+        <Box className="">Liked Stocks</Box>
         <h2 className="userLanding__header-watchesTitle">Current Watches</h2>
       </header>
       <section className="userLanding__section-top">
