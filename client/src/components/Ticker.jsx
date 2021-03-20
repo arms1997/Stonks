@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useLoading, Audio } from "@agney/react-loading";
 
 import Detail from "./Detail";
 import Graph from "./Graph";
@@ -11,8 +10,6 @@ import {
   CardActions,
   IconButton,
   makeStyles,
-  Menu,
-  MenuItem,
   TextField,
   Popper,
 } from "@material-ui/core";
@@ -30,7 +27,6 @@ const useStyles = makeStyles({
 });
 
 export default function Ticker({ symbol, company }) {
-  const [loading, setLoading] = useState(true);
   const [liked, setLiked] = useState(false);
   const [watch, setWatch] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -46,11 +42,6 @@ export default function Ticker({ symbol, company }) {
     removeWatch,
     updateWatch,
   } = useAuth();
-
-  const { containerProps, indicatorEl } = useLoading({
-    loading: loading,
-    indicator: <Audio width="100" />,
-  });
 
   useEffect(() => {
     setLiked(false);
@@ -138,15 +129,7 @@ export default function Ticker({ symbol, company }) {
   return (
     <div className="ticker">
       <Card>
-        <section {...containerProps}>{indicatorEl}</section>
-        <Graph
-          symbol={symbol}
-          company={company}
-          showNews={true}
-          loading={loading}
-          setLoading={setLoading}
-          height={500}
-        />
+        <Graph symbol={symbol} company={company} showNews={true} height={500} />
         <CardActions className={classes.cardBottom}>
           <div>
             <IconButton onClick={() => _handleLikeClick(currentUser)}>
