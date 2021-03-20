@@ -4,7 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
   //add a like to a ticker from a user
   router.post("/", (req, res) => {
-    const { userId, ticker } = req.body;
+    const { userId, ticker, company } = req.body;
 
     db.addLike(userId, ticker)
       .then((resources) => {

@@ -1,12 +1,12 @@
 const db = require("../index");
 
-const addLike = function (userId, ticker) {
-  let queryParams = [userId, ticker];
+const addLike = function (userId, ticker, company) {
+  let queryParams = [userId, ticker, company];
 
   let queryString = `
     INSERT INTO likes
-    (user_id, ticker)
-    VALUES($1, $2)
+    (user_id, ticker, company)
+    VALUES($1, $2, $3)
     RETURNING *;
     `;
 
