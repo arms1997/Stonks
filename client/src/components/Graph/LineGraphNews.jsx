@@ -72,7 +72,7 @@ export default function LineGraphNews({
 
   return (
     <div className="graph__item">
-      <h1 className="graph__item-title-small">{title.toUpperCase()}</h1>
+      <h1 className={graphClass}>{title.toUpperCase()}</h1>
       <h3 className="graph__item-price">${data[0]["y"]}</h3>
       <FlexibleWidthXYPlot
         onMouseLeave={_onMouseLeave}
