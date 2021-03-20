@@ -1,32 +1,14 @@
 import React, { useRef, useState } from "react";
 
-import {
-  Button,
-  Card,
-  Container,
-  TextField,
-  CardContent,
-} from "@material-ui/core";
-
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { Card, Container, TextField, CardContent } from "@material-ui/core";
 
 import { Alert } from "@material-ui/lab";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { Link, Redirect } from "react-router-dom";
 
 import "./Login.scss";
 
-import CustomButton from "./CustomButton";
-
-// const CustomButton = withStyles((theme) => ({
-//   root: {
-//     color: "white",
-//     backgroundColor: "#868c8c",
-//     "&:hover": {
-//       backgroundColor: "#4c5663",
-//     },
-//   },
-// }))(Button);
+import CustomButton from "../../CustomButton";
 
 export default function Login() {
   const emailRef = useRef();
