@@ -15,7 +15,6 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const useStyles = makeStyles({
   container: {
-    marginTop: 100,
     maxWidth: 300,
     maxHeight: 300,
     minHeight: 300,
