@@ -4,6 +4,9 @@ import {
   CardHeader,
   makeStyles,
   List,
+  ListItem,
+  Divider,
+  ListItemText,
 } from "@material-ui/core";
 
 import React from "react";
@@ -36,6 +39,15 @@ export default function NewsContainer({ relevantNews }) {
     return <NewsCard news={news} />;
   });
 
+  const noNews = (
+    <React.Fragment>
+      <Divider />
+      <ListItem alignItems="center">
+        <ListItemText primary={"Sorry seems like theres no relevant news"} />
+      </ListItem>
+    </React.Fragment>
+  );
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -45,7 +57,7 @@ export default function NewsContainer({ relevantNews }) {
         subheader="Relevant News"
       ></CardHeader>
       <CardContent>
-        <List>{newsListItems}</List>
+        <List>{newsListItems.length ? newsListItems : noNews}</List>
       </CardContent>
     </Card>
   );
