@@ -146,7 +146,6 @@ export default function Ticker({ symbol, company }) {
           loading={loading}
           setLoading={setLoading}
           height={500}
-          showNews={false}
         />
         <CardActions className={classes.cardBottom}>
           <div>

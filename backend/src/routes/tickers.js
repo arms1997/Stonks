@@ -92,12 +92,15 @@ module.exports = () => {
 
   router.get("/:symbol", (req, res) => {
     const { symbol } = req.params;
-    console.log(symbol);
+
     getTickerData(symbol)
       .then((data) => {
-        console.log(data);
-
         data = JSON.parse(data);
+
+        if (data["News"]) {
+          console.log("stock api limit reacher");
+          res.status(500).send("api limit reached");
+        }
 
         const { parsedData, timestamps } = dataParser(
           data["Time Series (5min)"]
