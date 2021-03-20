@@ -21,7 +21,6 @@ module.exports = () => {
             publishedAt: article.publishedAt,
           };
         });
-
         res.send(news);
       })
       .catch((err) => res.status(500).send({ err: err.message }));
