@@ -1,12 +1,32 @@
 import React, { useRef, useState } from "react";
 
-import { Button, Card, Container, TextField } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  Container,
+  TextField,
+  CardContent,
+} from "@material-ui/core";
+
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, Redirect } from "react-router-dom";
 
 import "./Login.scss";
+
+import CustomButton from "./CustomButton";
+
+// const CustomButton = withStyles((theme) => ({
+//   root: {
+//     color: "white",
+//     backgroundColor: "#868c8c",
+//     "&:hover": {
+//       backgroundColor: "#4c5663",
+//     },
+//   },
+// }))(Button);
 
 export default function Login() {
   const emailRef = useRef();
@@ -36,13 +56,14 @@ export default function Login() {
         <Redirect to="/mylanding" />
       ) : (
         <Container maxWidth="sm" className="login">
-          <Card>
+          <Card className="login__card">
+            <CardContent className="login__card-border" />
             <img
               src="./images/stonks.svg"
               className="login__image"
               alt="Stonks logo with graph"
             />
-            <h2>Log In</h2>
+            <h2 className="login__title">Log In</h2>
             {error && <Alert severity="error">{error}</Alert>}
             <form onSubmit={handleSubmit} className="login__form">
               <TextField
@@ -61,7 +82,7 @@ export default function Login() {
                 type="password"
                 inputRef={passwordRef}
               />
-              <Button
+              <CustomButton
                 disabled={loading}
                 variant="contained"
                 color="primary"
@@ -69,16 +90,14 @@ export default function Login() {
                 className="login__form-button"
               >
                 Log in!
-              </Button>
+              </CustomButton>
             </form>
             <div className="login__forgotpassword">
               <Link to="/forgot-password">Forgot password?</Link>
             </div>
           </Card>
-          <div className="login__link">
-            Need an account?
-            <Link to="/signup">Sign up!</Link>
-          </div>
+          <div className="login__link">Need an account?</div>
+          <Link to="/signup">Sign up!</Link>
         </Container>
       )}
     </>
