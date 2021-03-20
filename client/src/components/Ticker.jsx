@@ -75,7 +75,7 @@ export default function Ticker({ symbol, company }) {
 
       updateLike(id, index).then(() => setLiked(!liked));
     } else {
-      addLike(currentUser.user_id, symbol).then(() => setLiked(true));
+      addLike(currentUser.user_id, symbol, company).then(() => setLiked(true));
     }
   };
 

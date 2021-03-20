@@ -81,8 +81,8 @@ export function AuthProvider({ children }) {
     });
   }
 
-  function addLike(userId, ticker) {
-    return likeTicker(userId, ticker)
+  function addLike(userId, ticker, company) {
+    return likeTicker(userId, ticker, company)
       .then(({ data }) => {
         const { resources } = data;
         setCurrentUser((prev) => ({
