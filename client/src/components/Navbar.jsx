@@ -54,6 +54,8 @@ export default function Navbar({ setStock }) {
   const [options, setOptions] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+  const [value, setValue] = useState({ symbol: "", shortName: "" });
+  const [inputValue, setInputValue] = useState("");
 
   const { currentUser, logout } = useAuth();
 
@@ -67,14 +69,20 @@ export default function Navbar({ setStock }) {
   }
 
   const _onHomeClick = () => {
+    setStock(null);
+    setValue({ symbol: "", shortName: "" });
     history.push("/mylanding");
   };
 
   const _onAccountClick = () => {
+    setStock(null);
+    setValue({ symbol: "", shortName: "" });
     history.push("/me");
   };
 
   const _onLoginClick = () => {
+    setStock(null);
+    setValue({ symbol: "", shortName: "" });
     history.push("/login");
   };
 
@@ -82,7 +90,7 @@ export default function Navbar({ setStock }) {
     if (!value) {
       return;
     }
-
+    setValue({ ...value });
     setStock({ symbol: value.symbol, company: value.shortName });
     history.push("/ticker");
   };
@@ -148,12 +156,15 @@ export default function Navbar({ setStock }) {
           />
           <Autocomplete
             className={classes.search}
-            renderOption={(option) => optionComponent(option)}
-            options={options}
+            value={value}
             onChange={onChangeHandler}
+            options={options}
             getOptionLabel={(option) =>
               `${option.symbol.toUpperCase()} ${option.shortName}`
             }
+            renderOption={(option) => optionComponent(option)}
+            inputValue={inputValue}
+            onInputChange={(e, newInputValue) => setInputValue(newInputValue)}
             groupBy={() => "Symbol"}
             loading={loading}
             renderInput={(params) => (
