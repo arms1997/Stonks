@@ -4,12 +4,11 @@ const PORT = process.env.PORT || 8000;
 const express = require("express");
 const bodyparser = require("body-parser");
 const cors = require("cors");
+const http = require("http");
 const app = express();
 
 app.use(cors());
 app.use(bodyparser.json());
-
-const http = require("http");
 
 //Routes
 
@@ -42,7 +41,33 @@ const userRouter = userRoutes(db_users);
 app.use("/api/user", userRouter);
 
 const server = http.createServer(app);
-const io = require("./server")(server);
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
+
+io.on("connection", (socket) => {
+  //Join a convo
+
+  const { roomId } = socket.handshake.query;
+  console.log(roomId);
+  socket.join(roomId);
+
+  //listen for new users
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    console.log(data);
+    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+  });
+
+  //leave room is the user closes the socket
+  socket.on("disconnect", () => {
+    socket.leave(roomId);
+  });
+});
 
 server.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
