@@ -5,25 +5,39 @@ import {
   List,
   TextField,
   Button,
-  Typography,
   makeStyles,
-  withStyles,
+  Typography,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import useChat from "../Hooks/useChat";
 import ChatBubble from "./ChatBubble";
 import { useAuth } from "../contexts/AuthContext";
 
-const styles = (theme) => ({
-  title: {
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#8c9eaa",
     color: "white",
   },
 });
 
 const ChatRoom = ({ company }) => {
+  const classes = useStyles();
   const { messages, sendMessage } = useChat(company);
   const [value, setValue] = useState("");
   const { currentUser } = useAuth();
+
+  const chatContainer = useRef(null);
+
+  const scrollToBottom = () => {
+    chatContainer.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const listContent = messages.map((message, index) => {
     return (
@@ -58,11 +72,14 @@ const ChatRoom = ({ company }) => {
   return (
     <Card style={{ maxHeight: 500, marginBottom: 40 }}>
       <CardHeader
-        subheader="Chat"
-        style={{ backgroundColor: "#825c79" }}
+        className={classes.root}
+        subheader={<Typography variant="h6">Chat</Typography>}
       ></CardHeader>
       <CardContent style={{ height: 300, overflow: "auto" }}>
-        <List>{listContent}</List>
+        <List>
+          {listContent}
+          <div ref={chatContainer}></div>
+        </List>
       </CardContent>
       <CardContent>
         <TextField
