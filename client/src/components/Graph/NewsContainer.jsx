@@ -52,7 +52,7 @@ export default function NewsContainer({ relevantNews }) {
     <Card className={classes.root}>
       <CardHeader
         style={{
-          backgroundColor: "#f0ead6",
+          backgroundColor: "#7ca5ce",
         }}
         subheader="Relevant News"
       ></CardHeader>
