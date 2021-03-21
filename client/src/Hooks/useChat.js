@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import socketIOClient from "socket.io-client";
+import moment from "moment";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 const SOCKET_SERVER_URL = "http://localhost:8000";
@@ -30,9 +31,11 @@ const useChat = (roomId) => {
     };
   }, [roomId]);
 
-  const sendMessage = (messageBody) => {
+  const sendMessage = (messageBody, username = "randomUser123") => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
+      username: username,
       body: messageBody,
+      timestamp: moment().format("h:mm a"),
       senderId: socketRef.current.id,
     });
   };
