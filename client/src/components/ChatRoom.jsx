@@ -30,8 +30,11 @@ const ChatRoom = ({ company }) => {
   };
 
   return (
-    <Card style={{ maxHeight: 500, width: 300 }}>
-      <CardHeader title="Chat"></CardHeader>
+    <Card style={{ maxHeight: 500, marginBottom: 40 }}>
+      <CardHeader
+        subheader="Chat"
+        style={{ backgroundColor: "#825c79" }}
+      ></CardHeader>
       <CardContent style={{ height: 300, overflow: "auto" }}>
         <List>{listContent}</List>
       </CardContent>
@@ -41,6 +44,7 @@ const ChatRoom = ({ company }) => {
           variant="standard"
           value={value}
           onChange={(event) => setValue(event.target.value)}
+          style={{ width: "80%", marginBottom: "5px" }}
         />
         <Button onClick={handleSendMessage}>Send</Button>
       </CardContent>
