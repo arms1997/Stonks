@@ -50,6 +50,8 @@ export default function WatchTable() {
     .filter((watch) => watch.is_active)
     .map((watch) => createData(watch.id, watch.ticker, watch.value));
 
+  console.log("rows", rows);
+
   return (
     <TableContainer className={classes.container} component={Paper}>
       <Table stickyHeader className={classes.table} aria-label="simple table">
@@ -61,6 +63,13 @@ export default function WatchTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {!rows.length && (
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>You have no watched stocks!</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          )}
           {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell align="center">{row.ticker}</TableCell>
