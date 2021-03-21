@@ -1,35 +1,54 @@
 import React, { useState } from "react";
-import { Card, Button } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import { useAuth } from "../contexts/AuthContext";
+import { useSpring, animated } from "react-spring";
 import { useHistory } from "react-router-dom";
+import CustomButton from "./CustomButton";
+
+import "./Landing.scss";
 
 export default function Landing() {
-  const [error, setError] = useState("");
-
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
+  //fade in animation for logo with buttons
+  const props = useSpring({ opacity: 1, from: { opacity: 0 } });
 
-  async function handleLogout() {
-    setError("");
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
+  const handleLoginClick = () => {
+    history.push("/login");
+  };
+
+  const handleSignUpClick = () => {
+    history.push("/signup");
+  };
 
   return (
-    <>
-      <Card>
-        <h2 className="text-center mb-4">Profile</h2>
-        {error && <Alert severity="error">{error}</Alert>}
-        <strong>Email:</strong> {currentUser && currentUser.user_email}
-      </Card>
-      <div className="w-100 text-center mt-2">
-        <Button onClick={handleLogout}>Log Out</Button>
-      </div>
-    </>
+    <main className="landing">
+      <section className="landing__logoWithButton">
+        <animated.div style={props}>
+          <img src="./images/stonkslightfont.svg" alt="logo" />
+          <div className="landing__logoWithButton-buttons">
+            <CustomButton
+              className="landing__logoWithButton-buttons-login"
+              onClick={handleLoginClick}
+            >
+              {" "}
+              Log In
+            </CustomButton>
+            <CustomButton
+              className="landing__buttons-signup"
+              onClick={handleSignUpClick}
+            >
+              {" "}
+              Sign Up
+            </CustomButton>
+          </div>
+        </animated.div>
+        <p>Scroll down to learn more...</p>
+      </section>
+      <section className="landing__description">
+        <article className="landing__description-top">
+          <p>What is Stonks?</p>
+          <p></p>
+        </article>
+        <article>graph here</article>
+      </section>
+    </main>
   );
 }

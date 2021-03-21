@@ -8,9 +8,28 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 20px;
 
     &-watchesTitle {
-      margin-right: 120px;
+      margin-right: 15px;
+      font-size: 25px;
+      color: white;
+      text-align: center;
+      font-weight: 700;
+      width: 294px;
+      height: 60px;
+      background-color: #825c79;
+    }
+
+    &-likesTitle {
+      margin-left: 20px;
+      font-size: 25px;
+      color: white;
+      text-align: center;
+      font-weight: 700;
+      width: 795px;
+      height: 60px;
+      background-color: #849e95;
     }
   }
 
@@ -18,9 +37,25 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    justify-content: center;
 
     &-bottom {
-      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &-newsTitle {
+        font-size: 25px;
+        width: 65%;
+        color: white;
+        text-align: center;
+        font-weight: 700;
+        height: 60px;
+        background-color: #849e95;
+        margin-top: 30px;
+        margin-bottom: 10px;
+      }
     }
 
     &-top {

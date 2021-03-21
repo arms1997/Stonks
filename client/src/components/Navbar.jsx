@@ -66,7 +66,7 @@ export default function Navbar({ setStock }) {
   }
 
   const _onHomeClick = () => {
-    history.push("/");
+    history.push("/mylanding");
   };
 
   const _onAccountClick = () => {
@@ -127,13 +127,17 @@ export default function Navbar({ setStock }) {
 
   const { pathname } = useLocation();
 
-  if (pathname === "/login" || pathname === "/signup") {
+  if (
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password"
+  ) {
     return null;
   }
 
   return (
     <div>
-      <AppBar position={"fixed"} color={"default"} className={classes.root}>
+      <AppBar position={"fixed"} color="default" className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <img
             src="./images/stonks.svg"

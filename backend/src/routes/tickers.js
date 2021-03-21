@@ -107,7 +107,6 @@ module.exports = () => {
 
   router.get("/:symbol", (req, res) => {
     const { symbol } = req.params;
-
     getTickerData(symbol)
       .then((data) => {
         data = JSON.parse(data);

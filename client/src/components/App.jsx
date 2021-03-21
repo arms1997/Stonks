@@ -7,11 +7,11 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Signup from "./Signup";
+import Signup from "./UserAuth/SignUp/Signup";
 import UpdateProfile from "./ProfileSettings/UpdateProfile";
-import Login from "./Login";
+import Login from "./UserAuth/Login/Login";
 import Landing from "./Landing";
-import ForgotPassword from "./ForgotPassword";
+import ForgotPassword from "./UserAuth/ForgotPassword/ForgotPassword";
 import PrivateRoute from "./PrivateRoute";
 
 import "./App.css";
@@ -26,11 +26,11 @@ function App() {
   return (
     <AuthProvider>
       <div className="App">
-        <Container>
+        <Container className="App__container">
           <Router>
             <Navbar setStock={setStock} />
             <Switch>
-              <PrivateRoute exact path="/" component={Landing} />
+              <Route exact path="/" component={Landing} />
               <PrivateRoute
                 path="/mylanding"
                 component={() => <UserLanding setStock={setStock} />}

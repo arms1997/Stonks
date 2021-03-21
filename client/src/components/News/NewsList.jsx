@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Button } from "@material-ui/core";
 
 import NewsListItem from "./NewsListItem";
 import "./NewsList.scss";
+
+import CustomButton from "../CustomButton";
 
 export default function NewsList({ company, symbol, showAllNews = false }) {
   const articlesPerPage = 5;
@@ -67,16 +68,16 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
       )}
       {newsData && newsData.length > 0 && (
         <>
-          <h1 style={{ textAlign: "start", marginTop: 20 }}>News</h1>
+          {/* <h1 style={{ textAlign: "start", marginTop: 20 }}>News</h1> */}
           {articlesToShow}
           {newsData.length > articlesToShow.length && (
-            <Button
+            <CustomButton
               className="newsList__button"
               variant="outlined"
               onClick={handleShowMoreArticles}
             >
               Show More
-            </Button>
+            </CustomButton>
           )}
         </>
       )}

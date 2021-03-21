@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../../contexts/AuthContext";
+
+import CustomButton from "../CustomButton";
 
 import "./ProfileSettings.scss";
 
@@ -88,7 +90,7 @@ export default function Form() {
             defaultValue={currentUser && currentUser.user_phone_num}
             inputRef={phoneNumRef}
           />
-          <Button
+          <CustomButton
             className="profile__box-form-button"
             disabled={loading}
             variant="contained"
@@ -96,7 +98,7 @@ export default function Form() {
             type="submit"
           >
             Update
-          </Button>
+          </CustomButton>
         </form>
       </div>
     </>
