@@ -7,6 +7,7 @@ import {
   ListItem,
   Divider,
   ListItemText,
+  Typography,
 } from "@material-ui/core";
 
 import React from "react";
@@ -19,6 +20,10 @@ const useStyles = makeStyles({
     maxHeight: 450,
     margin: "100px 10px 0px 10px",
     overflow: "auto",
+  },
+  header: {
+    backgroundColor: "#7ca5ce",
+    color: "white",
   },
 });
 
@@ -51,10 +56,8 @@ export default function NewsContainer({ relevantNews }) {
   return (
     <Card className={classes.root}>
       <CardHeader
-        style={{
-          backgroundColor: "#7ca5ce",
-        }}
-        subheader="Relevant News"
+        className={classes.header}
+        subheader={<Typography>Relevant News</Typography>}
       ></CardHeader>
       <CardContent>
         <List>{newsListItems.length ? newsListItems : noNews}</List>
