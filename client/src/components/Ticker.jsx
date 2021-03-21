@@ -185,8 +185,8 @@ export default function Ticker({ symbol, company }) {
       </Card>
       <div className="ticker__bottom">
         <NewsList symbol={symbol} company={company} />
-        <ChatRoom company={company} />
         <div className="ticker__bottom-detail">
+          <ChatRoom company={company} />
           <Detail symbol={symbol} />
         </div>
       </div>
