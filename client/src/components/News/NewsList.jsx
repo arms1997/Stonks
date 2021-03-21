@@ -68,13 +68,12 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
       )}
       {newsData && newsData.length > 0 && (
         <>
-          {/* <h1 style={{ textAlign: "start", marginTop: 20 }}>News</h1> */}
           {articlesToShow}
           {newsData.length > articlesToShow.length && (
             <CustomButton
-              className="newsList__button"
               variant="outlined"
               onClick={handleShowMoreArticles}
+              // style={{ marginRight: "430px", marginBottom: "50px" }}
             >
               Show More
             </CustomButton>
