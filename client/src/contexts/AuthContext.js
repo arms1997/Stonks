@@ -81,8 +81,8 @@ export function AuthProvider({ children }) {
     });
   }
 
-  function addLike(userId, ticker) {
-    return likeTicker(userId, ticker)
+  function addLike(userId, ticker, company) {
+    return likeTicker(userId, ticker, company)
       .then(({ data }) => {
         const { resources } = data;
         setCurrentUser((prev) => ({
@@ -117,8 +117,7 @@ export function AuthProvider({ children }) {
     return updateWatchTicker(watchId, value)
       .then(({ data }) => {
         const newWatchArr = [...currentUser.watches];
-        newWatchArr[index]["value"] = value;
-        console.log(newWatchArr[index]["value"], value);
+        newWatchArr[index] = data;
         setCurrentUser((prev) => ({
           ...prev,
           watches: newWatchArr,

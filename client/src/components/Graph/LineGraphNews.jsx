@@ -14,7 +14,6 @@ import "../../../node_modules/react-vis/dist/style.css";
 import moment from "moment";
 
 import DataBubble from "../Bubbles/DataBubble";
-import NewsBubble from "../Bubbles/NewsBubble";
 
 import "./Graph.scss";
 
@@ -23,11 +22,11 @@ export default function LineGraphNews({
   showNews = false,
   height,
   small = false,
+  setRelevantNews,
 }) {
   const [hoverdNode, setHoveredNode] = useState(null);
   const [areaHover, setAreaHover] = useState({});
-  const [hintInfo, setHintInfo] = useState({});
-  const [hover, setHover] = useState(false);
+  const [lock, setLock] = useState(false);
 
   const {
     title,
@@ -35,7 +34,7 @@ export default function LineGraphNews({
     yDomain,
     data,
     areaData = null,
-    hintData = null,
+    relevantNews,
   } = graphData;
 
   const _onMouseLeave = () => setHoveredNode(null);
@@ -48,23 +47,32 @@ export default function LineGraphNews({
 
   const graphClass = small ? `graph__item-title-small` : "graph__item-title";
 
+  const keys = showNews ? Object.keys(relevantNews) : null;
+
   const areaSeries =
     showNews &&
     areaData.map((data, index) => {
       return (
         <AreaSeries
+          style={{ cursor: "pointer" }}
           key={index}
           data={data}
-          opacity={areaHover[index] ? 0.8 : 0.4}
+          opacity={areaHover[index] ? 1 : 0.4}
           color="#b4cbf0"
           onSeriesMouseOver={() => {
-            setHover(true);
-            setHintInfo(hintData[index]);
-            setAreaHover((prev) => ({ ...prev, [index]: true }));
+            if (!lock) {
+              setRelevantNews(relevantNews[keys[index]]);
+              setAreaHover((prev) => ({ ...prev, [index]: true }));
+            }
+          }}
+          onSeriesClick={() => {
+            setLock(!lock);
           }}
           onSeriesMouseOut={() => {
-            setHover(false);
-            setAreaHover((prev) => ({ ...prev, [index]: false }));
+            if (!lock) {
+              setAreaHover((prev) => ({ ...prev, [index]: false }));
+              setRelevantNews(relevantNews);
+            }
           }}
         />
       );
@@ -72,7 +80,7 @@ export default function LineGraphNews({
 
   return (
     <div className="graph__item">
-      <h1 className="graph__item-title-small">{title.toUpperCase()}</h1>
+      <h1 className={graphClass}>{title.toUpperCase()}</h1>
       <h3 className="graph__item-price">${data[0]["y"]}</h3>
       <FlexibleWidthXYPlot
         onMouseLeave={_onMouseLeave}
@@ -104,11 +112,6 @@ export default function LineGraphNews({
           </Hint>
         )}
         {showNews && areaSeries}
-        {showNews && hover && (
-          <Hint value={hintInfo.data} style={{ marginBottom: "10px" }}>
-            <NewsBubble title={hintInfo.hint.title} />
-          </Hint>
-        )}
       </FlexibleWidthXYPlot>
     </div>
   );

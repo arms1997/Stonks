@@ -15,19 +15,22 @@ const addWatch = function (userID, ticker, value) {
 };
 
 const updateWatch = function (watch_id, value = null) {
-  let queryString = `
-  UPDATE watches SET 
-  is_active = NOT is_active`;
+  const queryParams = value ? [watch_id, value] : [watch_id];
 
-  if (value) {
-    queryString += `,value = $2`;
+  let queryString = `
+  UPDATE watches SET `;
+
+  if (!value) {
+    queryString += `is_active = false `;
+  } else {
+    queryString += `value = $2, is_active = true `;
   }
 
   queryString += `WHERE id = $1
   RETURNING *;`;
 
   return db
-    .query(queryString, [watch_id, value])
+    .query(queryString, queryParams)
     .then((res) => res.rows[0])
     .catch((err) => console.log("query error", err.stack));
 };

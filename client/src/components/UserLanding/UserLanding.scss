@@ -66,6 +66,8 @@
       width: 100%;
 
       &-graph {
+        display: flex;
+        justify-content: center;
         height: 300px;
         width: 800px;
       }
