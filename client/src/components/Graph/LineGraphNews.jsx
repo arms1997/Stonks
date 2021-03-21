@@ -91,7 +91,12 @@ export default function LineGraphNews({
         <HorizontalGridLines />
         <XAxis tickFormat={_tickFormatter} />
         <YAxis />
-        <LineSeries data={data} onNearestX={_onNearestX} animation />
+        <LineSeries
+          data={data}
+          onNearestX={_onNearestX}
+          animation
+          color="#849e95"
+        />
         {hoverdNode && <MarkSeries data={[hoverdNode]} />}
         {hoverdNode && (
           <Hint
