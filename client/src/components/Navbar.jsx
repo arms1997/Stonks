@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Button,
   CircularProgress,
   ListItemIcon,
   ListItemText,
@@ -13,7 +12,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Toolbar from "@material-ui/core/Toolbar";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import IconButton from "@material-ui/core/IconButton";
-import NightsStayIcon from "@material-ui/icons/NightsStay";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -46,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ setStock }) {
+export default function Navbar() {
   const classes = useStyles();
 
   const history = useHistory();
@@ -69,19 +67,16 @@ export default function Navbar({ setStock }) {
   }
 
   const _onHomeClick = () => {
-    setStock(null);
     setValue({ symbol: "", shortName: "" });
     history.push("/mylanding");
   };
 
   const _onAccountClick = () => {
-    setStock(null);
     setValue({ symbol: "", shortName: "" });
     history.push("/me");
   };
 
   const _onLoginClick = () => {
-    setStock(null);
     setValue({ symbol: "", shortName: "" });
     history.push("/login");
   };
@@ -91,8 +86,7 @@ export default function Navbar({ setStock }) {
       return;
     }
     setValue({ ...value });
-    setStock({ symbol: value.symbol, company: value.shortName });
-    history.push("/ticker");
+    history.push(`/ticker/${value.symbol}/${value.shortName}`);
   };
 
   const _handleMenuClick = (event) => {
