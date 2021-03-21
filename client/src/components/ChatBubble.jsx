@@ -1,10 +1,43 @@
-import { CardContent, Typography, ListItem, Card } from "@material-ui/core";
+import {
+  CardContent,
+  Typography,
+  ListItem,
+  Card,
+  makeStyles,
+  withTheme,
+} from "@material-ui/core";
+
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+
+  altroot: {
+    display: "flex",
+    justifyContent: "flex-start",
+  },
+
+  me: {
+    backgroundColor: "#e6e9ea",
+    justifyContent: "flex-end",
+  },
+  notMe: {
+    backgroundColor: "#808386",
+    color: "white",
+    alignSelf: "flex-start",
+  },
+});
 
 const ChatBubble = ({ body, username, timestamp, ownedByCurrentUser }) => {
+  const classes = useStyles();
   return (
     <div>
-      <ListItem primary="message">
-        <Card>
+      <ListItem
+        className={ownedByCurrentUser ? classes.root : classes.altRoot}
+        primary="message"
+      >
+        <Card className={ownedByCurrentUser ? classes.me : classes.notMe}>
           <CardContent style={{ padding: "6px 10px" }}>
             <div
               style={{
