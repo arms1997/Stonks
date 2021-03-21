@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import "./Navbar.scss";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import CustomButton from "./CustomButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +60,7 @@ export default function Navbar({ setStock }) {
   async function handleLogout() {
     try {
       await logout();
-      history.push("/login");
+      history.push("/");
     } catch {
       // setError("Failed to log out");
     }
@@ -207,12 +208,6 @@ export default function Navbar({ setStock }) {
                     </ListItemIcon>
                     <ListItemText primary="Account" />
                   </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon>
-                      <NightsStayIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Dark Mode" />
-                  </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                       <ExitToAppIcon />
@@ -224,9 +219,7 @@ export default function Navbar({ setStock }) {
             </div>
           ) : (
             <div className="navbar__buttons">
-              <Button variant="outlined" onClick={_onLoginClick}>
-                Login
-              </Button>
+              <CustomButton onClick={_onLoginClick}>Login</CustomButton>
             </div>
           )}
         </Toolbar>
