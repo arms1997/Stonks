@@ -12,7 +12,7 @@ import {
 } from "react-vis";
 import "../../../node_modules/react-vis/dist/style.css";
 import moment from "moment";
-
+import LockIcon from "@material-ui/icons/Lock";
 import DataBubble from "../Bubbles/DataBubble";
 
 import "./Graph.scss";
@@ -26,7 +26,8 @@ export default function LineGraphNews({
 }) {
   const [hoverdNode, setHoveredNode] = useState(null);
   const [areaHover, setAreaHover] = useState({});
-  const [lock, setLock] = useState(false);
+  const [hintLocation, setHintLocation] = useState();
+  const [lock, setLock] = useState({ lock: false, index: null });
 
   const {
     title,
@@ -35,6 +36,7 @@ export default function LineGraphNews({
     data,
     areaData = null,
     relevantNews,
+    hintData,
   } = graphData;
 
   const _onMouseLeave = () => setHoveredNode(null);
@@ -60,16 +62,22 @@ export default function LineGraphNews({
           opacity={areaHover[index] ? 1 : 0.4}
           color="#b4cbf0"
           onSeriesMouseOver={() => {
-            if (!lock) {
+            if (!lock.lock) {
               setRelevantNews(relevantNews[keys[index]]);
               setAreaHover((prev) => ({ ...prev, [index]: true }));
             }
           }}
           onSeriesClick={() => {
-            setLock(!lock);
+            if (!lock.lock) {
+              setHintLocation(hintData[index].data);
+              setLock({ lock: !lock.lock, index: index });
+            } else if (index === lock.index) {
+              setHintLocation(null);
+              setLock({ lock: !lock.lock, index: null });
+            }
           }}
           onSeriesMouseOut={() => {
-            if (!lock) {
+            if (!lock.lock) {
               setAreaHover((prev) => ({ ...prev, [index]: false }));
               setRelevantNews(relevantNews);
             }
@@ -117,6 +125,11 @@ export default function LineGraphNews({
           </Hint>
         )}
         {showNews && areaSeries}
+        {showNews && lock.lock && (
+          <Hint value={hintLocation} style={{ marginBottom: "10px" }}>
+            <LockIcon style={{ color: "#ffb449" }} fontSize="medium" />
+          </Hint>
+        )}
       </FlexibleWidthXYPlot>
     </div>
   );
