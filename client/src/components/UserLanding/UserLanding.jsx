@@ -6,18 +6,35 @@ import Graph from "../Graph/index";
 import "./UserLanding.scss";
 import {
   Card,
+  CardContent,
   CardActionArea,
   Table,
   TableCell,
   TableContainer,
   TableBody,
   TableRow,
+  Avatar,
+  makeStyles,
 } from "@material-ui/core";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: "#849e95",
+  },
+
+  large: {
+    width: 100,
+    height: 100,
+    backgroundColor: "#7ca5ce",
+    alignSelf: "center",
+  },
+}));
+
 export default function UserLanding({ setStock }) {
+  const classes = useStyles();
   const { currentUser } = useAuth();
   const history = useHistory();
 
@@ -57,10 +74,19 @@ export default function UserLanding({ setStock }) {
 
   return (
     <div className="userLanding">
+      <Avatar src="/broken-image.jpg" className={classes.large} />
       <h1>Hello {currentUser.username}</h1>
       <header className="userLanding__header">
-        <h2>Liked Stocks</h2>
-        <h2 className="userLanding__header-watchesTitle">Current Watches</h2>
+        <Card className="userLanding__header-likesTitle">
+          <CardContent style={{ backgroundColor: "#849e95", color: "white" }}>
+            Liked Stocks
+          </CardContent>
+        </Card>
+        <Card className="userLanding__header-watchesTitle">
+          <CardContent style={{ backgroundColor: "#8b9eaa", color: "white" }}>
+            Watched Stocks
+          </CardContent>
+        </Card>
       </header>
       <section className="userLanding__section-top">
         <TableContainer>
@@ -71,10 +97,15 @@ export default function UserLanding({ setStock }) {
           </Table>
         </TableContainer>
         <div className="userLanding__section-top-watchTable">
-          <WatchTable />
+          {currentUser.watches && <WatchTable />}
         </div>
       </section>
-      <section className="userLanding___section-bottom">
+      <section className="userLanding__section-bottom">
+        <Card className="userLanding__section-bottom-newsTitle">
+          <CardContent style={{ backgroundColor: "#825c79", color: "white" }}>
+            Today's News
+          </CardContent>
+        </Card>
         <NewsList company="null" symbol="null" showAllNews={true} />
       </section>
     </div>
