@@ -20,6 +20,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAuth } from "../contexts/AuthContext";
 import ChatRoom from "./ChatRoom";
+import { useParams, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   cardBottom: {
@@ -28,12 +29,19 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Ticker({ symbol, company }) {
+export default function Ticker() {
   const [liked, setLiked] = useState(false);
   const [watch, setWatch] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [value, setValue] = useState("");
   const classes = useStyles();
+  const history = useHistory();
+
+  const { symbol, company } = useParams();
+
+  if (!symbol || !company) {
+    history.push("/mylanding");
+  }
 
   const {
     currentUser,
