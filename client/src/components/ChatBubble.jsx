@@ -4,7 +4,6 @@ import {
   ListItem,
   Card,
   makeStyles,
-  withTheme,
 } from "@material-ui/core";
 
 const useStyles = makeStyles({
