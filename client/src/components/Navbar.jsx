@@ -55,7 +55,7 @@ export default function Navbar() {
   const [value, setValue] = useState({ symbol: "", shortName: "" });
   const [inputValue, setInputValue] = useState("");
 
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, updatePreviousTickers } = useAuth();
 
   async function handleLogout() {
     try {
@@ -78,6 +78,7 @@ export default function Navbar() {
 
   const _onLoginClick = () => {
     setValue({ symbol: "", shortName: "" });
+
     history.push("/login");
   };
 
@@ -85,6 +86,8 @@ export default function Navbar() {
     if (!value) {
       return;
     }
+
+    updatePreviousTickers(value.symbol, value.shortName);
     setValue({ ...value });
     history.push(`/ticker/${value.symbol}/${value.shortName}`);
   };
