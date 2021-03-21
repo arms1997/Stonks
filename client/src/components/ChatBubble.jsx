@@ -5,8 +5,7 @@ const ChatBubble = ({ body, ownedByCurrentUser }) => {
     <div>
       <ListItem primary="message">
         <Card>
-          <CardContent>
-            <Typography>{ownedByCurrentUser ? "hello" : "goodbye"}</Typography>
+          <CardContent style={{ padding: "6px 10px" }}>
             <Typography>{body}</Typography>
           </CardContent>
         </Card>
