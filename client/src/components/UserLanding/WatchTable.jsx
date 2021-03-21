@@ -36,8 +36,6 @@ export default function WatchTable() {
   const { currentUser, removeWatch } = useAuth();
   const classes = useStyles();
 
-  const rows = [];
-
   const handleDeleteClick = (watchId) => {
     const index = currentUser.watches.findIndex(
       (watch) => watch.id === watchId
@@ -48,11 +46,9 @@ export default function WatchTable() {
       .catch((err) => console.error(err));
   };
 
-  currentUser.watches.map((watch) => {
-    if (watch.is_active) {
-      rows.push(createData(watch.id, watch.ticker, watch.value));
-    }
-  });
+  const rows = currentUser.watches
+    .filter((watch) => watch.is_active)
+    .map((watch) => createData(watch.id, watch.ticker, watch.value));
 
   return (
     <TableContainer className={classes.container} component={Paper}>

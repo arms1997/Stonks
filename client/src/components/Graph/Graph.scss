@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin: 10px 0px 10px 0px;
+    width: 100%;
 
     &-title {
       margin: 0px 0px 10px 2%;
@@ -19,4 +20,9 @@
       color: grey;
     }
   }
+}
+
+.news__container {
+  height: 300;
+  width: 100;
 }

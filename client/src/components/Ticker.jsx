@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useLoading, Audio } from "@agney/react-loading";
 
 import Detail from "./Detail";
 import Graph from "./Graph";
@@ -11,8 +10,6 @@ import {
   CardActions,
   IconButton,
   makeStyles,
-  Menu,
-  MenuItem,
   TextField,
   Popper,
 } from "@material-ui/core";
@@ -21,6 +18,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import CheckIcon from "@material-ui/icons/Check";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAuth } from "../contexts/AuthContext";
+import NewsContainer from "./Graph/NewsContainer";
 
 const useStyles = makeStyles({
   cardBottom: {
@@ -30,11 +28,9 @@ const useStyles = makeStyles({
 });
 
 export default function Ticker({ symbol, company }) {
-  const [loading, setLoading] = useState(true);
   const [liked, setLiked] = useState(false);
   const [watch, setWatch] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(false);
   const [value, setValue] = useState("");
   const classes = useStyles();
 
@@ -46,11 +42,6 @@ export default function Ticker({ symbol, company }) {
     removeWatch,
     updateWatch,
   } = useAuth();
-
-  const { containerProps, indicatorEl } = useLoading({
-    loading: loading,
-    indicator: <Audio width="100" />,
-  });
 
   useEffect(() => {
     setLiked(false);
@@ -85,7 +76,7 @@ export default function Ticker({ symbol, company }) {
 
       updateLike(id, index).then(() => setLiked(!liked));
     } else {
-      addLike(currentUser.user_id, symbol).then(() => setLiked(true));
+      addLike(currentUser.user_id, symbol, company).then(() => setLiked(true));
     }
   };
 
@@ -107,6 +98,7 @@ export default function Ticker({ symbol, company }) {
       const { id } = currentUser.watches[index];
 
       updateWatch(id, index, value).then(() => {
+        setWatch(true);
         setAnchorEl(null);
       });
     } else {
@@ -135,37 +127,8 @@ export default function Ticker({ symbol, company }) {
       .catch((err) => console.error(err));
   };
 
-  return (
-    <div className="ticker">
-      <Card>
-        <section {...containerProps}>{indicatorEl}</section>
-        <Graph
-          symbol={symbol}
-          company={company}
-          showNews={true}
-          loading={loading}
-          setLoading={setLoading}
-          height={500}
-        />
-        <CardActions className={classes.cardBottom}>
-          <div>
-            <IconButton onClick={() => _handleLikeClick(currentUser)}>
-              <FavoriteIcon color={liked ? "primary" : "inherit"} />
-            </IconButton>
-            <IconButton
-              onClick={(event) => _handleWatchClick(currentUser, event)}
-            >
-              <VisibilityIcon color={watch ? "primary" : "inherit"} />
-            </IconButton>
-          </div>
-        </CardActions>
-      </Card>
-      <div className="ticker__bottom">
-        <NewsList symbol={symbol} company={company} />
-        <div className="ticker__bottom-detail">
-          <Detail symbol={symbol} />
-        </div>
-      </div>
+  const watchPopper = () => {
+    return (
       <Popper anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)}>
         <Card>
           <CardActions>
@@ -187,6 +150,46 @@ export default function Ticker({ symbol, company }) {
           </CardActions>
         </Card>
       </Popper>
+    );
+  };
+
+  const graphButtons = () => {
+    return (
+      <CardActions className={classes.cardBottom}>
+        <div>
+          <IconButton onClick={() => _handleLikeClick(currentUser)}>
+            <FavoriteIcon color={liked ? "primary" : "inherit"} />
+          </IconButton>
+          <IconButton
+            onClick={(event) => _handleWatchClick(currentUser, event)}
+          >
+            <VisibilityIcon color={watch ? "primary" : "inherit"} />
+          </IconButton>
+        </div>
+      </CardActions>
+    );
+  };
+
+  return (
+    <div className="ticker">
+      <Card>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Graph
+            symbol={symbol}
+            company={company}
+            showNews={true}
+            height={500}
+          />
+        </div>
+        {graphButtons()}
+      </Card>
+      <div className="ticker__bottom">
+        <NewsList symbol={symbol} company={company} />
+        <div className="ticker__bottom-detail">
+          <Detail symbol={symbol} />
+        </div>
+      </div>
+      {watchPopper()}
     </div>
   );
 }
