@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserLanding() {
   const classes = useStyles();
-  const { currentUser } = useAuth();
+  const { currentUser, updatePreviousTickers } = useAuth();
   const history = useHistory();
 
   //get user's liked tickers for graph display
@@ -44,6 +44,7 @@ export default function UserLanding() {
   const likedTickers = [...currentUser.likes];
 
   const handleGraphClick = ({ ticker, company }) => {
+    updatePreviousTickers(ticker, company);
     history.push(`/ticker/${ticker}/${company}`);
   };
 

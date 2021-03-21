@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import ls from "local-storage";
 import { auth } from "../firebase";
 import {
   getUserBackend,
@@ -136,6 +137,12 @@ export function AuthProvider({ children }) {
       .catch((err) => console.error(err));
   }
 
+  function updatePreviousTickers(symbol, company) {
+    const newHistory = [...currentUser.previousTickers, { symbol, company }];
+    ls.set("previousTickers", newHistory);
+    setCurrentUser((prev) => ({ ...prev, previousTickers: newHistory }));
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setAuthUser(user);
@@ -146,7 +153,8 @@ export function AuthProvider({ children }) {
         // console.log("auth", auth);
         getUserBackend(user.email)
           .then((backendUserData) => {
-            setCurrentUser(backendUserData.data);
+            const previousTickers = ls.get("previousTickers") || [];
+            setCurrentUser({ ...backendUserData.data, previousTickers });
             setLoading(false);
           })
           .catch((err) => console.error("hello"));
@@ -173,6 +181,7 @@ export function AuthProvider({ children }) {
     createWatch,
     removeWatch,
     updateWatch,
+    updatePreviousTickers,
   };
 
   return (
