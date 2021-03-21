@@ -42,8 +42,7 @@
     &-bottom {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
 
       &-newsTitle {
         font-size: 25px;

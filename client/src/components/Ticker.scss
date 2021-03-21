@@ -1,6 +1,10 @@
 .ticker {
   margin: 100px 0px;
 
+  &__border {
+    background-color: #26638e;
+  }
+
   &__bottom {
     display: flex;
     justify-content: space-between;

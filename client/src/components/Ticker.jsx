@@ -12,6 +12,7 @@ import {
   makeStyles,
   TextField,
   Popper,
+  CardContent,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -173,6 +174,7 @@ export default function Ticker({ symbol, company }) {
   return (
     <div className="ticker">
       <Card>
+        <CardContent className="ticker__border" />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Graph
             symbol={symbol}
