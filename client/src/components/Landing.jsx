@@ -38,14 +38,6 @@ export default function Landing() {
             </CustomButton>
           </div>
         </animated.div>
-        <p>Scroll down to learn more...</p>
-      </section>
-      <section className="landing__description">
-        <article className="landing__description-top">
-          <p className="landing__description-top-title">What is Stonks?</p>
-          <p></p>
-        </article>
-        {/* <article>graph here</article> */}
       </section>
     </main>
   );
