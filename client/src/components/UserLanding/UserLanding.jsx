@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserLanding({ setStock }) {
+export default function UserLanding() {
   const classes = useStyles();
   const { currentUser } = useAuth();
   const history = useHistory();
@@ -44,8 +44,7 @@ export default function UserLanding({ setStock }) {
   const likedTickers = [...currentUser.likes];
 
   const handleGraphClick = ({ ticker, company }) => {
-    setStock({ symbol: ticker, company });
-    history.push("/ticker");
+    history.push(`/ticker/${ticker}/${company}`);
   };
 
   const parsedGraphs = likedTickers.map((graph) => {
