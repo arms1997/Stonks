@@ -5,10 +5,19 @@ import {
   List,
   TextField,
   Button,
+  Typography,
+  makeStyles,
+  withStyles,
 } from "@material-ui/core";
 import { useState } from "react";
 import useChat from "../Hooks/useChat";
 import ChatBubble from "./ChatBubble";
+
+const styles = (theme) => ({
+  title: {
+    color: "white",
+  },
+});
 
 const ChatRoom = ({ company }) => {
   const { messages, sendMessage } = useChat(company);
