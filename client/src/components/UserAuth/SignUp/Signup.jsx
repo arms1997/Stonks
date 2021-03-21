@@ -45,10 +45,10 @@ export default function Signup() {
 
     Promise.all(promises)
       .then(() => {
-        history.push("/");
+        history.push("/mylanding");
       })
       .catch((err) => {
-        setError(err);
+        setError(err.message);
       })
       .finally(() => {
         setLoading(false);
