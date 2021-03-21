@@ -5,7 +5,7 @@ import socketIOClient from "socket.io-client";
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 const SOCKET_SERVER_URL = "http://localhost:8000";
 
-export default useChat = (roomId) => {
+const useChat = (roomId) => {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef();
 
@@ -25,6 +25,7 @@ export default useChat = (roomId) => {
 
     //cleanup aka close socket connection when connection is closed
     return () => {
+      setMessages([]);
       socketRef.current.disconnect();
     };
   }, [roomId]);
@@ -38,3 +39,5 @@ export default useChat = (roomId) => {
 
   return { messages, sendMessage };
 };
+
+export default useChat;
