@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { AuthProvider } from "../contexts/AuthContext";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Signup from "./UserAuth/SignUp/Signup";
 import UpdateProfile from "./ProfileSettings/UpdateProfile";
@@ -21,29 +16,18 @@ import Ticker from "./Ticker";
 import UserLanding from "../components/UserLanding/UserLanding";
 
 function App() {
-  const [stock, setStock] = useState(null);
-
   return (
     <AuthProvider>
       <div className="App">
         <Container className="App__container">
           <Router>
-            <Navbar setStock={setStock} />
+            <Navbar />
             <Switch>
               <Route exact path="/" component={Landing} />
-              <PrivateRoute
-                path="/mylanding"
-                component={() => <UserLanding setStock={setStock} />}
-              />
+              <PrivateRoute path="/mylanding" component={UserLanding} />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
-              <Route path="/ticker">
-                {stock ? (
-                  <Ticker company={stock.company} symbol={stock.symbol} />
-                ) : (
-                  <Redirect to="/" />
-                )}
-              </Route>
+              <Route path="/ticker/:symbol/:company" component={Ticker} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
             </Switch>
