@@ -28,14 +28,12 @@ export default function Landing() {
               className="landing__logoWithButton-buttons-login"
               onClick={handleLoginClick}
             >
-              {" "}
               Log In
             </CustomButton>
             <CustomButton
               className="landing__buttons-signup"
               onClick={handleSignUpClick}
             >
-              {" "}
               Sign Up
             </CustomButton>
           </div>
