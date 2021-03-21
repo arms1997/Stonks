@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(bodyparser.json());
 
+const http = require("http");
+
 //Routes
 
 const watchRoutes = require("./routes/watches");
@@ -39,6 +41,9 @@ app.use("/api/like", likeRouter);
 const userRouter = userRoutes(db_users);
 app.use("/api/user", userRouter);
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+const io = require("./server")(server);
+
+server.listen(PORT, () => {
   console.log(`listening on PORT ${PORT}`);
 });

@@ -44,10 +44,10 @@ export default function Landing() {
       </section>
       <section className="landing__description">
         <article className="landing__description-top">
-          <p>What is Stonks?</p>
+          <p className="landing__description-top-title">What is Stonks?</p>
           <p></p>
         </article>
-        <article>graph here</article>
+        {/* <article>graph here</article> */}
       </section>
     </main>
   );
