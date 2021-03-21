@@ -18,7 +18,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import CheckIcon from "@material-ui/icons/Check";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useAuth } from "../contexts/AuthContext";
-import NewsContainer from "./Graph/NewsContainer";
+import ChatRoom from "./ChatRoom";
 
 const useStyles = makeStyles({
   cardBottom: {
@@ -185,6 +185,7 @@ export default function Ticker({ symbol, company }) {
       </Card>
       <div className="ticker__bottom">
         <NewsList symbol={symbol} company={company} />
+        <ChatRoom company={company} />
         <div className="ticker__bottom-detail">
           <Detail symbol={symbol} />
         </div>
