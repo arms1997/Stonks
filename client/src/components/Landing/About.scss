@@ -21,6 +21,33 @@
       align-items: center;
     }
 
+    &-howTo {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      &-text {
+        display: flex;
+        flex-direction: row;
+        margin-top: 100px;
+        justify-content: space-between;
+
+        &-step {
+          text-align: left;
+          width: 250px;
+
+          &-title {
+            margin-bottom: 20px;
+          }
+
+          &-link {
+            margin-top: 15px;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
     &-title {
       margin: 0px 0px 1000000px 0px;
     }
@@ -32,6 +59,6 @@
 
   #scrollUp {
     color: rgb(130, 150, 174);
-    margin-bottom: 20px;
+    margin-top: 10px;
   }
 }
