@@ -39,9 +39,11 @@ export default function Form() {
     }
 
     setLoading(true);
+    //clear error and messages state
     setError("");
     setMessage("");
 
+    //update user on backend and firebase together
     updateUser(userChanges)
       .then((value) => {
         setMessage("Your account has been updated.");
