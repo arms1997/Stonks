@@ -1,4 +1,6 @@
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 
 import Card3D from "../CustomCard/Card3D";
 import { Typography } from "@material-ui/core";
@@ -6,7 +8,7 @@ import { Typography } from "@material-ui/core";
 import "./About.scss";
 
 export default function About() {
-  const photoClassNames = ["graph", "graphWLock", "chatBox", "ticker"];
+  const photoClassNames = ["graph", "graphWLock", "chatBox", "tickerPage"];
 
   return (
     <main className="learnMore">
@@ -58,7 +60,7 @@ export default function About() {
             want to learn more about trends in prices!......
           </Typography>
         </div>
-        <div></div>
+        <FontAwesomeIcon id="scrollUp" icon={faArrowCircleUp} size="5x" />
       </section>
     </main>
   );
