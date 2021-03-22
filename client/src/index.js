@@ -5,8 +5,9 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 
-if (process.env.STONKS_APP_API_BASE_URL) {
-  axios.defaults.baseURL = process.env.STONKS_APP_API_BASE_URL;
+if (process.env.REACT_APP_STONKS_APP_API_BASE_URL) {
+  console.log("hello");
+  axios.defaults.baseURL = process.env.REACT_APP_STONKS_APP_API_BASE_URL;
 }
 
 ReactDOM.render(
