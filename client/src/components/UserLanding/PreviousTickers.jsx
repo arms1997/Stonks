@@ -7,7 +7,7 @@ import {
   ListItemText,
   Divider,
 } from "@material-ui/core";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import React from "react";
 

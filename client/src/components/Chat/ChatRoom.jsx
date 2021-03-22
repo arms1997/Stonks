@@ -9,9 +9,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useState, useRef, useEffect } from "react";
-import useChat from "../Hooks/useChat";
+import useChat from "../../Hooks/useChat";
 import ChatBubble from "./ChatBubble";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const useStyles = makeStyles({
   root: {

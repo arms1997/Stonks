@@ -4,6 +4,8 @@ import LineGraphNews from "./LineGraphNews";
 import { useLoading, Audio } from "@agney/react-loading";
 import NewsContainer from "./NewsContainer";
 
+import "./Graph.scss";
+
 export default function Graph({
   company,
   symbol,
@@ -37,7 +39,7 @@ export default function Graph({
   }, [company, symbol, showNews]);
 
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <div className="graph__container">
       <section {...containerProps}>{indicatorEl}</section>
       {!loading && graphData && (
         <>

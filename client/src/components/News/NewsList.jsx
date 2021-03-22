@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import NewsListItem from "./NewsListItem";
-import "./NewsList.scss";
 
 import CustomButton from "../CustomButton";
 

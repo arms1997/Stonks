@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     backgroundColor: "#e6e9ea",
     justifyContent: "flex-end",
   },
+
   notMe: {
     backgroundColor: "#808386",
     color: "white",
