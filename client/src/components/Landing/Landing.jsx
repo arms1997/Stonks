@@ -1,6 +1,6 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { Button } from "@material-ui/core";
 
