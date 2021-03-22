@@ -4,61 +4,29 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 250px;
 
-  &__graph1 {
+  &__section {
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 250px;
+    align-items: center;
+    scroll-snap-align: start;
 
     &-desc {
-      width: 300px;
-      height: 300px;
-      align-self: center;
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-  }
 
-  &__graph2 {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 250px;
-
-    &-desc {
-      width: 300px;
-      height: 300px;
-      align-self: center;
+    &-title {
+      margin: 0px 0px 1000000px 0px;
     }
-  }
 
-  &__chatbox {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 250px;
-
-    &-desc {
-      width: 300px;
-      height: 300px;
-      align-self: center;
-    }
-  }
-
-  &__ticker {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 250px;
-
-    &-desc {
-      width: 300px;
-      height: 300px;
-      align-self: center;
+    &-p {
+      width: 80%;
     }
   }
 
