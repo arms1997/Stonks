@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
@@ -76,7 +75,7 @@ export default function About() {
       >
         <Card3D photoClassName={photoClassNames[3]}></Card3D>
       </section>
-      <Button onClick={scrollTop}>
+      <Button onClick={scrollTop} style={{ scrollSnapAlign: "start" }}>
         <FontAwesomeIcon id="scrollUp" icon={faArrowCircleUp} size="5x" />
       </Button>
     </main>
