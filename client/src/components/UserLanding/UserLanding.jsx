@@ -51,9 +51,9 @@ export default function UserLanding() {
     history.push(`/ticker/${ticker}/${company}`);
   };
 
-  const parsedGraphs = likedTickers.map((graph) => {
+  const parsedGraphs = likedTickers.map((graph, index) => {
     return (
-      <TableRow>
+      <TableRow key={index}>
         <TableCell>
           <CardActionArea onClick={() => handleGraphClick(graph)}>
             <Card className="userLanding__section-top-graph">
