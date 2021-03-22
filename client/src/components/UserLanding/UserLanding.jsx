@@ -14,29 +14,13 @@ import {
   TableContainer,
   TableBody,
   TableRow,
-  Avatar,
-  makeStyles,
 } from "@material-ui/core";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import ChatRoom from "../Chat/ChatRoom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: "#849e95",
-  },
-
-  large: {
-    width: 100,
-    height: 100,
-    backgroundColor: "#7ca5ce",
-    alignSelf: "center",
-  },
-}));
-
 export default function UserLanding() {
-  const classes = useStyles();
   const { currentUser, updatePreviousTickers } = useAuth();
   const history = useHistory();
 

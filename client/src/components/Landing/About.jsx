@@ -72,6 +72,7 @@ export default function About() {
                   className="learnMore__section-howTo-text-step-link"
                   href="https://www.alphavantage.co/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Alpha Vantage API
                 </a>
@@ -94,6 +95,7 @@ export default function About() {
                   className="learnMore__section-howTo-text-step-link"
                   href="https://uber.github.io/react-vis/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   React Vis
                 </a>
@@ -117,6 +119,7 @@ export default function About() {
                   className="learnMore__section-howTo-text-step-link"
                   href="https://newsapi.org/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   News API
                 </a>
