@@ -25,7 +25,7 @@ function App() {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Landing} />
-              <Route exact path="/learnmore" component={About} />
+              <Route exact path="/about" component={About} />
               <PrivateRoute path="/mylanding" component={UserLanding} />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
