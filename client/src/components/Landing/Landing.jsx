@@ -1,6 +1,6 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { Button } from "@material-ui/core";
 
@@ -10,7 +10,7 @@ import "./Landing.scss";
 
 export default function Landing() {
   const history = useHistory();
-  //fade in animation for logo with buttons
+  //fade in animation for logo with buttons, this defines the spring and you pass it to the animated.div
   const props = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   const handleLoginClick = () => {
