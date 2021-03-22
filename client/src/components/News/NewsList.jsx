@@ -64,7 +64,13 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {newsData && newsData.length < 1 && (
         <h2 style={{ textAlign: "start", marginTop: 0 }}>
           No Articles Available
