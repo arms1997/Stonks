@@ -7,6 +7,7 @@
 
   &__logoWithButton {
     width: 100%;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +17,7 @@
       margin-left: 40%;
       justify-content: space-around;
       width: 20%;
+      margin-bottom: 20px;
     }
   }
 
