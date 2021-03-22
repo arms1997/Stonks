@@ -156,7 +156,7 @@ export function AuthProvider({ children }) {
             setCurrentUser({ ...backendUserData.data, previousTickers });
             setLoading(false);
           })
-          .catch((err) => console.error("hello"));
+          .catch((err) => console.error(err));
       } else {
         setCurrentUser(user);
         setLoading(false);
