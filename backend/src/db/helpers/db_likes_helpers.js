@@ -1,5 +1,7 @@
 const db = require("../index");
 
+//Add a user's like to database
+
 const addLike = function (userId, ticker, company) {
   let queryParams = [userId, ticker, company];
 
