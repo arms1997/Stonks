@@ -6,7 +6,9 @@ import NewsListItem from "./NewsListItem";
 import CustomButton from "../CustomButton";
 
 export default function NewsList({ company, symbol, showAllNews = false }) {
+  //set limit for articles per page on first render
   const articlesPerPage = 5;
+  // temporary holding container for articles in view
   let arrayForHoldingArticles = [];
 
   const [newsData, setNewsData] = useState(null);
@@ -14,6 +16,7 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
   const [next, setNext] = useState(5);
 
   useEffect(() => {
+    //determine with api endpoint to call by showAllNews boolean
     const requestString = showAllNews
       ? `/api/news/`
       : `/api/news/company?company=${company}&symbol=${symbol}`;
@@ -48,11 +51,13 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
   };
 
   useEffect(() => {
+    //if newsData present on first render, run through loopWithSlice to show first set of articles
     if (newsData) {
       loopWithSlice(0, articlesPerPage, parsedArticles);
     }
   }, [newsData]);
 
+  //when someone clicks show more button, use this function to add next 5 articles to articlesToShow array
   const handleShowMoreArticles = () => {
     loopWithSlice(0, next + articlesPerPage, parsedArticles);
     setNext(next + articlesPerPage);
@@ -69,11 +74,7 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
         <>
           {articlesToShow}
           {newsData.length > articlesToShow.length && (
-            <CustomButton
-              variant="outlined"
-              onClick={handleShowMoreArticles}
-              // style={{ marginRight: "430px", marginBottom: "50px" }}
-            >
+            <CustomButton variant="outlined" onClick={handleShowMoreArticles}>
               Show More
             </CustomButton>
           )}
