@@ -1,0 +1,64 @@
+.learnMore {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+
+  &__graph1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 250px;
+
+    &-desc {
+      width: 300px;
+      height: 300px;
+      align-self: center;
+    }
+  }
+
+  &__graph2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 250px;
+
+    &-desc {
+      width: 300px;
+      height: 300px;
+      align-self: center;
+    }
+  }
+
+  &__chatbox {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 250px;
+
+    &-desc {
+      width: 300px;
+      height: 300px;
+      align-self: center;
+    }
+  }
+
+  &__ticker {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 250px;
+
+    &-desc {
+      width: 300px;
+      height: 300px;
+      align-self: center;
+    }
+  }
+}
