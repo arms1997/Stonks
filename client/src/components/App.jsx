@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./UserAuth/SignUp/Signup";
 import UpdateProfile from "./ProfileSettings/UpdateProfile";
 import Login from "./UserAuth/Login/Login";
-import Landing from "./Landing";
+import Landing from "./Landing/Landing";
 import ForgotPassword from "./UserAuth/ForgotPassword/ForgotPassword";
+import LearnMore from "./Landing/LearnMore";
 import PrivateRoute from "./PrivateRoute";
 
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Landing} />
+              <Route exact path="/learnmore" component={LearnMore} />
               <PrivateRoute path="/mylanding" component={UserLanding} />
               <PrivateRoute path="/me" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
