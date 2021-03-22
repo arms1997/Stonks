@@ -40,6 +40,7 @@ app.use("/api/like", likeRouter);
 const userRouter = userRoutes(db_users);
 app.use("/api/user", userRouter);
 
+//Socket.IO set up
 const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
