@@ -14,6 +14,7 @@ import {
   Popper,
   CardContent,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import CheckIcon from "@material-ui/icons/Check";
@@ -34,6 +35,7 @@ export default function Ticker() {
   const [watch, setWatch] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [value, setValue] = useState("");
+  const [error, setError] = useState("");
   const classes = useStyles();
   const history = useHistory();
 
@@ -77,7 +79,13 @@ export default function Ticker() {
     }
   }, [currentUser, symbol]);
 
-  const _handleLikeClick = (currentUser) => {
+  const _handleLikeClick = (currentUser, event) => {
+    if (!currentUser) {
+      setError("Please make sure to be logged in to like a stock");
+      setAnchorEl(anchorEl ? null : event.currentTarget);
+      return;
+    }
+
     const index = currentUser.likes.findIndex((like) => like.ticker === symbol);
 
     if (index !== -1) {
@@ -90,7 +98,9 @@ export default function Ticker() {
   };
 
   const _handleWatchClick = (currentUser, event) => {
-    // createWatch(currentUser.user_id, symbol, 800);
+    if (!currentUser) {
+      setError("Please make sure to be logged in to watch a stock");
+    }
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
@@ -136,8 +146,18 @@ export default function Ticker() {
       .catch((err) => console.error(err));
   };
 
-  const watchPopper = () => {
+  const errorPopper = (props) => {
     return (
+      <Popper anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)}>
+        <Alert severity="error">{props}</Alert>
+      </Popper>
+    );
+  };
+
+  const popper = () => {
+    return !currentUser ? (
+      errorPopper(error)
+    ) : (
       <Popper anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)}>
         <Card>
           <CardActions>
@@ -166,7 +186,7 @@ export default function Ticker() {
     return (
       <CardActions className={classes.cardBottom}>
         <div>
-          <IconButton onClick={() => _handleLikeClick(currentUser)}>
+          <IconButton onClick={(event) => _handleLikeClick(currentUser, event)}>
             <FavoriteIcon color={liked ? "primary" : "inherit"} />
           </IconButton>
           <IconButton
@@ -200,7 +220,7 @@ export default function Ticker() {
           <Detail symbol={symbol} />
         </div>
       </div>
-      {watchPopper()}
+      {popper()}
     </div>
   );
 }
