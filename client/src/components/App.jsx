@@ -11,8 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 
 import "./App.css";
 import { Container } from "@material-ui/core";
-import Navbar from "./Navbar";
-import Ticker from "./Ticker";
+import Navbar from "./Navbar/Navbar";
+import Ticker from "./Ticker/Ticker";
 import UserLanding from "../components/UserLanding/UserLanding";
 
 function App() {

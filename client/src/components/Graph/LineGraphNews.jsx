@@ -15,8 +15,6 @@ import moment from "moment";
 import LockIcon from "@material-ui/icons/Lock";
 import DataBubble from "../Bubbles/DataBubble";
 
-import "./Graph.scss";
-
 export default function LineGraphNews({
   graphData,
   showNews = false,

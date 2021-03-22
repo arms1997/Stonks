@@ -21,8 +21,8 @@ import { useEffect, useState } from "react";
 
 import "./Navbar.scss";
 import { useHistory, useLocation } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import CustomButton from "./CustomButton";
+import { useAuth } from "../../contexts/AuthContext";
+import CustomButton from "../CustomButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {

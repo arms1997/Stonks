@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import Detail from "./Detail";
-import Graph from "./Graph";
-import NewsList from "./News/NewsList";
+import Graph from "../Graph";
+import NewsList from "../News/NewsList";
 
 import "./Ticker.scss";
 import {
@@ -18,8 +18,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import CheckIcon from "@material-ui/icons/Check";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useAuth } from "../contexts/AuthContext";
-import ChatRoom from "./ChatRoom";
+import { useAuth } from "../../contexts/AuthContext";
+import ChatRoom from "../Chat/ChatRoom";
 import { useParams, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({

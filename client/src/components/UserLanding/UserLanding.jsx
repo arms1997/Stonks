@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import NewsList from "../News/NewsList";
 import WatchTable from "./WatchTable";
 import Graph from "../Graph/index";
-import PreviousTicker from "../PreviousTickers";
+import PreviousTicker from "./PreviousTickers";
 import "./UserLanding.scss";
 import {
   Card,
