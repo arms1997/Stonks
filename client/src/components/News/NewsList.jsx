@@ -59,7 +59,13 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {newsData && newsData.length < 1 && (
         <h2 style={{ textAlign: "start", marginTop: 0 }}>
           No Articles Available
@@ -69,11 +75,7 @@ export default function NewsList({ company, symbol, showAllNews = false }) {
         <>
           {articlesToShow}
           {newsData.length > articlesToShow.length && (
-            <CustomButton
-              variant="outlined"
-              onClick={handleShowMoreArticles}
-              // style={{ marginRight: "430px", marginBottom: "50px" }}
-            >
+            <CustomButton variant="outlined" onClick={handleShowMoreArticles}>
               Show More
             </CustomButton>
           )}
