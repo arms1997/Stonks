@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
     if (!(changes.includes("password") && changes.length === 1)) {
       updates.push(updateUserBackend(currentUser.user_id, newUser));
     }
-
+    //return promise that updates currentUser object and firebase user
     return Promise.all(updates).then(() => {
       setUpdating(false);
       return setCurrentUser((prev) => {
@@ -150,7 +150,6 @@ export function AuthProvider({ children }) {
       if (updating) {
         return;
       } else if (user) {
-        // console.log("auth", auth);
         getUserBackend(user.email)
           .then((backendUserData) => {
             const previousTickers = ls.get("previousTickers") || [];
