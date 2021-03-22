@@ -6,8 +6,6 @@ import { Button } from "@material-ui/core";
 
 import CustomButton from "../CustomButton";
 
-import Card3D from "../CustomCard/Card3D";
-
 import "./Landing.scss";
 
 export default function Landing() {
@@ -24,7 +22,7 @@ export default function Landing() {
   };
 
   const handleLearnMoreClick = () => {
-    history.push("/learnmore");
+    history.push("/about");
   };
 
   return (
