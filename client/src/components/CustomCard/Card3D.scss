@@ -1,0 +1,85 @@
+.card {
+  width: 700px;
+  height: 400px;
+  background: white;
+  border-radius: 5px;
+  background-image: url(../../assets/Graph.png);
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s;
+  will-change: transform;
+  border: 15px solid white;
+}
+
+.graph {
+  width: 700px;
+  height: 400px;
+  background: white;
+  border-radius: 5px;
+  background-image: url(../../assets/Graph.png);
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s;
+  will-change: transform;
+  border: 15px solid white;
+
+  &:hover {
+    box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.graphWLock {
+  width: 700px;
+  height: 400px;
+  background: white;
+  border-radius: 5px;
+  background-image: url(../../assets/GraphWLock.png);
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s;
+  will-change: transform;
+  border: 15px solid white;
+
+  &:hover {
+    box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.chatBox {
+  width: 400px;
+  height: 600px;
+  background: white;
+  border-radius: 5px;
+  background-image: url(../../assets/ChatRoom.png);
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s;
+  will-change: transform;
+  border: 15px solid white;
+
+  &:hover {
+    box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.tickerPage {
+  width: 600px;
+  height: 800px;
+  background: white;
+  border-radius: 5px;
+  background-image: url(../../assets/Ticker.png);
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s;
+  will-change: transform;
+  border: 15px solid white;
+
+  &:hover {
+    box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+  }
+}
