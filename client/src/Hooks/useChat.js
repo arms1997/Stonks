@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 import moment from "moment";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
-const SOCKET_SERVER_URL = "http://localhost:8000";
+const SOCKET_SERVER_URL = "https://stonks-lhl.herokuapp.com/";
 
 const useChat = (roomId) => {
   const [messages, setMessages] = useState([]);
