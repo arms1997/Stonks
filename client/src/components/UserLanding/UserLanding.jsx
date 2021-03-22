@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import NewsList from "../News/NewsList";
 import WatchTable from "./WatchTable";
 import Graph from "../Graph/index";
+import PreviousTicker from "../PreviousTickers";
 import "./UserLanding.scss";
 import {
   Card,
@@ -101,8 +102,13 @@ export default function UserLanding() {
             </TableRow>
           </Table>
         </TableContainer>
-        <div className="userLanding__section-top-watchTable">
-          {currentUser.watches && <WatchTable />}
+        <div className="userLanding__section-top-rightSide">
+          <div className="userLanding__section-top-watchTable">
+            {currentUser.watches && <WatchTable />}
+          </div>
+          <div>
+            <PreviousTicker />
+          </div>
         </div>
       </section>
       <section className="userLanding__section-bottom">
