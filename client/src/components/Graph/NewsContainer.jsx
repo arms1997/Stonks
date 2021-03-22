@@ -40,8 +40,8 @@ export default function NewsContainer({ relevantNews }) {
 
   const arr = relevantNewsFormatter(relevantNews);
 
-  const newsListItems = arr.map((news) => {
-    return <NewsCard news={news} />;
+  const newsListItems = arr.map((news, index) => {
+    return <NewsCard key={index} news={news} />;
   });
 
   const noNews = (

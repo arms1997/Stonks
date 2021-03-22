@@ -16,8 +16,8 @@ export default function PreviousTickers() {
   const history = useHistory();
 
   const listContent = currentUser.previousTickers
-    .map((ticker) => (
-      <React.Fragment>
+    .map((ticker, index) => (
+      <React.Fragment key={index}>
         <Divider />
         <ListItem
           alignItems="center"
