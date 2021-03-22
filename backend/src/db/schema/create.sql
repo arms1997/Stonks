@@ -16,7 +16,7 @@ CREATE TABLE "likes" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
   "ticker" varchar,
-  "company" varchar
+  "company" varchar,
   "is_active" boolean DEFAULT true
 );
 
