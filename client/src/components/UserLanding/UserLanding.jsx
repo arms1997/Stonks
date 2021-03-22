@@ -42,7 +42,9 @@ export default function UserLanding() {
   //get user's liked tickers for graph display
   const [loading, setLoading] = useState(true);
 
-  const likedTickers = [...currentUser.likes];
+  let likedTickers = [...currentUser.likes].filter(
+    (ticker) => ticker.is_active
+  );
 
   const handleGraphClick = ({ ticker, company }) => {
     updatePreviousTickers(ticker, company);
