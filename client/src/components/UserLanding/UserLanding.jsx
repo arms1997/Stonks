@@ -20,6 +20,7 @@ import {
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import ChatRoom from "../Chat/ChatRoom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,47 +80,50 @@ export default function UserLanding() {
     <div className="userLanding">
       <Avatar src="/broken-image.jpg" className={classes.large} />
       <h1>Hello {currentUser.username}</h1>
-      <header className="userLanding__header">
-        <Card className="userLanding__header-likesTitle">
-          <CardContent style={{ backgroundColor: "#849e95", color: "white" }}>
-            Liked Stocks
-          </CardContent>
-        </Card>
-        <Card className="userLanding__header-watchesTitle">
-          <CardContent style={{ backgroundColor: "#8b9eaa", color: "white" }}>
-            Watched Stocks
-          </CardContent>
-        </Card>
-      </header>
       <section className="userLanding__section-top">
-        <TableContainer>
-          <Table>
-            <TableRow>
-              {!parsedGraphs.length && (
-                <div style={{ marginRight: "60px", fontSize: "30px" }}>
-                  You have no liked stocks!
-                </div>
-              )}
-              <TableBody>{parsedGraphs}</TableBody>
-            </TableRow>
-          </Table>
-        </TableContainer>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Card className="userLanding__header-likesTitle">
+            <CardContent style={{ backgroundColor: "#849e95", color: "white" }}>
+              Liked Stocks
+            </CardContent>
+          </Card>
+          <TableContainer>
+            <Table>
+              <TableRow>
+                {!parsedGraphs.length && (
+                  <div style={{ marginRight: "60px", fontSize: "30px" }}>
+                    You have no liked stocks!
+                  </div>
+                )}
+                <TableBody>{parsedGraphs}</TableBody>
+              </TableRow>
+            </Table>
+          </TableContainer>
+          <Card className="userLanding__section-bottom-newsTitle">
+            <CardContent style={{ backgroundColor: "#825c79", color: "white" }}>
+              Today's News
+            </CardContent>
+          </Card>
+          <NewsList company="null" symbol="null" showAllNews={true} />
+        </div>
         <div className="userLanding__section-top-rightSide">
+          <Card className="userLanding__header-watchesTitle">
+            <CardContent style={{ backgroundColor: "#96b9d0", color: "white" }}>
+              Watched Stocks
+            </CardContent>
+          </Card>
           <div className="userLanding__section-top-watchTable">
             {currentUser.watches && <WatchTable />}
           </div>
-          <div>
-            <PreviousTicker />
-          </div>
+          <ChatRoom company={"general"} />
+          <PreviousTicker />
         </div>
-      </section>
-      <section className="userLanding__section-bottom">
-        <Card className="userLanding__section-bottom-newsTitle">
-          <CardContent style={{ backgroundColor: "#825c79", color: "white" }}>
-            Today's News
-          </CardContent>
-        </Card>
-        <NewsList company="null" symbol="null" showAllNews={true} />
       </section>
     </div>
   );
