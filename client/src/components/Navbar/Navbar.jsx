@@ -24,6 +24,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import CustomButton from "../CustomButton";
 
+import Stonks from "../../assets/stonks.svg";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: 60,
@@ -148,7 +150,7 @@ export default function Navbar() {
       <AppBar position={"fixed"} color="default" className={classes.root}>
         <Toolbar className={classes.toolbar}>
           <img
-            src="./images/stonks.svg"
+            src={Stonks}
             className="navbar__image"
             alt="logo"
             onClick={_onHomeClick}
