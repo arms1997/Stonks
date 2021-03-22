@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "https://stonks-lhl.herokuapp.com/",
   "dependencies": {
     "@agney/react-loading": "^0.1.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
