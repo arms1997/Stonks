@@ -87,7 +87,9 @@ export default function Navbar() {
       return;
     }
 
-    updatePreviousTickers(value.symbol, value.shortName);
+    if (currentUser) {
+      updatePreviousTickers(value.symbol, value.shortName);
+    }
     setValue({ ...value });
     history.push(`/ticker/${value.symbol}/${value.shortName}`);
   };
