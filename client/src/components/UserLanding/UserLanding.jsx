@@ -78,8 +78,8 @@ export default function UserLanding() {
 
   return (
     <div className="userLanding">
-      <Avatar src="/broken-image.jpg" className={classes.large} />
-      <h1>Hello {currentUser.username}</h1>
+      {/* <Avatar src="/broken-image.jpg" className={classes.large} />
+      <h1>Hello {currentUser.username}</h1> */}
       <section className="userLanding__section-top">
         <div
           style={{
