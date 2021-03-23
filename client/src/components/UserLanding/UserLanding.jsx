@@ -81,7 +81,7 @@ export default function UserLanding() {
             <Table>
               <TableRow>
                 {!parsedGraphs.length && (
-                  <div style={{ marginRight: "60px", fontSize: "30px" }}>
+                  <div style={{ marginTop: "20px", fontSize: "30px" }}>
                     You have no liked stocks!
                   </div>
                 )}

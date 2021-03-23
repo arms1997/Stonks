@@ -9,7 +9,6 @@ const client = new pg.Client({
   ssl: {
     rejectUnauthorized: false,
   },
-  // `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}?sslmode=disable`,
 });
 
 client
