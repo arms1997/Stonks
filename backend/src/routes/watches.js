@@ -9,10 +9,10 @@ module.exports = (db) => {
 
     db.addWatch(userId, ticker, value)
       .then((resources) => {
-        res.json({ resources });
         twilioMessage(
           `You have setup a watch on ${ticker} for a desired value of ${value}`
         );
+        res.json({ resources });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -24,12 +24,13 @@ module.exports = (db) => {
     const { value = null } = req.body;
     db.updateWatch(watch_id, value)
       .then((resources) => {
-        res.json({ ...resources });
-
         const message = value
           ? `You have setup a watch on ${ticker} for a desired value of ${value}`
           : `You have stopped watching ${resources.ticker}`;
+
         twilioMessage(message);
+
+        res.json({ ...resources });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
