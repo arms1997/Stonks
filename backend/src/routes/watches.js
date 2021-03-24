@@ -25,7 +25,7 @@ module.exports = (db) => {
     db.updateWatch(watch_id, value)
       .then((resources) => {
         const message = value
-          ? `You have setup a watch on ${ticker} for a desired value of ${value}`
+          ? `You have setup a watch on ${resources.ticker} for a desired value of ${value}`
           : `You have stopped watching ${resources.ticker}`;
 
         twilioMessage(message);
